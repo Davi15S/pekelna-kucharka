@@ -1,7 +1,12 @@
+import PageTitle from "@components/PageTitle";
 import React from "react";
 
 function Landing() {
-  return <div>Landing</div>;
+  return (
+    <>
+      <PageTitle title="Pekelná kuchařka" />
+    </>
+  );
 }
 
 export default Landing;
