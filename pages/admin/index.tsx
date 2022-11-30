@@ -1,7 +1,10 @@
+import AdminLayout from "app/layouts/Admin";
 import React from "react";
 
-function Adming() {
-  return <div>Adming</div>;
+function Admin() {
+  return <div>Admin</div>;
 }
 
-export default Adming;
+Admin.PageLayout = AdminLayout;
+
+export default Admin;
