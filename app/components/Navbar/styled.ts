@@ -4,22 +4,21 @@ import { Row } from "app/styled";
 export const NavbarWrapper = styled(Row)`
   padding: 35px 100px;
   position: absolute;
-  justify-content: center;
-  align-items: center;
 
   @media only screen and (max-width: 1024px) {
-    padding: 20px;
+    padding: 15px;
   }
 `;
 
 export const LogoWrapper = styled(Row)`
   position: absolute;
   justify-content: center;
+  width: auto;
 
   @media only screen and (max-width: 1024px) {
     justify-content: start;
     position: relative;
-    height: 40px;
+    width: 200px;
   }
 `;
 

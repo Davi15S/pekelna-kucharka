@@ -14,9 +14,23 @@ export const Row = styled.div<{
   flex-direction: row;
 `;
 
-export const ImageWrapper = styled(Image)<{ w?: React.CSSProperties["width"]; h?: React.CSSProperties["height"] }>`
-  width: ${({ w }) => (w ? w : "100%")};
+export const Column = styled.div<{ h?: React.CSSProperties["height"] }>`
+  display: flex;
+  flex-direction: column;
   height: ${({ h }) => (h ? h : "100%")};
-  max-width: 100%;
-  max-height: 100%;
+`;
+
+export const PageContent = styled(Column)`
+  padding-top: 80px;
+`;
+
+export const ImageWrapper = styled(Image)<{ w?: React.CSSProperties["width"]; h?: React.CSSProperties["height"]; mobileW?: React.CSSProperties["width"] }>`
+  width: ${({ w }) => (w ? w : "auto")};
+  height: ${({ h }) => (h ? h : "auto")};
+  max-width: auto;
+  max-height: auto;
+
+  @media only screen and (max-width: 1024px) {
+    ${({ mobileW }) => (mobileW ? `width: ${mobileW};` : "")}
+  }
 `;
