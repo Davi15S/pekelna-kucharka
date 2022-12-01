@@ -20,10 +20,6 @@ export const Column = styled.div<{ h?: React.CSSProperties["height"] }>`
   height: ${({ h }) => (h ? h : "100%")};
 `;
 
-export const PageContent = styled(Column)`
-  padding-top: 80px;
-`;
-
 export const ImageWrapper = styled(Image)<{ w?: React.CSSProperties["width"]; h?: React.CSSProperties["height"]; mobileW?: React.CSSProperties["width"] }>`
   width: ${({ w }) => (w ? w : "auto")};
   height: ${({ h }) => (h ? h : "auto")};

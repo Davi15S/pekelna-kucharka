@@ -1,17 +1,16 @@
 import PageTitle from "@components/PageTitle";
 import React from "react";
-import { LandingWrapper } from "./styled";
 import landingBg from "@assets/landingBackground.png";
-import { PageContent } from "app/styled";
+import usePageBackground from "app/hooks/usePageBackground";
 
 function Landing() {
+  usePageBackground(landingBg);
+
   return (
-    <LandingWrapper bgImage={landingBg}>
+    <>
       <PageTitle title="Pekelná kuchařka" />
-      <PageContent>
-        <div>ahoj</div>
-      </PageContent>
-    </LandingWrapper>
+      <div>ahoj</div>
+    </>
   );
 }
 
