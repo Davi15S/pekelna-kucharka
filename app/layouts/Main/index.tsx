@@ -7,11 +7,12 @@ import React, { useState } from "react";
 
 function MainLayout({ children }: { children: React.ReactNode }) {
   const [bgImage, setBgImage] = useState<StaticImageData>();
+  const [bgHeight, setBgHeight] = useState<string>("auto");
 
   return (
-    <PageBackgroundProvider value={{ bgImage, setBgImage }}>
+    <PageBackgroundProvider value={{ bgImage, setBgImage, bgHeight, setBgHeight }}>
       <Navbar />
-      <Page bgImage={bgImage}>{children}</Page>
+      <Page>{children}</Page>
       <Footer />
     </PageBackgroundProvider>
   );
