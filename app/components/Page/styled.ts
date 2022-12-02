@@ -25,7 +25,16 @@ export const Shadow = styled.div<{ top?: boolean }>`
   ${({ top }) => (top ? `top: 0;` : `bottom: 0;`)};
 `;
 
-export const PageContent = styled(Column)<{ p?: React.CSSProperties["padding"] }>`
-  padding: ${({ p }) => (p ? p : "100px 200px 0 200px")};
+export const PageContent = styled(Column)<{
+  p?: React.CSSProperties["padding"];
+  mobileP?: React.CSSProperties["padding"];
+  topP?: React.CSSProperties["padding"];
+}>`
+  padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 200px 0 200px`)};
   z-index: 0;
+  align-items: center;
+
+  @media only screen and (max-width: 1024px) {
+    padding: ${({ mobileP, topP }) => (mobileP ? mobileP : `${topP ? "100px" : "0px"} 15px 0 15px`)};
+  }
 `;

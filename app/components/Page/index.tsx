@@ -1,6 +1,6 @@
 import { PageBackgroundContext } from "app/contexts/PageBackgroundContext";
 import React, { useContext } from "react";
-import { PageContent, PageBackground, Shadow } from "./styled";
+import { PageBackground, Shadow } from "./styled";
 
 function Page(props: { children: React.ReactNode }) {
   const { bgImage, bgHeight } = useContext(PageBackgroundContext);
