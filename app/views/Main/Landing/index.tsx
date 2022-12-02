@@ -7,7 +7,7 @@ import Hero from "./components/Hero";
 
 function Landing() {
   usePageTitle("Pekelná kuchařka");
-  usePageBackground(landingBg);
+  usePageBackground(landingBg, "100vh");
 
   return (
     <PageContent p="0 200px">

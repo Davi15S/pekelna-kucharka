@@ -7,10 +7,10 @@ import { BiSearch } from "react-icons/bi";
 function Hero() {
   return (
     <HeroWrapper alignItems="center" justifyContent="center">
-      <MainTitle>Ultricies tortor posue vitae, fringilla platea.</MainTitle>
-      <SubTitle>Scelerisque elit hendrerit turpis lectus neque ipsum, egestas nunc elementum.</SubTitle>
-      <Row justifyContent="center" p="50px 40px 0 40px">
-        <Input maxW="700px" placeholder="Hledat" icon={<BiSearch size={20} color={"#111111"} />} />
+      <MainTitle>Všechny recepty pálivých jídel na jednom místě</MainTitle>
+      <SubTitle>Objevujte s námi veškeré recepty na pálivá jídla, vytvořená naší skvělou pekelnou komunitou</SubTitle>
+      <Row justifyContent="center" p="50px 30px 0 30px">
+        <Input maxW="500px" placeholder="Hledat" icon={<BiSearch size={20} color={"#111111"} />} />
       </Row>
     </HeroWrapper>
   );

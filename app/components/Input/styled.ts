@@ -5,7 +5,7 @@ import { Theme } from "styles/theme";
 
 export const InputWrapper = styled(Row)<{ maxW?: React.CSSProperties["maxWidth"]; h?: React.CSSProperties["height"] }>`
   max-width: ${({ maxW }) => (maxW ? maxW : "none")};
-  height: ${({ h }) => (h ? h : "55px")};
+  height: ${({ h }) => (h ? h : "45px")};
   color: ${({ theme }) => theme.background.primary};
   align-items: center;
   background-color: ${({ theme }) => theme.colors.primary};

@@ -9,7 +9,7 @@ export const PageBackground = styled(Column)<{ bgImage?: StaticImageData; h: Rea
   width: 100%;
   height: ${({ h }) => h && h};
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   background-image: url(${({ bgImage }) => (bgImage ? bgImage.src : "")});
   background-repeat: no-repeat;
   background-size: cover;
@@ -31,10 +31,9 @@ export const PageContent = styled(Column)<{
   topP?: React.CSSProperties["padding"];
 }>`
   padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 200px 0 200px`)};
-  z-index: 0;
   align-items: center;
 
   @media only screen and (max-width: 1024px) {
-    padding: ${({ mobileP, topP }) => (mobileP ? mobileP : `${topP ? "100px" : "0px"} 15px 0 15px`)};
+    padding: ${({ mobileP, topP }) => (mobileP ? mobileP : `${topP ? "100px" : "0px"} 20px 0 20px`)};
   }
 `;

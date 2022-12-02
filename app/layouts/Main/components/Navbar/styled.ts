@@ -4,9 +4,10 @@ import { Row } from "app/styled";
 export const NavbarWrapper = styled(Row)`
   padding: 35px 100px;
   position: absolute;
+  z-index: 10;
 
   @media only screen and (max-width: 1024px) {
-    padding: 15px;
+    padding: 20px;
   }
 `;
 
