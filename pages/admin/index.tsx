@@ -1,4 +1,4 @@
-import AdminLayout from "app/layouts/Admin";
+import AdminLayout from "@layouts/Admin";
 import React from "react";
 
 function Admin() {
