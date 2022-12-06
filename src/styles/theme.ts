@@ -3,6 +3,7 @@ export type Theme = {
     primary: string;
     secondary: string;
     third: string;
+    fifth: string;
     error: string;
   };
   background: {
@@ -15,6 +16,7 @@ export const theme = {
     primary: "#FFFFFF",
     secondary: "#B7B7B7",
     third: "#232323",
+    fifth: "#626262",
     error: "#ED4040",
   },
   background: {

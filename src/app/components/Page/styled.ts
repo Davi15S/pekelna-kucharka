@@ -1,5 +1,5 @@
+import { Column } from "@app/styled";
 import styled from "@emotion/styled";
-import { Column } from "src/app/styled";
 import { StaticImageData } from "next/image";
 import React from "react";
 
