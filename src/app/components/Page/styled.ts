@@ -1,5 +1,5 @@
+import { Column } from "@app/styled";
 import styled from "@emotion/styled";
-import { Column } from "src/app/styled";
 import { StaticImageData } from "next/image";
 import React from "react";
 
@@ -32,7 +32,7 @@ export const PageContent = styled(Column)<{
 }>`
   padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 200px 0 200px`)};
   align-items: center;
-
+  overflow: hidden;
   @media only screen and (max-width: 1024px) {
     padding: ${({ mobileP, topP }) => (mobileP ? mobileP : `${topP ? "100px" : "0px"} 20px 0 20px`)};
   }

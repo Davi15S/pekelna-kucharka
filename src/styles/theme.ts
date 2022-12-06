@@ -3,6 +3,7 @@ export type Theme = {
     primary: string;
     secondary: string;
     third: string;
+    quantery: string;
     error: string;
   };
   background: {
@@ -15,7 +16,9 @@ export const theme = {
     primary: "#FFFFFF",
     secondary: "#B7B7B7",
     third: "#232323",
-    error: "#ED4040",
+    quantery: "#141414",
+    fiftery: "#ED4040",
+    error: "#E31C25",
   },
   background: {
     primary: "#111111",
