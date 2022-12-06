@@ -7,7 +7,7 @@ function Page(props: { children: React.ReactNode }) {
 
   return (
     <>
-      <div style={{ position: "relative", zIndex: 1 }}>{props.children}</div>
+      <div style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}>{props.children}</div>
       {bgImage && (
         <PageBackground bgImage={bgImage} h={bgHeight}>
           <Shadow top />

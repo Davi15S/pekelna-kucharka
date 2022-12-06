@@ -4,6 +4,8 @@ export type Theme = {
     secondary: string;
     third: string;
     quantery: string;
+    fiftery: string;
+    sixtery: string;
     error: string;
   };
   background: {
@@ -18,6 +20,7 @@ export const theme = {
     third: "#232323",
     quantery: "#141414",
     fiftery: "#ED4040",
+    sixtery: "#626262"
     error: "#E31C25",
   },
   background: {
