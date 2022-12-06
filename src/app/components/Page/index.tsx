@@ -1,13 +1,13 @@
 import { PageBackgroundContext } from "@contexts/PageBackgroundContext";
 import React, { useContext } from "react";
-import { PageBackground, Shadow } from "./styled";
+import { PageBackground, PageWrapper, Shadow } from "./styled";
 
 function Page(props: { children: React.ReactNode }) {
   const { bgImage, bgHeight } = useContext(PageBackgroundContext);
 
   return (
     <>
-      <div style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}>{props.children}</div>
+      <PageWrapper>{props.children}</PageWrapper>
       {bgImage && (
         <PageBackground bgImage={bgImage} h={bgHeight}>
           <Shadow top />

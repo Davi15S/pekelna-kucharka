@@ -5,8 +5,13 @@ import { MainTitle } from "../Landing/components/Hero/styled";
 import LoginButton from "./components/LoginButton";
 import { LoginWrapper } from "./styled";
 import { FcGoogle } from "react-icons/fc";
+import usePageTitle from "@hooks/usePageTitle";
+import usePageBackground from "@hooks/usePageBackground";
 
 function Login() {
+  usePageTitle("Pekelná kuchařka | Přihlášení");
+  usePageBackground(undefined);
+
   return (
     <PageContent>
       <LoginWrapper alignItems="center" justifyContent="center" h="100vh">

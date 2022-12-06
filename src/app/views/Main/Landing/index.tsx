@@ -16,8 +16,8 @@ function Landing() {
       <PageContent>
         <Hero />
         <Stats />
+        <Favourite />
       </PageContent>
-      <Favourite />
     </>
   );
 }

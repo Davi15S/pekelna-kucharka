@@ -20,7 +20,7 @@ export const theme = {
     third: "#232323",
     quantery: "#141414",
     fiftery: "#ED4040",
-    sixtery: "#626262"
+    sixtery: "#626262",
     error: "#E31C25",
   },
   background: {
