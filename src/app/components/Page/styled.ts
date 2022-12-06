@@ -32,7 +32,7 @@ export const PageContent = styled(Column)<{
 }>`
   padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 200px 0 200px`)};
   align-items: center;
-
+  overflow: hidden;
   @media only screen and (max-width: 1024px) {
     padding: ${({ mobileP, topP }) => (mobileP ? mobileP : `${topP ? "100px" : "0px"} 20px 0 20px`)};
   }

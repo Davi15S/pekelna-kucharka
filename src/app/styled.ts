@@ -28,6 +28,7 @@ export const Column = styled.div<{
   alignItems?: React.CSSProperties["alignItems"];
   justifyContent?: React.CSSProperties["justifyContent"];
   p?: React.CSSProperties["padding"];
+  w?: React.CSSProperties["width"];
 }>`
   display: flex;
   flex-direction: column;
@@ -35,6 +36,7 @@ export const Column = styled.div<{
   align-items: ${({ alignItems }) => (alignItems ? alignItems : "flex-start")};
   justify-content: ${({ justifyContent }) => (justifyContent ? justifyContent : "flex-start")};
   padding: ${({ p }) => (p ? p : "")};
+  width: ${({ w }) => (w ? w : "auto")};
 `;
 
 export const ImageWrapper = styled(Image)<{ w?: React.CSSProperties["width"]; h?: React.CSSProperties["height"]; mobileW?: React.CSSProperties["width"] }>`
