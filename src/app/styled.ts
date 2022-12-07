@@ -49,3 +49,16 @@ export const ImageWrapper = styled(Image)<{ w?: React.CSSProperties["width"]; h?
     ${({ mobileW }) => (mobileW ? `width: ${mobileW};` : "")}
   }
 `;
+
+export const Text = styled.p<{
+  theme?: Theme;
+  fontSize?: React.CSSProperties["fontSize"];
+  fontWeight?: React.CSSProperties["fontWeight"];
+  textAlign?: React.CSSProperties["textAlign"];
+  p?: React.CSSProperties["padding"];
+}>`
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "16px")};
+  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
+  text-align: ${({ textAlign }) => (textAlign ? textAlign : "start")};
+  padding: ${({ p }) => (p ? p : "0")};
+`;

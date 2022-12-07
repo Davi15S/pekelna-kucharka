@@ -1,12 +1,12 @@
 import { Column, Row } from "@app/styled";
 import BgTitle from "@components/BgTitle";
-import React, { lazy } from "react";
+import React from "react";
 import FavouriteItem from "./components/FavouriteItem";
 import { ItemsWrapper } from "./styled";
-import favourite1 from "@assets/favourite1.png";
-import favourite2 from "@assets/favourite2.png";
-import favourite3 from "@assets/favourite3.png";
-import favourite4 from "@assets/favourite4.png";
+import favourite1 from "@assets/favourites/favourite1.png";
+import favourite2 from "@assets/favourites/favourite2.png";
+import favourite3 from "@assets/favourites/favourite3.png";
+import favourite4 from "@assets/favourites/favourite4.png";
 
 function Favourite() {
   return (

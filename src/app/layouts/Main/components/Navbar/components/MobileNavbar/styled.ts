@@ -11,6 +11,7 @@ export const MobileNavbarWrapper = styled(Column)<{ active: boolean; theme?: The
   left: ${({ active }) => (active ? `0%` : "100%")};
   background-color: ${({ theme }) => theme.background.primary};
   transition: all 400ms ease-in-out;
+  overflow: auto;
 `;
 
 export const LoginWrapper = styled(Column)`

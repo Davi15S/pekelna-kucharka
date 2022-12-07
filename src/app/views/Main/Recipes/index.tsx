@@ -1,5 +1,5 @@
 import React from "react";
-import recipesBg from "@assets/recipesBackground.png";
+import recipesBg from "@assets/backgrounds/recipesBackground.png";
 import usePageBackground from "@hooks/usePageBackground";
 import usePageTitle from "@hooks/usePageTitle";
 import { PageContent } from "@components/Page/styled";
