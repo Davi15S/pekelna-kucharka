@@ -11,9 +11,11 @@ function MainLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <PageBackgroundProvider value={{ bgImage, setBgImage, bgHeight, setBgHeight }}>
-      <Navbar />
-      <Page>{children}</Page>
-      <Footer />
+      <div style={{ overflow: "hidden" }}>
+        <Navbar />
+        <Page>{children}</Page>
+        <Footer />
+      </div>
     </PageBackgroundProvider>
   );
 }

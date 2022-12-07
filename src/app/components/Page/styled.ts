@@ -32,8 +32,8 @@ export const PageContent = styled(Column)<{
 }>`
   padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 20px 0 20px`)};
   align-items: center;
-  overflow: hidden;
   max-width: 1400px;
+  width: 100%;
 `;
 
 export const PageWrapper = styled.div`
