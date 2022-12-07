@@ -2,7 +2,7 @@ import { Text } from "@app/styled";
 import styled from "@emotion/styled";
 
 export const SubTitle = styled(Text)`
-  color: ${({ theme }) => theme.colors.seventhtery};
+  color: ${({ theme }) => theme.colors.secondary};
   max-width: 700px;
 `;
 

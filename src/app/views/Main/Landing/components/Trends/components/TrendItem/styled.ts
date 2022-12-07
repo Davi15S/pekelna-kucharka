@@ -30,5 +30,5 @@ export const SubTitle = styled(Text)`
   -webkit-line-clamp: 4;
   white-space: pre-wrap;
   max-height: 5.55rem;
-  color: ${({ theme }) => theme.colors.seventhtery};
+  color: ${({ theme }) => theme.colors.third};
 `;

@@ -8,9 +8,9 @@ export const BgTitleWrapper = styled.div`
 
 export const Title = styled.p<{ theme?: Theme }>`
   position: absolute;
-  color: ${({ theme }) => theme.colors.quantery};
+  color: ${({ theme }) => theme.background.secondary};
   font-size: 300px;
-  left: -250px;
+  left: -20vw;
   top: -230px;
   font-weight: 900;
   z-index: -1;

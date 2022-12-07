@@ -26,6 +26,7 @@ export const LogoWrapper = styled(Row)`
 
 export const NavbarContainer = styled(Row)<{ mobile?: boolean }>`
   display: ${({ mobile }) => (mobile ? "none" : "flex")};
+  max-width: 1800px;
 
   @media only screen and (max-width: 1024px) {
     justify-content: flex-end;
