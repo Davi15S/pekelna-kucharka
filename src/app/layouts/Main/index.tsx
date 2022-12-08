@@ -1,5 +1,4 @@
-import { Column } from "@app/styled";
-import Page from "@components/Page";
+import Page from "@layouts/Main/components/Page";
 import { PageBackgroundProvider } from "@contexts/PageBackgroundContext";
 import { StaticImageData } from "next/image";
 import React, { useState } from "react";

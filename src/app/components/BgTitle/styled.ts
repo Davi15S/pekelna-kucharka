@@ -14,6 +14,7 @@ export const Title = styled.p<{ theme?: Theme }>`
   top: -230px;
   font-weight: 800;
   z-index: -1;
+  user-select: none;
 
   @media only screen and (max-width: 1024px) {
     font-size: 80px;

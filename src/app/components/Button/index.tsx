@@ -8,7 +8,7 @@ function Button(props: ButtonProps) {
     <ButtonWrapper {...props}>
       <ButtonContent>
         {props.icon}
-        <Text fontSize="16px" fontWeight="600">
+        <Text fontSize="16px" fontWeight="500">
           {props.text}
         </Text>
       </ButtonContent>

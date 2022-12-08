@@ -20,6 +20,9 @@ export type Theme = {
     white: string;
     red: string;
   };
+  border: {
+    primary: string;
+  };
 };
 
 export const theme = {
@@ -43,5 +46,8 @@ export const theme = {
   button: {
     white: "#FFFFFF",
     red: "#ED4040",
+  },
+  border: {
+    primary: "#353535",
   },
 };

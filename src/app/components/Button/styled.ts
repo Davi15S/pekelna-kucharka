@@ -4,6 +4,7 @@ import { Theme } from "@styles/theme";
 import React from "react";
 
 export const ButtonWrapper = styled.button<{
+  m?: React.CSSProperties["margin"];
   maxW?: React.CSSProperties["width"];
   transparent?: boolean;
   color?: "white" | "red";
@@ -19,7 +20,7 @@ export const ButtonWrapper = styled.button<{
   background-color: ${({ transparent, theme, color }) => (transparent ? "transparent" : color ? theme.button[color] : "white")};
   border: 2px solid ${({ color, theme }) => (color ? theme.button[color] : "white")};
   cursor: pointer;
-  margin: 20px;
+  margin: ${({ m }) => (m ? m : "20px")};
   transition: all 300ms ease-in-out;
   max-width: ${({ maxW }) => (maxW ? maxW : "")};
 
