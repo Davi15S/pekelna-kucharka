@@ -12,7 +12,7 @@ export const Title = styled.p<{ theme?: Theme }>`
   font-size: 300px;
   left: -20vw;
   top: -230px;
-  font-weight: 900;
+  font-weight: 800;
   z-index: -1;
 
   @media only screen and (max-width: 1024px) {
@@ -25,5 +25,5 @@ export const Title = styled.p<{ theme?: Theme }>`
 export const Subtitle = styled.h3<{ theme?: Theme }>`
   font-size: 30px;
   color: ${({ theme }) => theme.colors.error};
-  font-weight: 900;
+  font-weight: 800;
 `;

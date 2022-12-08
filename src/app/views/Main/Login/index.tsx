@@ -2,7 +2,7 @@ import { PageContent } from "@components/Page/styled";
 import { FooterText } from "@layouts/Main/components/Footer/styled";
 import React from "react";
 import { MainTitle } from "../Landing/components/Hero/styled";
-import LoginButton from "./components/LoginButton";
+import LoginButton from "../../../components/Button";
 import { LoginWrapper } from "./styled";
 import { FcGoogle } from "react-icons/fc";
 import usePageTitle from "@hooks/usePageTitle";

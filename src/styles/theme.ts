@@ -16,6 +16,10 @@ export type Theme = {
   footer: {
     primary: string;
   };
+  button: {
+    white: string;
+    red: string;
+  };
 };
 
 export const theme = {
@@ -35,5 +39,9 @@ export const theme = {
   },
   footer: {
     primary: "#434343",
+  },
+  button: {
+    white: "#FFFFFF",
+    red: "#ED4040",
   },
 };

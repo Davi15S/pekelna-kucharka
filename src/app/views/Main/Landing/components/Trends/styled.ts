@@ -1,4 +1,4 @@
-import { Text } from "@app/styled";
+import { Row, Text } from "@app/styled";
 import styled from "@emotion/styled";
 
 export const SubTitle = styled(Text)`
@@ -22,5 +22,11 @@ export const ItemsWrapper = styled.div`
     div:nth-child(3n - 1) {
       top: 40px;
     }
+  }
+`;
+
+export const ButtonWrapper = styled(Row)`
+  @media only screen and (min-width: 1240px) {
+    padding-top: 100px;
   }
 `;

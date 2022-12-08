@@ -2,8 +2,9 @@ import { Column, Row } from "@app/styled";
 import BgTitle from "@components/BgTitle";
 import React from "react";
 import TrendItem from "./components/TrendItem";
-import { ItemsWrapper, SubTitle } from "./styled";
+import { ButtonWrapper, ItemsWrapper, SubTitle } from "./styled";
 import trend from "@assets/trends/trend.jpg";
+import Button from "@components/Button";
 
 function Trends() {
   return (
@@ -46,6 +47,9 @@ function Trends() {
             subTitle="Dictumst sed aliquam faucibus adipiscing aliquam. Morbi duis tincidunt facilisis in. Lorem morbi amet, semper nunc eu platea at tristique nunc. Sollicitudin eu porta..."
           />
         </ItemsWrapper>
+        <ButtonWrapper p="40px 0 0 0" justifyContent="center">
+          <Button text="Zobrazit další" color="red" maxW="220px" h="45px" />
+        </ButtonWrapper>
       </Column>
     </Column>
   );
