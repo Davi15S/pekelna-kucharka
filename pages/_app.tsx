@@ -1,7 +1,11 @@
-import MainLayout from "app/layouts/Main";
+import { PageTitleProvider } from "@contexts/PageTitleContext";
+import { ThemeProvider } from "@emotion/react";
+import MainLayout from "@layouts/Main";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import "../styles/global.css";
+import { useState } from "react";
+import "@styles/global.css";
+import { theme } from "../src/styles/theme";
 
 type ComponentLayout = AppProps & {
   Component: AppProps["Component"] & {
@@ -10,24 +14,26 @@ type ComponentLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: ComponentLayout) {
+  const [title, setTitle] = useState<string>();
+
   return (
-    <>
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
-      </Head>
-      {Component.PageLayout ? (
-        <Component.PageLayout>
-          <Component {...pageProps} />
-        </Component.PageLayout>
-      ) : (
-        <>
-          <MainLayout>
+    <ThemeProvider theme={theme}>
+      <PageTitleProvider value={{ title, setTitle }}>
+        <Head>
+          <title>{title}</title>
+        </Head>
+        {Component.PageLayout ? (
+          <Component.PageLayout>
             <Component {...pageProps} />
-          </MainLayout>
-        </>
-      )}
-    </>
+          </Component.PageLayout>
+        ) : (
+          <>
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout>
+          </>
+        )}
+      </PageTitleProvider>
+    </ThemeProvider>
   );
 }

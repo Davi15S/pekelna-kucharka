@@ -1,7 +1,8 @@
+import Recipes from "@views/Main/Recipes";
 import React from "react";
 
-function Recipes() {
-  return <div>Recipes</div>;
+function RecipesPage() {
+  return <Recipes />;
 }
 
-export default Recipes;
+export default RecipesPage;
