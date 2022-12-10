@@ -1,4 +1,4 @@
-import { Row, Text } from "@app/styled";
+import { Row, StyledLink } from "@app/styled";
 import React from "react";
 import Input from "../Input";
 
@@ -8,7 +8,9 @@ function LoginInputs() {
       <Input placeholder="Email" />
       <Input placeholder="Heslo" />
       <Row justifyContent="flex-end" p="15px 0 0 0">
-        <Text fontSize="13px">Zapomněli jste heslo?</Text>
+        <StyledLink href="/forgot" fontSize="13px" underline underlineW="1px">
+          Zapomněli jste heslo?
+        </StyledLink>
       </Row>
     </>
   );

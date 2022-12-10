@@ -5,8 +5,11 @@ import TrendItem from "./components/TrendItem";
 import { ButtonWrapper, ItemsWrapper, SubTitle } from "./styled";
 import trend from "@assets/trends/trend.jpg";
 import Button from "@components/Button";
+import { useRouter } from "next/router";
 
 function Trends() {
+  const { push } = useRouter();
+
   return (
     <Column w="100%" p="200px 0 150px 0">
       <BgTitle title="Trendy" subTitle="Trendy" />
@@ -48,7 +51,7 @@ function Trends() {
           />
         </ItemsWrapper>
         <ButtonWrapper p="40px 0 0 0" justifyContent="center">
-          <Button text="Zobrazit další" color="red" maxW="220px" h="45px" />
+          <Button onClick={() => push("/recipes")} text="Zobrazit další" color="red" maxW="220px" h="45px" />
         </ButtonWrapper>
       </Column>
     </Column>

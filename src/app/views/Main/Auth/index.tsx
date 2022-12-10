@@ -7,9 +7,9 @@ import { LoginWrapper } from "./styled";
 import { FcGoogle } from "react-icons/fc";
 import usePageTitle from "@hooks/usePageTitle";
 import usePageBackground from "@hooks/usePageBackground";
-import Input from "./components/Input";
-import { Column, Row, Text } from "@app/styled";
+import { Column, Row, StyledLink, Text } from "@app/styled";
 import LoginInputs from "./components/LoginInputs";
+import RegisterInputs from "./components/RegisterInputs";
 
 function Auth(props: { pathName: string }) {
   const loginPath = "/login";
@@ -26,13 +26,18 @@ function Auth(props: { pathName: string }) {
       <LoginWrapper alignItems="center" justifyContent="center" h="100vh">
         <MainTitle fontSize="40px">{isLogin ? "Přihlášení" : "Registrace"}</MainTitle>
         <FooterText>Scelerisque elit hendrerit turpis lectus neque ipsum, egestas nunc elementum.</FooterText>
-        <Button transparent text="Přihlásit se s Googlem" icon={<FcGoogle style={{ marginRight: "10px" }} size={25} />} h="50px" />
+        {isLogin ? <Button transparent text="Přihlásit se s Googlem" icon={<FcGoogle style={{ marginRight: "10px" }} size={25} />} h="50px" /> : null}
         <Column h="auto" w="100%">
-          {isLogin ? <LoginInputs /> : <></>}
+          {isLogin ? <LoginInputs /> : <RegisterInputs />}
         </Column>
-        <Button m="40px 20px 20px" text="Přihlásit se" h="50px" />
+        <Button m="40px 20px 20px" text={isLogin ? "Přihlásit se" : "Vytvořit účet"} h="50px" />
         <Row justifyContent="center" p="20px 0 0 0">
-          <Text fontSize="13px">Nemáte ještě účet? Zaregistujte se!</Text>
+          <Text p="0 5px 0 0" fontSize="13px">
+            {isLogin ? "Nemáte ještě účet?" : "Máte již účet?"}
+          </Text>
+          <StyledLink href={isLogin ? "/register" : "/login"} color="red" underline underlineW="1px" fontSize="13px">
+            {isLogin ? "Zaregistrujte se" : "Přihlásit se"}
+          </StyledLink>
         </Row>
       </LoginWrapper>
     </PageContent>

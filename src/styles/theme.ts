@@ -23,6 +23,10 @@ export type Theme = {
   border: {
     primary: string;
   };
+  link: {
+    white: string;
+    red: string;
+  };
 };
 
 export const theme = {
@@ -37,8 +41,8 @@ export const theme = {
     secondary: "#141414",
   },
   shadow: {
-    trend: "0px 2px 5px rgba(250, 67, 67, 0.25)",
-    trendHover: "5px 5px 20px rgba(250, 67, 67, 0.25)",
+    trend: "6px 12px 48px rgba(0, 0, 0, 0.75)",
+    trendHover: "2px 10px 100px rgba(0, 0, 0, 0.9);",
   },
   footer: {
     primary: "#434343",
@@ -49,5 +53,9 @@ export const theme = {
   },
   border: {
     primary: "#353535",
+  },
+  link: {
+    white: "#FFFFFF",
+    red: "#E31C25",
   },
 };

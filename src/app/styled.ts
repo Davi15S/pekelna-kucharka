@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Theme } from "@styles/theme";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export const Row = styled.div<{
@@ -63,4 +64,38 @@ export const Text = styled.p<{
   text-align: ${({ textAlign }) => (textAlign ? textAlign : "start")};
   padding: ${({ p }) => (p ? p : "0")};
   color: ${({ theme, color }) => (color ? theme.colors[color] : "")};
+`;
+
+export const StyledLink = styled(Link)<{
+  theme?: Theme;
+  color?: "white" | "red";
+  fontSize?: React.CSSProperties["fontSize"];
+  underline?: boolean;
+  underlineW?: React.CSSProperties["borderWidth"];
+}>`
+  color: ${({ theme, color }) => (color ? theme.link[color] : theme.link.white)};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "16px")};
+  position: relative;
+
+  ${({ underline, theme, color, underlineW }) =>
+    underline
+      ? `::before {
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    position: absolute;
+    border-bottom: ${underlineW ? underlineW : "2px"} solid ${color ? theme.link[color] : theme.link.white};
+    transform: scale(0, 1);
+    transition: transform 300ms ease-in-out;
+    transform-origin: bottom left;
+  }
+
+  :hover {
+    ::before {
+      transform: scale(1, 1);
+    }
+  }`
+      : ""}
 `;
