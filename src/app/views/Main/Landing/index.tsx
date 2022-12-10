@@ -9,7 +9,7 @@ import { PageContent } from "@layouts/Main/components/Page/styled";
 import Trends from "./components/Trends";
 
 function Landing() {
-  usePageTitle("Pekelná kuchařka");
+  usePageTitle(undefined);
   usePageBackground(landingBg, "100vh");
 
   return (

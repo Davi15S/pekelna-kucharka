@@ -6,7 +6,7 @@ import { PageContent } from "@layouts/Main/components/Page/styled";
 
 function Recipes() {
   usePageBackground(recipesBg, "600px");
-  usePageTitle("Pekelná kuchařka | Recepty");
+  usePageTitle("Recepty");
 
   return <PageContent style={{ height: "2000px" }}>Recipes</PageContent>;
 }

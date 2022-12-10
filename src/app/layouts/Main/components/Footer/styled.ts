@@ -7,4 +7,8 @@ export const FooterText = styled.p<{ theme?: Theme }>`
   padding: 20px;
   font-size: 14px;
   max-width: 800px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 10px;
+  }
 `;

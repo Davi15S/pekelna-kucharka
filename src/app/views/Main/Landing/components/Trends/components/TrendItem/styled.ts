@@ -8,7 +8,7 @@ export const TrendItemWrapper = styled(Column)<{ offset?: boolean }>`
   max-width: 400px;
   box-shadow: ${({ theme }) => theme.shadow.trend};
   cursor: pointer;
-  transition: all 150ms ease-in-out;
+  transition: all 300ms ease-in-out;
   position: relative;
   height: max-content;
 

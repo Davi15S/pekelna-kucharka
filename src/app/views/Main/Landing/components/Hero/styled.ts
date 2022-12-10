@@ -10,8 +10,13 @@ export const HeroWrapper = styled(Column)`
   max-width: 900px;
 `;
 
-export const MainTitle = styled.h1<{ fontSize?: React.CSSProperties["fontSize"]; mobileFontSize?: React.CSSProperties["fontSize"] }>`
+export const MainTitle = styled.h1<{
+  fontSize?: React.CSSProperties["fontSize"];
+  mobileFontSize?: React.CSSProperties["fontSize"];
+  m?: React.CSSProperties["margin"];
+}>`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "50px")};
+  margin: ${({ m }) => (m ? m : "0px")};
 
   @media only screen and (max-width: 768px) {
     font-size: ${({ mobileFontSize }) => (mobileFontSize ? mobileFontSize : "30px")};
