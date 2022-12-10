@@ -1,5 +1,4 @@
 import { Row } from "@app/styled";
-import Icon from "@components/Icon";
 import Link from "next/link";
 import React from "react";
 import { AiOutlineInstagram } from "react-icons/ai";
@@ -17,13 +16,13 @@ function MobileNavbar(props: { active: boolean; handleClick: () => void }) {
         <LinkComponent handleClick={props.handleClick} text="Přihlásit se" link="/login" last />
         <Row justifyContent="center" p="30px 0 0 0">
           <Link href="" style={{ margin: "0 10px" }}>
-            <Icon icon={<AiOutlineInstagram size={25} color={"white"} />} />
+            <AiOutlineInstagram size={25} color={"white"} />
           </Link>
           <Link href="" style={{ margin: "0 10px" }}>
-            <Icon icon={<IoLogoTiktok size={25} color={"white"} />} />
+            <IoLogoTiktok size={25} color={"white"} />
           </Link>
           <Link href="" style={{ margin: "0 10px" }}>
-            <Icon icon={<BsFacebook size={25} color={"white"} />} />
+            <BsFacebook size={25} color={"white"} />
           </Link>
         </Row>
       </LoginWrapper>

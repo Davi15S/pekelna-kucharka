@@ -29,7 +29,9 @@ function Auth(props: { pathName: string }) {
       <PageContent>
         <LoginWrapper alignItems="center" justifyContent="center" h="100vh">
           <MainTitle fontSize="40px">{isLogin ? "Přihlášení" : "Registrace"}</MainTitle>
-          <FooterText>Scelerisque elit hendrerit turpis lectus neque ipsum, egestas nunc elementum.</FooterText>
+          <Text p="10px 0" color="third" fontSize="15px" textAlign="center">
+            Scelerisque elit hendrerit turpis lectus neque ipsum, egestas nunc elementum.
+          </Text>
           {isLogin ? <Button transparent text="Přihlásit se s Googlem" icon={<FcGoogle style={{ marginRight: "10px" }} size={25} />} h="50px" /> : null}
           <Column h="auto" w="100%">
             {isLogin ? <LoginInputs /> : <RegisterInputs />}

@@ -28,7 +28,7 @@ export const Shadow = styled.div<{ top?: boolean }>`
 export const PageContent = styled(Column)<{
   p?: React.CSSProperties["padding"];
   mobileP?: React.CSSProperties["padding"];
-  topP?: React.CSSProperties["padding"];
+  topP?: boolean;
 }>`
   padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 20px 0 20px`)};
   align-items: center;

@@ -10,19 +10,21 @@ export const ButtonWrapper = styled.button<{
   color?: "white" | "red";
   theme?: Theme;
   h?: React.CSSProperties["height"];
+  borderRadius?: React.CSSProperties["borderRadius"];
 }>`
   width: 100%;
   display: flex;
   justify-content: center;
   height: ${({ h }) => (h ? h : "40px")};
   align-items: center;
-  border-radius: 10px;
+  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "10px")};
   background-color: ${({ transparent, theme, color }) => (transparent ? "transparent" : color ? theme.button[color] : "white")};
   border: 2px solid ${({ color, theme }) => (color ? theme.button[color] : "white")};
   cursor: pointer;
   margin: ${({ m }) => (m ? m : "20px")};
   transition: all 300ms ease-in-out;
   max-width: ${({ maxW }) => (maxW ? maxW : "")};
+  padding: 5px 15px;
 
   div {
     transition: all 300ms ease-in-out;
@@ -30,10 +32,10 @@ export const ButtonWrapper = styled.button<{
   }
 
   :hover {
-    background-color: ${({ transparent }) => (transparent ? "white" : "transparent")};
+    background-color: ${({ transparent, color, theme }) => (transparent ? (color ? theme.button[color] : "white") : "transparent")};
 
     div {
-      color: ${({ transparent, color, theme }) => (transparent ? "black" : color ? theme.button[color] : "white")};
+      color: ${({ transparent, color, theme }) => (transparent ? (color ? "white" : "black") : color ? theme.button[color] : "white")};
     }
   }
 `;
