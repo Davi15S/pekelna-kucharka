@@ -11,7 +11,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <PageBackgroundProvider value={{ bgImage, setBgImage, bgHeight, setBgHeight }}>
-      <div style={{ overflow: "hidden" }}>
+      <div style={{ contain: "paint" }}>
         <Navbar />
         <Page>{children}</Page>
         <Footer />

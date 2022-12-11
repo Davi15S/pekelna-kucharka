@@ -1,28 +1,38 @@
-import { Column, Row } from "@app/styled";
+import { Row } from "@app/styled";
 import BgTitle from "@components/BgTitle";
+import Button from "@components/Button";
+import { useRouter } from "next/router";
 import React from "react";
+import Filter from "./components/Filter";
 import RecipeItem from "./components/RecipeItem";
-import { ContentWrapper, FilterWrapper, RecipesWrapper } from "./styled";
+import { ContentWrapper, RecipesWrapper } from "./styled";
 
 function Content() {
+  const { push } = useRouter();
+
   return (
-    <ContentWrapper p="130px 0 0 0" justifyContent="space-between">
-      <BgTitle title="Katalog" />
-      <BgTitle title="receptů" top="50px" left="30vw" />
-      <FilterWrapper w="30%">Filter</FilterWrapper>
-      <RecipesWrapper w="65%">
-        <Row p="0 0 30px 0">
-          <Row>Nalezeno 21 receptů</Row>
-          <Row justifyContent="flex-end">Seřadit podle: Nejnovější</Row>
-        </Row>
-        <RecipeItem />
-        <RecipeItem />
-        <RecipeItem />
-        <RecipeItem />
-        <RecipeItem />
-        <RecipeItem />
-      </RecipesWrapper>
-    </ContentWrapper>
+    <div>
+      <BgTitle title="Katalog" top="-150px" />
+      <BgTitle title="receptů" top="50px" left="30vw" mobileTop="40px" mobileLeft="25vw" />
+      <ContentWrapper p="130px 0 0 0" justifyContent="space-around">
+        <Filter />
+        <RecipesWrapper w="65%" alignItems="center">
+          <Row p="0 0 30px 0">
+            <Row>Nalezeno 21 receptů</Row>
+            <Row justifyContent="flex-end">Seřadit podle: Nejnovější</Row>
+          </Row>
+          <RecipeItem />
+          <RecipeItem />
+          <RecipeItem />
+          <RecipeItem />
+          <RecipeItem />
+          <RecipeItem />
+        </RecipesWrapper>
+      </ContentWrapper>
+      <Row p="40px 0 0 0" justifyContent="center">
+        <Button text="Zobrazit další" color="red" maxW="220px" h="45px" />
+      </Row>
+    </div>
   );
 }
 

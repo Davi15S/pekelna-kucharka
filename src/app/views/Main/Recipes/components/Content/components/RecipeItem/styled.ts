@@ -8,8 +8,9 @@ export const ItemWrapper = styled(Row)`
   transition: all 300ms ease-in-out;
   cursor: pointer;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 786px) {
     flex-direction: column;
+    max-width: 500px;
   }
 
   :hover {
@@ -18,7 +19,7 @@ export const ItemWrapper = styled(Row)`
 `;
 
 export const MobilePicture = styled.div`
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 786px) {
     display: none;
   }
 `;
@@ -51,7 +52,7 @@ export const CategoryWrapper = styled(Row)`
 `;
 
 export const ContentWrapper = styled(Column)<{ picture?: boolean }>`
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 786px) {
     padding: 20px;
     width: 100%;
     ${({ picture }) => (picture ? "display: none;" : "")}

@@ -7,12 +7,10 @@ export const ContentWrapper = styled(Row)`
   }
 `;
 
-export const FilterWrapper = styled(Column)`
-  background-color: pink;
-`;
-
 export const RecipesWrapper = styled(Column)`
   @media only screen and (max-width: 1024px) {
     width: 100%;
   }
 `;
+
+export const StickyNavbar = styled.div``;

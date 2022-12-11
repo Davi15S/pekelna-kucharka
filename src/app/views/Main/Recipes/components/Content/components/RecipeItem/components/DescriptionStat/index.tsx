@@ -1,5 +1,5 @@
 import { Row, Text } from "@app/styled";
-import Pepper from "@components/Pepper";
+import PepperRating from "@components/PepperRating";
 import React from "react";
 
 function DescriptionStat(props: { icon?: React.ReactNode; text?: string; peppers?: boolean }) {
@@ -9,11 +9,7 @@ function DescriptionStat(props: { icon?: React.ReactNode; text?: string; peppers
         props.icon
       ) : (
         <>
-          <Pepper w="25px" h="25px" fill />
-          <Pepper w="25px" h="25px" fill />
-          <Pepper w="25px" h="25px" fill />
-          <Pepper w="25px" h="25px" />
-          <Pepper w="25px" h="25px" />
+          <PepperRating rating={3} w="22px" h="22px" />
         </>
       )}
       {props.peppers ? (
