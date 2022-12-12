@@ -1,4 +1,4 @@
-import { Row } from "@app/styled";
+import { Column, Row } from "@app/styled";
 import BgTitle from "@components/BgTitle";
 import Button from "@components/Button";
 import { useRouter } from "next/router";
@@ -11,10 +11,10 @@ function Content() {
   const { push } = useRouter();
 
   return (
-    <div>
-      <BgTitle title="Katalog" top="-150px" />
+    <Column w="100%">
+      <BgTitle title="Katalog" top="-80px" />
       <BgTitle title="receptů" top="50px" left="30vw" mobileTop="40px" mobileLeft="25vw" />
-      <ContentWrapper p="130px 0 0 0" justifyContent="space-around">
+      <ContentWrapper justifyContent="space-around">
         <Filter />
         <RecipesWrapper w="65%" alignItems="center">
           <Row p="0 0 30px 0">
@@ -32,7 +32,7 @@ function Content() {
       <Row p="40px 0 0 0" justifyContent="center">
         <Button text="Zobrazit další" color="red" maxW="220px" h="45px" />
       </Row>
-    </div>
+    </Column>
   );
 }
 

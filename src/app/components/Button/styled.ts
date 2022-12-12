@@ -12,7 +12,7 @@ export const ButtonWrapper = styled.button<{
   h?: React.CSSProperties["height"];
   borderRadius?: React.CSSProperties["borderRadius"];
 }>`
-  width: 100%;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   height: ${({ h }) => (h ? h : "40px")};
@@ -21,10 +21,10 @@ export const ButtonWrapper = styled.button<{
   background-color: ${({ transparent, theme, color }) => (transparent ? "transparent" : color ? theme.button[color] : "white")};
   border: 2px solid ${({ color, theme }) => (color ? theme.button[color] : "white")};
   cursor: pointer;
-  margin: ${({ m }) => (m ? m : "20px")};
   transition: all 300ms ease-in-out;
   max-width: ${({ maxW }) => (maxW ? maxW : "")};
   padding: 5px 15px;
+  margin: ${({ m }) => (m ? m : "20px")};
 
   div {
     transition: all 300ms ease-in-out;

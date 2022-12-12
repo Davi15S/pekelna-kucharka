@@ -5,9 +5,13 @@ export const FilterWrapper = styled(Column)`
   position: -webkit-sticky;
   position: sticky;
   top: 50px;
-  width: max-content;
   overflow: auto;
   height: calc(100vh - 100px);
   align-items: flex-start;
-  padding: 0 100px 0 10px;
+  width: auto;
+  padding-right: 100px;
+
+  @media only screen and (max-width: 1024px) {
+    display: none;
+  }
 `;

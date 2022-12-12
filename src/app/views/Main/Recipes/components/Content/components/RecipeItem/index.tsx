@@ -27,13 +27,13 @@ function RecipeItem() {
             Sollicitudin eu portaSollicitudin eu portaSollicitudin eu portaSollicitudin eu portaSollicitudin eu porta
           </Description>
         </Row>
-        <CategoryWrapper p="0 0 5px 0">
-          <Button text="Vietnamské" color="red" transparent maxW="max-content" borderRadius="25px" m="20px 20px 0 0" />
-          <Button text="Vietnamské" color="red" transparent maxW="max-content" borderRadius="25px" m="20px 20px 0 0" />
-          <Button text="Vietnamské" color="red" transparent maxW="max-content" borderRadius="25px" m="20px 20px 0 0" />
-          <Button text="Vietnamské" color="red" transparent maxW="max-content" borderRadius="25px" m="20px 20px 0 0" />
-          <Button text="Vietnamské" color="red" transparent maxW="max-content" borderRadius="25px" m="20px 20px 0 0" />
-          <Button text="Vietnamské" color="red" transparent maxW="max-content" borderRadius="25px" m="20px 20px 0 0" />
+        <CategoryWrapper>
+          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
+          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
+          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
+          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
+          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
+          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
         </CategoryWrapper>
       </ContentWrapper>
       <ContentWrapper w="37%" alignItems="center" justifyContent="center" h="100%" p="30px 30px 30px 0" picture>

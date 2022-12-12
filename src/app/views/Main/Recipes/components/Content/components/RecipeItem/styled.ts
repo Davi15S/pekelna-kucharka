@@ -11,6 +11,7 @@ export const ItemWrapper = styled(Row)`
   @media only screen and (max-width: 786px) {
     flex-direction: column;
     max-width: 500px;
+    width: 100%;
   }
 
   :hover {
@@ -47,8 +48,10 @@ export const Description = styled(Text)`
   }
 `;
 
-export const CategoryWrapper = styled(Row)`
+export const CategoryWrapper = styled.div`
   overflow: auto;
+  display: flex;
+  width: 100%;
 `;
 
 export const ContentWrapper = styled(Column)<{ picture?: boolean }>`

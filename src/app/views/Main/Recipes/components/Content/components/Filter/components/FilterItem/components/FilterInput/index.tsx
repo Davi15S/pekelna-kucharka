@@ -9,7 +9,7 @@ function FilterInput(props: { title?: string; rating?: number }) {
 
   return (
     <Row alignItems="center" p="5px 0">
-      <CheckBox checked={checked} onClick={() => setChecked(!checked)}>
+      <CheckBox whileTap={{ scale: 1.1 }} checked={checked} onClick={() => setChecked(!checked)}>
         {checked ? <BiCheck size={25} /> : null}
       </CheckBox>
       {props.rating ? (
