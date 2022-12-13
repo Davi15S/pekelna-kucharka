@@ -12,6 +12,7 @@ export const Row = styled.div<{
   m?: React.CSSProperties["margin"];
   p?: React.CSSProperties["padding"];
   flexWrap?: React.CSSProperties["flexWrap"];
+  flexGrow?: React.CSSProperties["flexGrow"];
 }>`
   display: flex;
   width: ${({ w }) => (w ? w : "100%")};
@@ -21,6 +22,7 @@ export const Row = styled.div<{
   margin: ${({ m }) => (m ? m : "")};
   padding: ${({ p }) => (p ? p : "")};
   flex-wrap: ${({ flexWrap }) => (flexWrap ? flexWrap : "nowrap")};
+  flex-grow: ${({ flexGrow }) => (flexGrow ? flexGrow : "none")};
 `;
 
 export const Column = styled.div<{
