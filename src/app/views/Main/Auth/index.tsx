@@ -24,14 +24,11 @@ function Auth(props: { pathName: string }) {
 
   return (
     <>
-      <BgTitle title="Přihlásit se" top="0vh" mobileTop="10vh" />
+      <BgTitle title="Přihlásit se" top="20px" mobileTop="10vh" left="-10vw" />
       <BgTitle title="Registrace" top="65vh" left="35vw" mobileTop="80vh" mobileLeft="55vw" />
       <PageContent>
         <LoginWrapper alignItems="center" justifyContent="center" h="100vh">
           <MainTitle fontSize="40px">{isLogin ? "Přihlášení" : "Registrace"}</MainTitle>
-          <Text p="10px 0" color="third" fontSize="15px" textAlign="center">
-            Scelerisque elit hendrerit turpis lectus neque ipsum, egestas nunc elementum.
-          </Text>
           {isLogin ? <Button transparent text="Přihlásit se s Googlem" icon={<FcGoogle style={{ marginRight: "10px" }} size={25} />} h="50px" /> : null}
           <Column h="auto" w="100%">
             {isLogin ? <LoginInputs /> : <RegisterInputs />}

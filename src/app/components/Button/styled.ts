@@ -12,7 +12,7 @@ export const ButtonWrapper = styled.button<{
   h?: React.CSSProperties["height"];
   borderRadius?: React.CSSProperties["borderRadius"];
 }>`
-  flex-grow: 1;
+  width: 100%;
   display: flex;
   justify-content: center;
   height: ${({ h }) => (h ? h : "40px")};

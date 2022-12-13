@@ -13,7 +13,7 @@ function Content() {
   return (
     <Column w="100%">
       <BgTitle title="Katalog" top="-80px" />
-      <BgTitle title="receptů" top="50px" left="30vw" mobileTop="40px" mobileLeft="25vw" />
+      <BgTitle title="receptů" top="70px" left="20vw" mobileTop="40px" mobileLeft="25vw" />
       <ContentWrapper justifyContent="space-around">
         <Filter />
         <RecipesWrapper w="65%" alignItems="center">
