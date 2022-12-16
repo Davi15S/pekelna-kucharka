@@ -13,7 +13,7 @@ function MobileNavbar(props: { active: boolean; handleClick: () => void }) {
       <LinkComponent handleClick={props.handleClick} text="Recepty" link="/recipes" />
       <LinkComponent handleClick={props.handleClick} text="Magazín" link="/magazine" />
       <LoginWrapper>
-        <LinkComponent handleClick={props.handleClick} text="Přihlásit se" link="/login" last />
+        <LinkComponent handleClick={props.handleClick} text="Přihlásit se" link="/login" last={true} />
         <Row justifyContent="center" p="30px 0 0 0">
           <Link href="" style={{ margin: "0 10px" }}>
             <AiOutlineInstagram size={25} color={"white"} />

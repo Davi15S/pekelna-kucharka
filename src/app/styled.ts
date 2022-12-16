@@ -51,12 +51,15 @@ export const ImageWrapper = styled(Image)<{
   maxH?: React.CSSProperties["maxHeight"];
   maxW?: React.CSSProperties["maxWidth"];
   borderRadius?: React.CSSProperties["borderRadius"];
+  shadow?: boolean;
+  theme?: Theme;
 }>`
   width: ${({ w }) => (w ? w : "auto")};
   height: ${({ h }) => (h ? h : "auto")};
   max-width: ${({ maxW }) => (maxW ? maxW : "auto")};
   max-height: ${({ maxH }) => (maxH ? maxH : "auto")};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
+  box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.trend : "")};
 
   @media only screen and (max-width: 1024px) {
     ${({ mobileW }) => (mobileW ? `width: ${mobileW};` : "")}
