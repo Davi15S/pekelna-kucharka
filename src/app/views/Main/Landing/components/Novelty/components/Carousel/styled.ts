@@ -3,10 +3,6 @@ import styled from "@emotion/styled";
 import { Theme } from "@styles/theme";
 import { Carousel } from "react-responsive-carousel";
 
-export const Test = styled(Row)`
-  height: 500px;
-`;
-
 export const CarouselWrapper = styled.div`
   position: relative;
   width: 100%;
