@@ -8,6 +8,18 @@ body {
   background-color: #111111;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track-piece {
+  background: rgb(32, 32, 32);
+}
+::-webkit-scrollbar-thumb {
+  background: #525252;
+  border-radius: 20px;
+}
+
 html .openNavbar {
   height: 100vh;
   overflow: hidden;

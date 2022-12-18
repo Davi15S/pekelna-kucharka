@@ -5,6 +5,7 @@ import React from "react";
 export const BgTitleWrapper = styled.div`
   position: relative;
   margin-bottom: 30px;
+  z-index: -1;
 `;
 
 export const Title = styled.p<{
@@ -19,11 +20,11 @@ export const Title = styled.p<{
   position: absolute;
   color: ${({ theme }) => theme.background.secondary};
   font-size: 300px;
-  left: ${({ left }) => (left ? left : "-20vw")};
+  left: ${({ left }) => (left ? left : "-150px")};
   top: ${({ top }) => (top ? top : "-230px")};
   font-weight: 800;
-  z-index: -1;
   user-select: none;
+  z-index: -1;
   white-space: ${({ wrap }) => (wrap ? "normal" : "nowrap")};
 
   @media only screen and (max-width: 1024px) {

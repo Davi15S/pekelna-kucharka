@@ -7,6 +7,9 @@ import usePageBackground from "@hooks/usePageBackground";
 import Favourite from "./components/Favourite";
 import { PageContent } from "@layouts/Main/components/Page/styled";
 import Trends from "./components/Trends";
+import Novelty from "./components/Novelty";
+import { Carousel } from "react-responsive-carousel";
+import { Row } from "@app/styled";
 
 function Landing() {
   usePageTitle(undefined);
@@ -19,6 +22,7 @@ function Landing() {
         <Stats />
         <Favourite />
         <Trends />
+        <Novelty />
       </PageContent>
     </>
   );

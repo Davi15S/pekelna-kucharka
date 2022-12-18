@@ -8,4 +8,5 @@ interface ButtonProps extends React.ButtonHTMLAttributes<ButtonHTMLAttributes> {
   color?: "white" | "red";
   maxW?: React.CSSProperties["maxWidth"];
   h?: React.CSSProperties["height"];
+  borderRadius?: React.CSSProperties["borderRadius"];
 }

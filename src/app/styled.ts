@@ -12,6 +12,7 @@ export const Row = styled.div<{
   m?: React.CSSProperties["margin"];
   p?: React.CSSProperties["padding"];
   flexWrap?: React.CSSProperties["flexWrap"];
+  flexGrow?: React.CSSProperties["flexGrow"];
 }>`
   display: flex;
   width: ${({ w }) => (w ? w : "100%")};
@@ -21,6 +22,7 @@ export const Row = styled.div<{
   margin: ${({ m }) => (m ? m : "")};
   padding: ${({ p }) => (p ? p : "")};
   flex-wrap: ${({ flexWrap }) => (flexWrap ? flexWrap : "nowrap")};
+  flex-grow: ${({ flexGrow }) => (flexGrow ? flexGrow : "none")};
 `;
 
 export const Column = styled.div<{
@@ -30,6 +32,7 @@ export const Column = styled.div<{
   justifyContent?: React.CSSProperties["justifyContent"];
   p?: React.CSSProperties["padding"];
   w?: React.CSSProperties["width"];
+  textAlign?: React.CSSProperties["textAlign"];
 }>`
   display: flex;
   flex-direction: column;
@@ -38,13 +41,25 @@ export const Column = styled.div<{
   justify-content: ${({ justifyContent }) => (justifyContent ? justifyContent : "flex-start")};
   padding: ${({ p }) => (p ? p : "")};
   width: ${({ w }) => (w ? w : "auto")};
+  text-align: ${({ textAlign }) => (textAlign ? textAlign : "")};
 `;
 
-export const ImageWrapper = styled(Image)<{ w?: React.CSSProperties["width"]; h?: React.CSSProperties["height"]; mobileW?: React.CSSProperties["width"] }>`
+export const ImageWrapper = styled(Image)<{
+  w?: React.CSSProperties["width"];
+  h?: React.CSSProperties["height"];
+  mobileW?: React.CSSProperties["width"];
+  maxH?: React.CSSProperties["maxHeight"];
+  maxW?: React.CSSProperties["maxWidth"];
+  borderRadius?: React.CSSProperties["borderRadius"];
+  shadow?: boolean;
+  theme?: Theme;
+}>`
   width: ${({ w }) => (w ? w : "auto")};
   height: ${({ h }) => (h ? h : "auto")};
-  max-width: auto;
-  max-height: auto;
+  max-width: ${({ maxW }) => (maxW ? maxW : "auto")};
+  max-height: ${({ maxH }) => (maxH ? maxH : "auto")};
+  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
+  box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.trend : "")};
 
   @media only screen and (max-width: 1024px) {
     ${({ mobileW }) => (mobileW ? `width: ${mobileW};` : "")}

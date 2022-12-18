@@ -19,7 +19,7 @@ export const ItemsWrapper = styled.div`
   @media only screen and (min-width: 1240px) {
     grid-template-columns: repeat(3, 1fr);
 
-    div:nth-child(3n - 1) {
+    div:nth-of-type(3n - 1) {
       top: 40px;
     }
   }

@@ -6,7 +6,6 @@ import { BsFacebook } from "react-icons/bs";
 import Link from "next/link";
 import Logo from "@assets/Logo.svg";
 import { ImageWrapper, Row } from "@app/styled";
-import Icon from "@components/Icon";
 import { useState } from "react";
 import MobileNavbar from "./components/MobileNavbar";
 
@@ -37,13 +36,13 @@ function Navbar() {
         <Row justifyContent="flex-end" alignItems="center" w="max-content">
           <LinkComponent text="Přihlásit se" link="/login" />
           <Link href="" style={{ margin: "0 15px 0 0" }}>
-            <Icon icon={<AiOutlineInstagram size={25} color={"white"} />} />
+            <AiOutlineInstagram size={25} color={"white"} />
           </Link>
           <Link href="" style={{ margin: "0 15px 0 0" }}>
-            <Icon icon={<IoLogoTiktok size={25} color={"white"} />} />
+            <IoLogoTiktok size={25} color={"white"} />
           </Link>
           <Link href="">
-            <Icon icon={<BsFacebook size={25} color={"white"} />} />
+            <BsFacebook size={25} color={"white"} />
           </Link>
         </Row>
       </NavbarContainer>

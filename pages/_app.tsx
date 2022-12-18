@@ -6,6 +6,7 @@ import Head from "next/head";
 import { useState } from "react";
 import "@styles/global.css";
 import { theme } from "../src/styles/theme";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 type ComponentLayout = AppProps & {
   Component: AppProps["Component"] & {
