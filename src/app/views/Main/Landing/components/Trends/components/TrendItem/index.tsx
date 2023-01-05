@@ -15,7 +15,7 @@ function TrendItem(props: { image: StaticImageData; title: string; subTitle: str
         <Text fontWeight="700" fontSize="24px">
           {props.title}
         </Text>
-        <SubTitle p="15px 0">{props.subTitle}</SubTitle>
+        <SubTitle>{props.subTitle}</SubTitle>
         <Row p="40px 0 0 0" justifyContent="space-between">
           <Row alignItems="center">
             <MdInsertComment size={25} color={"#AFAFAF"} style={{ transform: "scaleX(-1)" }} />
