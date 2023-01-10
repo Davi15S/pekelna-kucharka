@@ -1,11 +1,13 @@
-import { Column } from "@app/styled";
 import styled from "@emotion/styled";
+import { Theme } from "@styles/theme";
 
-export const ItemWrapper = styled(Column)`
-  max-width: 535px;
+export const ItemWrapper = styled.div<{ theme?: Theme }>`
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  max-width: 500px;
   width: 100%;
-  min-width: 300px;
-  margin: 30px;
+  height: max-content;
   box-shadow: ${({ theme }) => theme.shadow.trend};
   border-radius: 10px;
   transition: all 200ms ease-in-out;
@@ -23,5 +25,3 @@ export const ImageContent = styled.div`
   height: 100%;
   max-height: 300px;
 `;
-
-export const Link = styled.p``;

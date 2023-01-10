@@ -3,18 +3,19 @@ import BgTitle from "@components/BgTitle";
 import React from "react";
 import Carousel from "./components/Carousel";
 import Item from "./components/Item";
+import { ItemsWrapper } from "./styled";
 
 function Novelty() {
   return (
     <Column w="100%" p="100px 0">
       <BgTitle title="Novinky" subTitle="Novinky" />
       <Carousel />
-      <Row justifyContent="space-evenly" flexWrap="wrap" m="150px 0 0 0">
+      <ItemsWrapper>
         <Item />
         <Item />
         <Item />
         <Item />
-      </Row>
+      </ItemsWrapper>
     </Column>
   );
 }
