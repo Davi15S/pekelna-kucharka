@@ -28,6 +28,11 @@ export type Theme = {
     white: string;
     red: string;
   };
+  slider: {
+    track: string;
+    middleTrack: string;
+    thumb: string;
+  };
 };
 
 export const theme = {
@@ -59,5 +64,10 @@ export const theme = {
   link: {
     white: "#FFFFFF",
     red: "#E31C25",
+  },
+  slider: {
+    track: "#B9B9B9",
+    middleTrack: "#6b6b6b",
+    thumb: "#ED4040",
   },
 };
