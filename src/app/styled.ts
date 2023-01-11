@@ -84,21 +84,6 @@ export const Text = styled.p<{
   padding: ${({ p }) => (p ? p : "0")};
   margin: ${({ m }) => (m ? m : "0")};
   color: ${({ theme, color }) => (color ? theme.colors[color] : "")};
-  position: relative;
-
-  ::before {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    bottom: -2px;
-    content: "";
-  }
-
-  :hover {
-    ::before {
-      border-bottom: ${({ underline }) => (underline ? "1px solid white" : "")};
-    }
-  }
 `;
 
 export const StyledLink = styled(Link)<{

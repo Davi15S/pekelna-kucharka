@@ -13,7 +13,7 @@ export const FilterWrapper = styled(Column)`
   align-items: flex-start;
   width: auto;
   padding-right: 20px;
-  padding-left: 10px;
+  padding-left: 25px;
 
   @media only screen and (max-width: 1024px) {
     display: none;
@@ -26,8 +26,9 @@ export const SliderWrapper = styled.div`
 `;
 
 export const Slider = styled(ReactSlider)<{ theme?: Theme }>`
-  max-width: 300px;
+  max-width: 225px;
   padding-bottom: 20px;
+  position: relative;
 
   .customSlider-track {
     top: 8px;
@@ -53,4 +54,14 @@ export const Slider = styled(ReactSlider)<{ theme?: Theme }>`
       box-shadow: 0 0 0 8px rgba(110, 110, 110, 0.1);
     }
   }
+`;
+
+export const ThumbIndicator = styled.div<{ theme?: Theme }>`
+  position: absolute;
+  top: -30px;
+  color: ${({ theme }) => theme.colors.third};
+  font-size: 16px;
+  white-space: nowrap;
+  display: flex;
+  left: -100%;
 `;
