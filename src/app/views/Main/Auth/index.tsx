@@ -1,5 +1,4 @@
 import { PageContent } from "@layouts/Main/components/Page/styled";
-import { FooterText } from "@layouts/Main/components/Footer/styled";
 import React, { useEffect, useState } from "react";
 import { MainTitle } from "../Landing/components/Hero/styled";
 import Button from "../../../components/Button";

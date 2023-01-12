@@ -3,9 +3,9 @@ import { InputStyled, InputWrapper } from "./styled";
 
 function Input(props: InputProps) {
   return (
-    <InputWrapper maxW={props.maxW}>
+    <InputWrapper {...props}>
       {props.icon}
-      <InputStyled {...props} type="text" />
+      <InputStyled {...props} type={props.type ?? "text"} />
     </InputWrapper>
   );
 }
