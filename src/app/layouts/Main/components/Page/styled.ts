@@ -30,10 +30,14 @@ export const PageContent = styled(Column)<{
   mobileP?: React.CSSProperties["padding"];
   topP?: boolean;
 }>`
-  padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 20px 0 20px`)};
+  padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 80px 0 80px`)};
   align-items: center;
   max-width: 1400px;
   width: 100%;
+
+  @media only screen and (max-width: 1024px) {
+    padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 20px 0 20px`)};
+  }
 `;
 
 export const PageWrapper = styled.div`

@@ -1,4 +1,4 @@
-import { Column, ImageWrapper, Row } from "@app/styled";
+import { ImageWrapper, Row } from "@app/styled";
 import React from "react";
 import { CategoryWrapper, ContentWrapper, Description, ItemWrapper, MobilePicture, Title } from "./styled";
 import { AiOutlineClockCircle, AiOutlineStar } from "react-icons/ai";

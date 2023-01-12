@@ -53,6 +53,7 @@ export const ImageWrapper = styled(Image)<{
   borderRadius?: React.CSSProperties["borderRadius"];
   shadow?: boolean;
   theme?: Theme;
+  objectFit?: React.CSSProperties["objectFit"];
 }>`
   width: ${({ w }) => (w ? w : "auto")};
   height: ${({ h }) => (h ? h : "auto")};
@@ -60,6 +61,7 @@ export const ImageWrapper = styled(Image)<{
   max-height: ${({ maxH }) => (maxH ? maxH : "auto")};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
   box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.trend : "")};
+  object-fit: ${({ objectFit }) => (objectFit ? objectFit : "")};
 
   @media only screen and (max-width: 1024px) {
     ${({ mobileW }) => (mobileW ? `width: ${mobileW};` : "")}
@@ -72,12 +74,15 @@ export const Text = styled.p<{
   fontWeight?: React.CSSProperties["fontWeight"];
   textAlign?: React.CSSProperties["textAlign"];
   p?: React.CSSProperties["padding"];
+  m?: React.CSSProperties["margin"];
   color?: "primary" | "secondary" | "third" | "error";
+  underline?: boolean;
 }>`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "16px")};
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
   text-align: ${({ textAlign }) => (textAlign ? textAlign : "start")};
   padding: ${({ p }) => (p ? p : "0")};
+  margin: ${({ m }) => (m ? m : "0")};
   color: ${({ theme, color }) => (color ? theme.colors[color] : "")};
 `;
 
