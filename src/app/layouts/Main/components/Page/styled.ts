@@ -30,7 +30,7 @@ export const PageContent = styled(Column)<{
   mobileP?: React.CSSProperties["padding"];
   topP?: boolean;
 }>`
-  padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 100px 0 100px`)};
+  padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 80px 0 80px`)};
   align-items: center;
   max-width: 1400px;
   width: 100%;

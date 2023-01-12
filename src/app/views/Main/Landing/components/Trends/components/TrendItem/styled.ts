@@ -30,6 +30,7 @@ export const SubTitle = styled(Text)`
   -webkit-line-clamp: 4;
   white-space: pre-wrap;
   line-height: 1.8ex;
-  height: 9ex;
+  height: 9.5ex;
+  line-height: 20px;
   color: ${({ theme }) => theme.colors.third};
 `;

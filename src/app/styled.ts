@@ -76,12 +76,15 @@ export const Text = styled.p<{
   fontWeight?: React.CSSProperties["fontWeight"];
   textAlign?: React.CSSProperties["textAlign"];
   p?: React.CSSProperties["padding"];
+  m?: React.CSSProperties["margin"];
   color?: "primary" | "secondary" | "third" | "error";
+  underline?: boolean;
 }>`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "16px")};
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
   text-align: ${({ textAlign }) => (textAlign ? textAlign : "start")};
   padding: ${({ p }) => (p ? p : "0")};
+  margin: ${({ m }) => (m ? m : "0")};
   color: ${({ theme, color }) => (color ? theme.colors[color] : "")};
 `;
 
