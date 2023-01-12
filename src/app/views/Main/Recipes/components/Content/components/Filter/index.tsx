@@ -17,7 +17,7 @@ function Filter() {
       <FilterItem title="Úroveň pálivosti" peppers={filter.peppers} />
       <FilterItem title="Úroveň pálivosti" filterInputArr={filter.source} />
       <SliderWrapper>
-        <Text fontSize="20px" fontWeight="700" p="0 0 35px 0">
+        <Text fontSize="20px" fontWeight="700" p="0 0 45px 0">
           Doba přípravy
         </Text>
         <Slider
@@ -27,6 +27,8 @@ function Filter() {
           max={120}
           defaultValue={currentValue}
           minDistance={30}
+          pearling
+          step={15}
           renderThumb={(props, state) => (
             <div {...props}>
               <ThumbIndicator>
