@@ -9,7 +9,7 @@ import { CarouselButton, CarouselButtonWrapper, CarouselWrapper } from "../Landi
 import { MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
 
 function Recipe(props: { id: string }) {
-  const [images, setImages] = useState([recipeImage, recipeImage1, recipeImage2]);
+  const [images, ,] = useState([recipeImage, recipeImage1, recipeImage2]);
   const [currentImage, setCurrentImage] = useState(0);
 
   const buttonHandle = (left: boolean) => {
