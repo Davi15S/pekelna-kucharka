@@ -14,14 +14,22 @@ export const StyledCarousel = styled(Carousel)`
   padding: 0;
 `;
 
-export const CarouselButtonWrapper = styled(Column)<{ left?: boolean }>`
-  background-color: pink;
+export const CarouselButtonWrapper = styled(Column)<{
+  left?: boolean;
+  shadow?: boolean;
+  leftOffset?: React.CSSProperties["left"];
+  rightOffset?: React.CSSProperties["right"];
+}>`
   position: absolute;
   z-index: 2;
-  ${({ left, theme }) =>
-    left
-      ? `left: 0; align-items: start; background: linear-gradient(to right, ${theme.background.primary} 25%, transparent);`
-      : `right: 0; align-items: flex-end; background: linear-gradient(to left, ${theme.background.primary} 25%, transparent);`}
+  ${({ left, leftOffset, rightOffset }) =>
+    left ? `align-items: start; left: ${leftOffset ? leftOffset : "0"};` : `align-items: flex-end; right: ${rightOffset ? rightOffset : "0"};`};
+  ${({ left, theme, shadow }) =>
+    shadow
+      ? left
+        ? `background: linear-gradient(to right, ${theme.background.primary} 25%, transparent);`
+        : `background: linear-gradient(to left, ${theme.background.primary} 25%, transparent);`
+      : ""}
   width: 100px;
 
   @media only screen and (max-width: 768px) {
