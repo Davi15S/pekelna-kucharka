@@ -36,6 +36,32 @@ function Recipe(props: { id: string }) {
             </CarouselButtonWrapper>
             <ImageWrapper src={images[currentImage]} alt="" w="100%" maxH="500px" objectFit="cover" borderRadius="20px" />
           </CarouselWrapper>
+          <Row p="10px 0 0 0">
+            <ImageWrapper
+              src={images[currentImage == images.length - 1 ? 0 : currentImage + 1]}
+              alt=""
+              w="100%"
+              maxW="220px"
+              maxH="125px"
+              objectFit="cover"
+              borderRadius="10px"
+              m="0 15px 0 0"
+            />
+            <ImageWrapper
+              src={
+                images[
+                  currentImage == images.length - 2 && images.length >= 3 ? 0 : currentImage == images.length - 1 && images.length >= 3 ? 1 : currentImage + 2
+                ]
+              }
+              alt=""
+              w="100%"
+              maxW="220px"
+              maxH="125px"
+              objectFit="cover"
+              borderRadius="10px"
+              m="0 15px 0 0"
+            />
+          </Row>
         </ColumnContent>
       </Row>
     </PageContent>
