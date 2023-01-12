@@ -54,6 +54,7 @@ export const ImageWrapper = styled(Image)<{
   shadow?: boolean;
   theme?: Theme;
   objectFit?: React.CSSProperties["objectFit"];
+  m?: React.CSSProperties["margin"];
 }>`
   width: ${({ w }) => (w ? w : "auto")};
   height: ${({ h }) => (h ? h : "auto")};
@@ -62,6 +63,7 @@ export const ImageWrapper = styled(Image)<{
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
   box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.trend : "")};
   object-fit: ${({ objectFit }) => (objectFit ? objectFit : "")};
+  margin: ${({ m }) => (m ? m : "")};
 
   @media only screen and (max-width: 1024px) {
     ${({ mobileW }) => (mobileW ? `width: ${mobileW};` : "")}
