@@ -31,7 +31,7 @@ function Gallery() {
         </CarouselButtonWrapper>
         <ImageWrapper src={images[currentImage]} alt="" w="100%" maxH="500px" objectFit="cover" borderRadius="20px" />
       </CarouselWrapper>
-      <Row p="10px 0 0 0">
+      <Row p="10px 0 0 0" m="0 0 50px 0">
         <ImageWrapper
           src={images[currentImage == images.length - 1 ? 0 : currentImage + 1]}
           alt=""

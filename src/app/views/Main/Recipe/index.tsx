@@ -1,4 +1,4 @@
-import { Text } from "@app/styled";
+import { Row, Text } from "@app/styled";
 import { PageContent } from "@layouts/Main/components/Page/styled";
 import React from "react";
 import { ColumnContent, PageWrapper } from "./styled";
@@ -6,6 +6,8 @@ import Gallery from "./components/Gallery";
 import usePageBackground from "@hooks/usePageBackground";
 import Description from "./components/Description";
 import Ingredients from "./components/Ingredients";
+import Button from "@components/Button";
+import Process from "./components/Process";
 
 function Recipe(props: { id: string }) {
   usePageBackground(undefined);
@@ -18,10 +20,20 @@ function Recipe(props: { id: string }) {
             Ultrices etiam arcu sagittis, in nullam varius nunc ut at. Id lacus
           </Text>
           <Gallery />
+          <Process mobile={false} />
         </ColumnContent>
         <ColumnContent w="30%" left>
           <Description />
           <Ingredients />
+          <Row flexWrap="wrap" justifyContent="space-evenly" p="20px 0">
+            <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="5px 1px 5px 1px" maxW="max-content" />
+            <Button text="Polévka" color="red" transparent borderRadius="25px" m="5px 1px 5px 1px" maxW="max-content" />
+            <Button text="Oběd" color="red" transparent borderRadius="25px" m="5px 1px 5px 1px" maxW="max-content" />
+            <Button text="Kuřecí maso" color="red" transparent borderRadius="25px" m="5px 1px 5px 1px" maxW="max-content" />
+          </Row>
+        </ColumnContent>
+        <ColumnContent w="100">
+          <Process mobile={true} />
         </ColumnContent>
       </PageWrapper>
     </PageContent>
