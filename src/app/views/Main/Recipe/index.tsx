@@ -5,6 +5,7 @@ import { ColumnContent, PageWrapper } from "./styled";
 import Gallery from "./components/Gallery";
 import usePageBackground from "@hooks/usePageBackground";
 import Description from "./components/Description";
+import Ingredients from "./components/Ingredients";
 
 function Recipe(props: { id: string }) {
   usePageBackground(undefined);
@@ -20,6 +21,7 @@ function Recipe(props: { id: string }) {
         </ColumnContent>
         <ColumnContent w="30%" left>
           <Description />
+          <Ingredients />
         </ColumnContent>
       </PageWrapper>
     </PageContent>

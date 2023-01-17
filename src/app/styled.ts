@@ -33,6 +33,7 @@ export const Column = styled.div<{
   p?: React.CSSProperties["padding"];
   w?: React.CSSProperties["width"];
   textAlign?: React.CSSProperties["textAlign"];
+  m?: React.CSSProperties["margin"];
 }>`
   display: flex;
   flex-direction: column;
@@ -42,6 +43,7 @@ export const Column = styled.div<{
   padding: ${({ p }) => (p ? p : "")};
   width: ${({ w }) => (w ? w : "auto")};
   text-align: ${({ textAlign }) => (textAlign ? textAlign : "")};
+  margin: ${({ m }) => (m ? m : "")};
 `;
 
 export const ImageWrapper = styled(Image)<{
