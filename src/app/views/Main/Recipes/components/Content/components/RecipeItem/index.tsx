@@ -6,10 +6,13 @@ import { BiCommentDetail } from "react-icons/bi";
 import DescriptionStat from "./components/DescriptionStat";
 import Button from "@components/Button";
 import recipe from "@assets/recipes/recipe.jpg";
+import { useRouter } from "next/router";
 
 function RecipeItem() {
+  const navigate = useRouter();
+
   return (
-    <ItemWrapper alignItems="center" justifyContent="space-between" w="100%" m="15px 0">
+    <ItemWrapper alignItems="center" justifyContent="space-between" w="100%" m="15px 0" onClick={() => navigate.push("/recipes/jdiusajdoisajdoisa")}>
       <MobilePicture>
         <ImageWrapper src={recipe} alt="" maxW="100%" borderRadius="20px" />
       </MobilePicture>

@@ -9,7 +9,6 @@ export const PageBackground = styled(Column)<{ bgImage?: StaticImageData; h: Rea
   width: 100%;
   height: ${({ h }) => h && h};
   position: absolute;
-  z-index: 0;
   background-image: url(${({ bgImage }) => (bgImage ? bgImage.src : "")});
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,8 +41,8 @@ export const PageContent = styled(Column)<{
 
 export const PageWrapper = styled.div`
   position: relative;
-  z-index: 1;
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  z-index: 1;
 `;
