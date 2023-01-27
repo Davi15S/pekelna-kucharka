@@ -5,13 +5,15 @@ import React, { useState } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import styled from "@emotion/styled";
+import { PageFixedContextProvider } from "@contexts/PageFixedContext";
 
 function MainLayout({ children }: { children: React.ReactNode }) {
   const [bgImage, setBgImage] = useState<StaticImageData>();
   const [bgHeight, setBgHeight] = useState<string>();
   const [active, setActive] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
 
-  const handleNavbar = () => {
+  const handleNavbar = async () => {
     if (active) {
       document.body.classList.remove("openNavbar");
     } else {
@@ -20,19 +22,25 @@ function MainLayout({ children }: { children: React.ReactNode }) {
     setActive(!active);
   };
 
+  const handleIsFixed = () => {
+    setIsFixed(!isFixed);
+  };
+
   return (
     <PageBackgroundProvider value={{ bgImage, setBgImage, bgHeight, setBgHeight }}>
-      <PageContainer active={active}>
-        <Navbar active={active} handleNavbar={handleNavbar} />
-        <Page>{children}</Page>
+      <PageFixedContextProvider value={{ isFixed, handleIsFixed }}>
+        <Navbar active={active} handleClick={handleNavbar} />
+        <PageContainer active={isFixed}>
+          <Page>{children}</Page>
+        </PageContainer>
         <Footer />
-      </PageContainer>
+      </PageFixedContextProvider>
     </PageBackgroundProvider>
   );
 }
 
 const PageContainer = styled.div<{ active: boolean }>`
-  contain: ${({ active }) => (active ? "" : "paint")};
+  /* contain: ${({ active }) => (active ? "" : "paint")}; */
 `;
 
 export default MainLayout;

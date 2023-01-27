@@ -8,7 +8,7 @@ import Logo from "@assets/Logo.svg";
 import { ImageWrapper, Row } from "@app/styled";
 import MobileNavbar from "./components/MobileNavbar";
 
-function Navbar(props: { active: boolean; handleNavbar: () => void }) {
+function Navbar(props: { active: boolean; handleClick: () => void }) {
   return (
     <NavbarWrapper justifyContent="center" alignItems="center">
       <LogoWrapper>
@@ -35,9 +35,9 @@ function Navbar(props: { active: boolean; handleNavbar: () => void }) {
         </Row>
       </NavbarContainer>
       <NavbarContainer mobile>
-        <MobileNavbar active={props.active} handleClick={props.handleNavbar} />
+        <MobileNavbar active={props.active} handleClick={props.handleClick} />
         <Row justifyContent="flex-end">
-          <HamburgerWrapper onClick={props.handleNavbar}>
+          <HamburgerWrapper onClick={props.handleClick}>
             <HamburgerLine line="1" active={props.active} />
             <HamburgerLine line="2" active={props.active} />
             <HamburgerLine line="3" active={props.active} />

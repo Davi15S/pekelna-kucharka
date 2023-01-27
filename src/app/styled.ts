@@ -81,6 +81,8 @@ export const Text = styled.p<{
   m?: React.CSSProperties["margin"];
   color?: "primary" | "secondary" | "third" | "error";
   underline?: boolean;
+  wrap?: React.CSSProperties["whiteSpace"];
+  link?: boolean;
 }>`
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "16px")};
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "400")};
@@ -88,6 +90,8 @@ export const Text = styled.p<{
   padding: ${({ p }) => (p ? p : "0")};
   margin: ${({ m }) => (m ? m : "0")};
   color: ${({ theme, color }) => (color ? theme.colors[color] : "")};
+  white-space: ${({ wrap }) => (wrap ? wrap : "")};
+  cursor: ${({ link }) => (link ? "pointer" : "normal")};
 `;
 
 export const StyledLink = styled(Link)<{

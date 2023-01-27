@@ -8,6 +8,7 @@ import Description from "./components/Description";
 import Ingredients from "./components/Ingredients";
 import Button from "@components/Button";
 import Process from "./components/Process";
+import Comments from "./components/Comments";
 
 function Recipe(props: { id: string }) {
   usePageBackground(undefined);
@@ -35,6 +36,7 @@ function Recipe(props: { id: string }) {
         <ColumnContent w="100">
           <Process mobile={true} />
         </ColumnContent>
+        <Comments />
       </PageWrapper>
     </PageContent>
   );

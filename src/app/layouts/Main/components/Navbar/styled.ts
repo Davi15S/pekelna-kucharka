@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 export const NavbarWrapper = styled(Row)`
   padding: 35px 100px;
   position: absolute;
-  z-index: 10;
+  z-index: 2;
 
   @media only screen and (max-width: 1024px) {
     padding: 20px;
