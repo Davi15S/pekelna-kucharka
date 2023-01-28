@@ -13,16 +13,16 @@ export const InputWrapper = styled(Row)<{ maxW?: React.CSSProperties["maxWidth"]
   padding: 20px 15px;
 `;
 
-export const InputStyled = styled.input<{ theme?: Theme }>`
+export const InputStyled = styled.input<{ theme?: Theme; isForm?: boolean }>`
   width: 100%;
   outline: none;
   border: none;
   font-size: 16px;
   margin-left: 10px;
   background-color: transparent;
-  color: ${({ theme }) => theme.background.primary};
+  color: ${({ theme, isForm }) => (isForm ? theme.colors.third : theme.background.primary)};
 
   ::placeholder {
-    color: ${({ theme }) => theme.background.primary};
+    color: ${({ theme, isForm }) => (isForm ? theme.colors.third : theme.background.primary)};
   }
 `;
