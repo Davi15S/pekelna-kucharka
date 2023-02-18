@@ -8,5 +8,4 @@ export const InputWrapper = styled(Row)<{ maxH?: React.CSSProperties["maxHeight"
   min-height: 60px;
   ${({ clickable }) => clickable && "cursor: pointer;"}
   position: relative;
-  background-color: ${({ theme }) => theme.background.primary};
 `;

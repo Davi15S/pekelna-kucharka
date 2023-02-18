@@ -4,12 +4,18 @@ import { InputWrapper } from "../Input/styled";
 import { IoIosArrowDown } from "react-icons/io";
 import { Arrow, ListItem, ListItems } from "./styled";
 
-function List(props: { title?: string; p?: React.CSSProperties["padding"]; listItems: string[]; w?: React.CSSProperties["width"] }) {
+function List(props: {
+  title?: string;
+  p?: React.CSSProperties["padding"];
+  listItems: string[];
+  w?: React.CSSProperties["width"];
+  maxW?: React.CSSProperties["maxWidth"];
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(props.listItems[0]);
 
   return (
-    <Column w={props.w ? props.w : "100%"} p={props.p}>
+    <Column w={props.w ? props.w : "100%"} p={props.p} maxW={props.maxW}>
       {props.title && <Text p="0 0 8px 0">{props.title}</Text>}
       <InputWrapper alignItems={"center"} p="0 20px" justifyContent="space-between" onClick={() => setIsOpen(!isOpen)} clickable>
         <Text fontSize="16px" color="third" fontWeight="400">

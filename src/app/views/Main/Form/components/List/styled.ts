@@ -22,6 +22,7 @@ export const ListItems = styled.div<{ isOpen: boolean; theme?: Theme }>`
   border-radius: 10px;
   background-color: ${({ theme }) => theme.background.primary};
   z-index: 10;
+  margin-top: 10px;
 `;
 
 export const ListItem = styled(Text)`
