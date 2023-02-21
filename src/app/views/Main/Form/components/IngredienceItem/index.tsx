@@ -6,10 +6,10 @@ import List from "../List";
 import { IngredientItemWrapper, Number } from "./styled";
 import { RxCross2 } from "react-icons/rx";
 
-function IngredientItem(props: { category: string[] }) {
+function IngredientItem(props: { category: string[]; index: number; handleClick: () => void }) {
   return (
-    <IngredientItemWrapper gap="20px" p="20px">
-      <Number>1</Number>
+    <IngredientItemWrapper gap="20px" p="20px" m="10px 0">
+      <Number>{props.index}</Number>
       <InputsWrapper minW={250}>
         <Row gap="20px">
           <Input title="Název" />
@@ -17,7 +17,7 @@ function IngredientItem(props: { category: string[] }) {
         <Row gap="20px">
           <Input title="Množství" maxW="150px" />
           <List listItems={props.category} title="Jednotky" />
-          <Number offsetTop="45px">
+          <Number offsetTop="45px" onClick={props.handleClick}>
             <RxCross2 size={20} />
           </Number>
         </Row>

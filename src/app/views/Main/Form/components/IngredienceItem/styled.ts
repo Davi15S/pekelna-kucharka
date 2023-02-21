@@ -15,6 +15,7 @@ export const Number = styled.div<{ theme?: Theme; offsetTop?: React.CSSPropertie
   justify-content: center;
   align-items: center;
   font-weight: 600;
+  cursor: pointer;
 `;
 
 export const IngredientItemWrapper = styled(Row)`

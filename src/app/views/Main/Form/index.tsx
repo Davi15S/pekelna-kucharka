@@ -1,5 +1,6 @@
 import { Column, Row, Text } from "@app/styled";
 import BgTitle from "@components/BgTitle";
+import Button from "@components/Button";
 import usePageBackground from "@hooks/usePageBackground";
 import usePageTitle from "@hooks/usePageTitle";
 import { PageContent } from "@layouts/Main/components/Page/styled";
@@ -13,8 +14,13 @@ import { InputsWrapper } from "./styled";
 function Form() {
   usePageBackground(undefined);
   const [category, setCategory] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
+  const [ingredients, setIngredients] = useState([{}]);
 
   usePageTitle("Vytvoření receptu");
+
+  const removeIngredient = (i: number) => {
+    setIngredients((prevState) => prevState.filter((prevItem, _i) => _i != i));
+  };
 
   return (
     <>
@@ -47,8 +53,11 @@ function Form() {
                 <Text fontWeight="500" fontSize="18px">
                   Suroviny na 1 porci
                 </Text>
-                <Column w="100%" p="20px 0 0 0">
-                  <IngredientItem category={category} />
+                <Column w="100%" p="20px 0 0 0" alignItems="center">
+                  {ingredients.map((ingredient, i) => (
+                    <IngredientItem category={category} key={i} index={i + 1} handleClick={() => removeIngredient(i)} />
+                  ))}
+                  <Button text="Přidat další" maxW="220px" onClick={() => setIngredients((prevState) => [...prevState, {}])} />
                 </Column>
               </Column>
             </Column>
