@@ -1,25 +1,29 @@
 import { Column, Row, Text } from "@app/styled";
 import BgTitle from "@components/BgTitle";
 import Button from "@components/Button";
+import TextArea from "@views/Main/Form/components/TextArea";
 import usePageBackground from "@hooks/usePageBackground";
 import usePageTitle from "@hooks/usePageTitle";
 import { PageContent } from "@layouts/Main/components/Page/styled";
 import React, { useState } from "react";
-import IngredientItem from "./components/IngredienceItem";
+import IngredientItem from "./components/IngredientItem";
 import Input from "./components/Input";
 import List from "./components/List";
 import UploadInput from "./components/UploadInput";
 import { InputsWrapper } from "./styled";
+import { RecipeForm } from "@shared/recipe";
 
 function Form() {
   usePageBackground(undefined);
   const [category, setCategory] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
   const [ingredients, setIngredients] = useState([{}]);
+  const [progress, setProgress] = useState([""]);
+  const [recipe, setRecipe] = useState<RecipeForm | null>(null);
 
   usePageTitle("Vytvoření receptu");
 
   const removeIngredient = (i: number) => {
-    setIngredients((prevState) => prevState.filter((prevItem, _i) => _i != i));
+    setIngredients((prevState) => prevState.filter((prevItem, _i) => _i !== i));
   };
 
   return (
@@ -55,10 +59,21 @@ function Form() {
                 </Text>
                 <Column w="100%" p="20px 0 0 0" alignItems="center">
                   {ingredients.map((ingredient, i) => (
-                    <IngredientItem category={category} key={i} index={i + 1} handleClick={() => removeIngredient(i)} />
+                    <IngredientItem category={category} key={i} handleClick={() => removeIngredient(i)} onlyOne={ingredients.length <= 1} />
                   ))}
                   <Button text="Přidat další" maxW="220px" onClick={() => setIngredients((prevState) => [...prevState, {}])} />
                 </Column>
+              </Column>
+              <Column w="100%" p="60px 0 0 0">
+                <Text fontWeight="800" fontSize="30px">
+                  Postup
+                </Text>
+                {progress.map((process, i) => (
+                  <TextArea i={i + 1} key={i} />
+                ))}
+                <Row justifyContent="center">
+                  <Button text="Přidat další" maxW="220px" onClick={() => setProgress((prevState) => [...prevState, ""])} />
+                </Row>
               </Column>
             </Column>
           </Column>
