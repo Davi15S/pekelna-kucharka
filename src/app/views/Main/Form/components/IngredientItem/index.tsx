@@ -14,6 +14,7 @@ function IngredientItem(props: {
   onlyOne?: boolean;
   setIngredient: <T>(key: keyof RecipeForm, index: number, value: T) => void;
   index: number;
+  ingredient: Ingredient;
 }) {
   const [ingredient, setTitle] = useState<string>("");
   const [amount, setAmount] = useState("");
@@ -27,11 +28,11 @@ function IngredientItem(props: {
     <IngredientItemWrapper gap="20px" p="20px" m="10px 0">
       <InputsWrapper minW={250}>
         <Row gap="20px">
-          <Input title="Název" onChange={(e) => setTitle(e.currentTarget.value)} />
+          <Input title="Název" onChange={(e) => setTitle(e.currentTarget.value)} value={props.ingredient.ingredient} />
         </Row>
         <Row gap="20px">
-          <Input title="Množství" maxW="150px" onChange={(e) => setAmount(e.currentTarget.value)} />
-          <List listItems={props.category} title="Jednotky" onClick={(e) => setUnit(e)} value={unit} />
+          <Input title="Množství" maxW="150px" onChange={(e) => setAmount(e.currentTarget.value)} value={props.ingredient.amount} />
+          <List listItems={props.category} title="Jednotky" onClick={(e) => setUnit(e)} value={props.ingredient.unit} />
         </Row>
       </InputsWrapper>
       {!props.onlyOne && (

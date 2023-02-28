@@ -12,7 +12,6 @@ import List from "./components/List";
 import UploadInput from "./components/UploadInput";
 import { InputsWrapper } from "./styled";
 import { RecipeForm } from "@shared/recipe";
-import { Ingredient } from "@shared/ingredient";
 
 function Form() {
   usePageBackground(undefined);
@@ -51,10 +50,10 @@ function Form() {
   };
 
   const handleSetRecipeArray = <T,>(key: keyof RecipeForm, index: number, value: T) => {
-    const updatedIngredients = [...recipe[key]];
+    const updatedIngredients = [...(recipe[key] as Array<T>)];
     updatedIngredients[index] = value;
     const updatedRecipe = { ...recipe, [key]: updatedIngredients };
-    console.log(updatedRecipe);
+    setRecipe(updatedRecipe);
   };
 
   return (
@@ -97,7 +96,13 @@ function Form() {
                 </Text>
                 <Column w="100%" p="20px 0 0 0" alignItems="center">
                   {recipe.ingredients.map((ingredient, i) => (
-                    <IngredientItem category={category} key={i} setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)} index={i} />
+                    <IngredientItem
+                      category={category}
+                      key={i}
+                      setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)}
+                      index={i}
+                      ingredient={ingredient}
+                    />
                   ))}
                   <Button text="Přidat další" maxW="220px" />
                 </Column>
