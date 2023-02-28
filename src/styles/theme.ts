@@ -9,6 +9,7 @@ export type Theme = {
     primary: string;
     secondary: string;
     third: string;
+    fourth: string;
   };
   shadow: {
     trend: string;
@@ -46,6 +47,7 @@ export const theme = {
     primary: "#111111",
     secondary: "#141414",
     third: "#232323",
+    fourth: "#181818",
   },
   shadow: {
     trend: "6px 12px 48px rgba(0, 0, 0, 0.75)",

@@ -13,6 +13,8 @@ export const Row = styled.div<{
   p?: React.CSSProperties["padding"];
   flexWrap?: React.CSSProperties["flexWrap"];
   flexGrow?: React.CSSProperties["flexGrow"];
+  gap?: React.CSSProperties["gap"];
+  maxW?: React.CSSProperties["maxWidth"];
 }>`
   display: flex;
   width: ${({ w }) => (w ? w : "100%")};
@@ -23,6 +25,8 @@ export const Row = styled.div<{
   padding: ${({ p }) => (p ? p : "")};
   flex-wrap: ${({ flexWrap }) => (flexWrap ? flexWrap : "nowrap")};
   flex-grow: ${({ flexGrow }) => (flexGrow ? flexGrow : "none")};
+  gap: ${({ gap }) => (gap ? gap : "")};
+  max-width: ${({ maxW }) => (maxW ? maxW : "")};
 `;
 
 export const Column = styled.div<{
@@ -34,6 +38,7 @@ export const Column = styled.div<{
   w?: React.CSSProperties["width"];
   textAlign?: React.CSSProperties["textAlign"];
   m?: React.CSSProperties["margin"];
+  maxW?: React.CSSProperties["maxWidth"];
 }>`
   display: flex;
   flex-direction: column;
@@ -44,6 +49,7 @@ export const Column = styled.div<{
   width: ${({ w }) => (w ? w : "auto")};
   text-align: ${({ textAlign }) => (textAlign ? textAlign : "")};
   margin: ${({ m }) => (m ? m : "")};
+  max-width: ${({ maxW }) => (maxW ? maxW : "")};
 `;
 
 export const ImageWrapper = styled(Image)<{

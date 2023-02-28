@@ -29,18 +29,14 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <PageBackgroundProvider value={{ bgImage, setBgImage, bgHeight, setBgHeight }}>
       <PageFixedContextProvider value={{ isFixed, handleIsFixed }}>
-        <Navbar active={active} handleClick={handleNavbar} />
-        <PageContainer active={isFixed}>
-          <Page>{children}</Page>
-        </PageContainer>
+        <Page>
+          <Navbar active={active} handleClick={handleNavbar} />
+          {children}
+        </Page>
         <Footer />
       </PageFixedContextProvider>
     </PageBackgroundProvider>
   );
 }
-
-const PageContainer = styled.div<{ active: boolean }>`
-  /* contain: ${({ active }) => (active ? "" : "paint")}; */
-`;
 
 export default MainLayout;

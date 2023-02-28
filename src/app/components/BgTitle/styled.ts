@@ -20,8 +20,7 @@ export const Title = styled.p<{
   position: absolute;
   color: ${({ theme }) => theme.background.secondary};
   font-size: 300px;
-  /* left: ${({ left }) => (left ? left : "-150px")}; */
-  left: 500px;
+  left: ${({ left }) => (left ? left : "-150px")};
   top: ${({ top }) => (top ? top : "-230px")};
   font-weight: 800;
   user-select: none;
