@@ -10,16 +10,17 @@ function List(props: {
   listItems: string[];
   w?: React.CSSProperties["width"];
   maxW?: React.CSSProperties["maxWidth"];
+  onClick: (value: string) => void;
+  value: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(props.listItems[0]);
 
   return (
     <Column w={props.w ? props.w : "100%"} p={props.p} maxW={props.maxW}>
       {props.title && <Text p="0 0 8px 0">{props.title}</Text>}
       <InputWrapper alignItems={"center"} p="0 20px" justifyContent="space-between" onClick={() => setIsOpen(!isOpen)} clickable>
         <Text fontSize="16px" color="third" fontWeight="400">
-          {selectedItem}
+          {props.value}
         </Text>
         <Arrow isOpen={isOpen}>
           <IoIosArrowDown size={25} />
@@ -28,8 +29,8 @@ function List(props: {
           <ListItems isOpen={isOpen}>
             {props.listItems.map((item) => {
               return (
-                item != selectedItem && (
-                  <ListItem p="10px 20px" color="third" key={item} onClick={() => setSelectedItem(item)}>
+                item != props.value && (
+                  <ListItem p="10px 20px" color="third" key={item} onClick={() => props.onClick(item)}>
                     {item}
                   </ListItem>
                 )

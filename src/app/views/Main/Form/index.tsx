@@ -12,18 +12,49 @@ import List from "./components/List";
 import UploadInput from "./components/UploadInput";
 import { InputsWrapper } from "./styled";
 import { RecipeForm } from "@shared/recipe";
+import { Ingredient } from "@shared/ingredient";
 
 function Form() {
   usePageBackground(undefined);
   const [category, setCategory] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
-  const [ingredients, setIngredients] = useState([{}]);
-  const [progress, setProgress] = useState([""]);
-  const [recipe, setRecipe] = useState<RecipeForm | null>(null);
+  const [recipe, setRecipe] = useState<RecipeForm>({
+    title: "",
+    author: undefined,
+    description: "",
+    ingredients: [{ ingredient: "", amount: "", unit: "" }],
+    images: [],
+    category: category[0],
+    cookingTime: "",
+    process: [""],
+    comments: [],
+    spiciness: "",
+    approved: false,
+    creationTime: "",
+    recipeOrigin: [],
+  });
 
   usePageTitle("Vytvoření receptu");
 
-  const removeIngredient = (i: number) => {
-    setIngredients((prevState) => prevState.filter((prevItem, _i) => _i !== i));
+  // const removeIngredient = (i: number) => {
+  //   setIngredients((prevState) => prevState.filter((prevItem, _i) => _i !== i));
+  // };
+
+  const handleSetRecipe = (key: keyof RecipeForm, value: string) => {
+    const result = (Object.keys(recipe) as Array<keyof typeof key>).reduce(
+      (acc) => ({
+        ...acc,
+        [key]: value,
+      }),
+      recipe,
+    );
+    setRecipe(result);
+  };
+
+  const handleSetRecipeArray = <T,>(key: keyof RecipeForm, index: number, value: T) => {
+    const updatedIngredients = [...recipe[key]];
+    updatedIngredients[index] = value;
+    const updatedRecipe = { ...recipe, [key]: updatedIngredients };
+    console.log(updatedRecipe);
   };
 
   return (
@@ -36,18 +67,25 @@ function Form() {
             Vytvoření receptu
           </Text>
           <Text textAlign="center" color="third">
-            Máš recept, o který se chceš podělit s komunitou? Vyplň níže požadované informace a tvůj recept bude veřejný.
+            Máš recept, o který se chceš podělit s komunitou? Vyplň níže požadované informace a tvůj recept zveřejníme.
           </Text>
           <Column w="100%" p="35px 0">
             <Text fontWeight="800" fontSize="30px" p="0 0 20px 0" textAlign="start">
               Informace
             </Text>
             <UploadInput />
-            <Input p="40px 0 0 0" title="Název receptu" placeholder="Zadejte prosím celý název tvého receptu" />
+            <Input
+              p="40px 0 0 0"
+              title="Název receptu"
+              placeholder="Zadejte prosím celý název tvého receptu"
+              value={recipe.title}
+              onChange={(e) => handleSetRecipe("title", e.currentTarget.value)}
+              required
+            />
             <Column w="100%">
               <InputsWrapper p="30px 0 0 0">
-                <List listItems={category} title="Kategorie" />
-                <List listItems={category} title="Úroveň pálivosti" />
+                <List listItems={category} title="Kategorie" onClick={(e) => handleSetRecipe("category", e)} value={recipe.category} />
+                <List listItems={category} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} />
               </InputsWrapper>
               <InputsWrapper p="20px 0 0 0">
                 <Input title="Délka přípravy (minuty)" />
@@ -58,25 +96,26 @@ function Form() {
                   Suroviny na 1 porci
                 </Text>
                 <Column w="100%" p="20px 0 0 0" alignItems="center">
-                  {ingredients.map((ingredient, i) => (
-                    <IngredientItem category={category} key={i} handleClick={() => removeIngredient(i)} onlyOne={ingredients.length <= 1} />
+                  {recipe.ingredients.map((ingredient, i) => (
+                    <IngredientItem category={category} key={i} setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)} index={i} />
                   ))}
-                  <Button text="Přidat další" maxW="220px" onClick={() => setIngredients((prevState) => [...prevState, {}])} />
+                  <Button text="Přidat další" maxW="220px" />
                 </Column>
               </Column>
               <Column w="100%" p="60px 0 0 0">
                 <Text fontWeight="800" fontSize="30px">
                   Postup
                 </Text>
-                {progress.map((process, i) => (
+                {recipe.process.map((process, i) => (
                   <TextArea i={i + 1} key={i} />
                 ))}
                 <Row justifyContent="center">
-                  <Button text="Přidat další" maxW="220px" onClick={() => setProgress((prevState) => [...prevState, ""])} />
+                  {/* <Button text="Přidat další" maxW="220px" onClick={() => setProgress((prevState) => [...prevState, ""])} /> */}
                 </Row>
               </Column>
             </Column>
           </Column>
+          <Button text="Potvrdit" maxW="220px" onClick={() => console.log(recipe)} />
         </Column>
       </PageContent>
     </>
