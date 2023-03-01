@@ -29,8 +29,8 @@ export const Title = styled.p<{
 
   @media only screen and (max-width: 1024px) {
     font-size: 80px;
-    top: ${({ mobileTop }) => (mobileTop ? mobileTop : "-18px")};
-    left: ${({ mobileLeft }) => (mobileLeft ? mobileLeft : "-15px")};
+    top: ${({ mobileTop, top }) => (mobileTop ? mobileTop : top ? top : "-18px")};
+    left: ${({ mobileLeft, left }) => (mobileLeft ? mobileLeft : left ? left : "-15px")};
   }
 `;
 

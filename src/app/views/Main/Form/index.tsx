@@ -27,16 +27,11 @@ function Form() {
     process: [""],
     comments: [],
     spiciness: "",
-    approved: false,
     creationTime: "",
     recipeOrigin: [],
   });
 
   usePageTitle("Vytvoření receptu");
-
-  // const removeIngredient = (i: number) => {
-  //   setIngredients((prevState) => prevState.filter((prevItem, _i) => _i !== i));
-  // };
 
   const handleSetRecipe = (key: keyof RecipeForm, value: string) => {
     const result = (Object.keys(recipe) as Array<keyof typeof key>).reduce(
@@ -97,6 +92,8 @@ function Form() {
                 <Column w="100%" p="20px 0 0 0" alignItems="center">
                   {recipe.ingredients.map((ingredient, i) => (
                     <IngredientItem
+                      onlyOne={recipe.ingredients.length <= 1}
+                      handleClick={() => setRecipe((prevState) => ({ ...prevState, ingredients: prevState.ingredients.filter((prevItem, _i) => _i !== i) }))}
                       category={category}
                       key={i}
                       setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)}
@@ -104,7 +101,13 @@ function Form() {
                       ingredient={ingredient}
                     />
                   ))}
-                  <Button text="Přidat další" maxW="220px" />
+                  <Button
+                    text="Přidat další"
+                    maxW="220px"
+                    onClick={() =>
+                      setRecipe((prevState) => ({ ...prevState, ingredients: [...prevState.ingredients, { ingredient: "", amount: "", unit: "" }] }))
+                    }
+                  />
                 </Column>
               </Column>
               <Column w="100%" p="60px 0 0 0">
@@ -112,15 +115,31 @@ function Form() {
                   Postup
                 </Text>
                 {recipe.process.map((process, i) => (
-                  <TextArea i={i + 1} key={i} />
+                  <TextArea
+                    value={process}
+                    index={i}
+                    key={i}
+                    setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)}
+                    onlyone={recipe.process.length <= 1}
+                    handleClick={() => setRecipe((prevState) => ({ ...prevState, process: prevState.process.filter((prevItem, _i) => _i !== i) }))}
+                  />
                 ))}
                 <Row justifyContent="center">
-                  {/* <Button text="Přidat další" maxW="220px" onClick={() => setProgress((prevState) => [...prevState, ""])} /> */}
+                  <Button text="Přidat další" maxW="220px" onClick={() => setRecipe((prevState) => ({ ...prevState, process: [...prevState.process, ""] }))} />
                 </Row>
               </Column>
             </Column>
           </Column>
-          <Button text="Potvrdit" maxW="220px" onClick={() => console.log(recipe)} />
+          <Column w="100%" alignItems="center">
+            <BgTitle title="Děkujeme" top="-100px" left="-50vw" mobileTop="20px" />
+            <Text fontWeight="700" fontSize="44px" textAlign="center">
+              Nezapomněl jsi na něco?
+            </Text>
+            <Text color="third" p="20px 0" textAlign="center">
+              Jestli jsi spokojený se svým receptem, neváhej ho odeslat. Tvůj recept bude po kontrole dostupná veřejnosti.
+            </Text>
+            <Button text="Potvrdit" maxW="220px" onClick={() => console.log(recipe)} />
+          </Column>
         </Column>
       </PageContent>
     </>
