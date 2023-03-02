@@ -1,4 +1,4 @@
-import { Column, Row, Text } from "@app/styled";
+import { Column, Image, Row, Text } from "@app/styled";
 import BgTitle from "@components/BgTitle";
 import Button from "@components/Button";
 import TextArea from "@views/Main/Form/components/TextArea";
@@ -10,12 +10,15 @@ import IngredientItem from "./components/IngredientItem";
 import Input from "./components/Input";
 import List from "./components/List";
 import UploadInput from "./components/UploadInput";
-import { InputsWrapper } from "./styled";
+import { StyledForm, InputsWrapper } from "./styled";
 import { RecipeForm } from "@shared/recipe";
+import { createRecipe } from "@api/recipes";
+import { TextArea as TextAreaStyled } from "./components/TextArea/styled";
 
 function Form() {
   usePageBackground(undefined);
   const [category, ,] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
+  const [images, setImages] = useState<string[]>([]);
   const [recipe, setRecipe] = useState<RecipeForm>({
     title: "",
     author: undefined,
@@ -25,7 +28,6 @@ function Form() {
     category: category[0],
     cookingTime: "",
     process: [""],
-    comments: [],
     spiciness: "",
     creationTime: "",
     recipeOrigin: [],
@@ -51,96 +53,121 @@ function Form() {
     setRecipe(updatedRecipe);
   };
 
+  const handleCreateRecipe = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const res = await createRecipe(recipe);
+    console.log(res);
+  };
+
   return (
     <>
       <BgTitle title="Vytvoření" top="20px" mobileTop="10vh" left="-10vw" />
       <BgTitle title="Receptu" top="65vh" left="35vw" mobileTop="80vh" mobileLeft="55vw" />
       <PageContent topP>
-        <Column p="100px 0" alignItems="center">
-          <Text fontWeight="700" fontSize="44px" p="0 0 20px 0" textAlign="center">
-            Vytvoření receptu
-          </Text>
-          <Text textAlign="center" color="third">
-            Máš recept, o který se chceš podělit s komunitou? Vyplň níže požadované informace a tvůj recept zveřejníme.
-          </Text>
-          <Column w="100%" p="35px 0">
-            <Text fontWeight="800" fontSize="30px" p="0 0 20px 0" textAlign="start">
-              Informace
+        <Row p="100px 0" alignItems="center" justifyContent="center" maxW="800px">
+          <StyledForm onSubmit={(e) => handleCreateRecipe(e)}>
+            <Text fontWeight="700" fontSize="44px" p="0 0 20px 0" textAlign="center">
+              Vytvoření receptu
             </Text>
-            <UploadInput />
-            <Input
-              p="40px 0 0 0"
-              title="Název receptu"
-              placeholder="Zadejte prosím celý název tvého receptu"
-              value={recipe.title}
-              onChange={(e) => handleSetRecipe("title", e.currentTarget.value)}
-              required
-            />
-            <Column w="100%">
-              <InputsWrapper p="30px 0 0 0">
-                <List listItems={category} title="Kategorie" onClick={(e) => handleSetRecipe("category", e)} value={recipe.category} />
-                <List listItems={category} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} />
-              </InputsWrapper>
-              <InputsWrapper p="20px 0 0 0">
-                <Input title="Délka přípravy (minuty)" />
-                <Input title="Počet porcí" />
-              </InputsWrapper>
-              <Column w="100%" p="40px 0 0 0">
-                <Text fontWeight="500" fontSize="18px">
-                  Suroviny na 1 porci
-                </Text>
-                <Column w="100%" p="20px 0 0 0" alignItems="center">
-                  {recipe.ingredients.map((ingredient, i) => (
-                    <IngredientItem
-                      onlyOne={recipe.ingredients.length <= 1}
-                      handleClick={() => setRecipe((prevState) => ({ ...prevState, ingredients: prevState.ingredients.filter((prevItem, _i) => _i !== i) }))}
-                      category={category}
-                      key={i}
-                      setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)}
-                      index={i}
-                      ingredient={ingredient}
-                    />
+            <Text textAlign="center" color="third">
+              Máš recept, o který se chceš podělit s komunitou? Vyplň níže požadované informace a tvůj recept zveřejníme.
+            </Text>
+            <Column w="100%" p="35px 0">
+              <Text fontWeight="800" fontSize="30px" p="0 0 20px 0" textAlign="start">
+                Informace
+              </Text>
+              <Column w="100%">
+                <UploadInput handleClick={(images) => setImages(images)} />
+                <Row maxW="100%" flexWrap="wrap">
+                  {images.map((image, i) => (
+                    <Image key={i} src={image} alt="" width={200} height={200} objectFit="cover" borderRadius="15px" />
                   ))}
-                  <Button
-                    text="Přidat další"
-                    maxW="220px"
-                    onClick={() =>
-                      setRecipe((prevState) => ({ ...prevState, ingredients: [...prevState.ingredients, { ingredient: "", amount: "", unit: "" }] }))
-                    }
-                  />
-                </Column>
-              </Column>
-              <Column w="100%" p="60px 0 0 0">
-                <Text fontWeight="800" fontSize="30px">
-                  Postup
-                </Text>
-                {recipe.process.map((process, i) => (
-                  <TextArea
-                    value={process}
-                    index={i}
-                    key={i}
-                    setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)}
-                    onlyone={recipe.process.length <= 1}
-                    handleClick={() => setRecipe((prevState) => ({ ...prevState, process: prevState.process.filter((prevItem, _i) => _i !== i) }))}
-                  />
-                ))}
-                <Row justifyContent="center">
-                  <Button text="Přidat další" maxW="220px" onClick={() => setRecipe((prevState) => ({ ...prevState, process: [...prevState.process, ""] }))} />
                 </Row>
               </Column>
+              <Input
+                p="40px 0 0 0"
+                title="Název receptu"
+                placeholder="Zadejte prosím celý název tvého receptu"
+                value={recipe.title}
+                onChange={(e) => handleSetRecipe("title", e.currentTarget.value)}
+                required
+              />
+              <Column w="100%" p="20px 0 0 0">
+                <Text p="0 0 8px 0">Popis</Text>
+                <TextAreaStyled onChange={(e) => handleSetRecipe("description", e.currentTarget.value)} value={recipe.description} required />
+              </Column>
+              <Column w="100%" p="30px 0 0 0">
+                <InputsWrapper p="30px 0 0 0">
+                  <List listItems={category} title="Kategorie" onClick={(e) => handleSetRecipe("category", e)} value={recipe.category} />
+                  <List listItems={category} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} />
+                </InputsWrapper>
+                <InputsWrapper p="20px 0 0 0">
+                  <Input title="Délka přípravy (minuty)" required />
+                  <Input title="Počet porcí" required />
+                </InputsWrapper>
+                <Column w="100%" p="40px 0 0 0">
+                  <Text fontWeight="500" fontSize="18px">
+                    Suroviny na 1 porci
+                  </Text>
+                  <Column w="100%" p="20px 0 0 0" alignItems="center">
+                    {recipe.ingredients.map((ingredient, i) => (
+                      <IngredientItem
+                        onlyOne={recipe.ingredients.length <= 1}
+                        handleClick={() => setRecipe((prevState) => ({ ...prevState, ingredients: prevState.ingredients.filter((prevItem, _i) => _i !== i) }))}
+                        category={category}
+                        key={i}
+                        setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)}
+                        index={i}
+                        ingredient={ingredient}
+                      />
+                    ))}
+                    <Button
+                      text="Přidat další"
+                      maxW="220px"
+                      type="button"
+                      onClick={() =>
+                        setRecipe((prevState) => ({ ...prevState, ingredients: [...prevState.ingredients, { ingredient: "", amount: "", unit: "" }] }))
+                      }
+                    />
+                  </Column>
+                </Column>
+                <Column w="100%" p="60px 0 0 0">
+                  <Text fontWeight="800" fontSize="30px">
+                    Postup
+                  </Text>
+                  {recipe.process.map((process, i) => (
+                    <TextArea
+                      value={process}
+                      index={i}
+                      key={i}
+                      setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)}
+                      onlyone={recipe.process.length <= 1}
+                      handleClick={() => setRecipe((prevState) => ({ ...prevState, process: prevState.process.filter((prevItem, _i) => _i !== i) }))}
+                    />
+                  ))}
+                  <Row justifyContent="center">
+                    <Button
+                      text="Přidat další"
+                      maxW="220px"
+                      type="button"
+                      onClick={() => setRecipe((prevState) => ({ ...prevState, process: [...prevState.process, ""] }))}
+                    />
+                  </Row>
+                </Column>
+              </Column>
             </Column>
-          </Column>
-          <Column w="100%" alignItems="center">
-            <BgTitle title="Děkujeme" top="-100px" left="-50vw" mobileTop="20px" />
-            <Text fontWeight="700" fontSize="44px" textAlign="center">
-              Nezapomněl jsi na něco?
-            </Text>
-            <Text color="third" p="20px 0" textAlign="center">
-              Jestli jsi spokojený se svým receptem, neváhej ho odeslat. Tvůj recept bude po kontrole dostupná veřejnosti.
-            </Text>
-            <Button text="Potvrdit" maxW="220px" onClick={() => console.log(recipe)} />
-          </Column>
-        </Column>
+            <Column w="100%" alignItems="center">
+              <BgTitle title="Děkujeme" top="-100px" left="-50vw" mobileTop="20px" />
+              <Text fontWeight="700" fontSize="44px" textAlign="center">
+                Nezapomněl jsi na něco?
+              </Text>
+              <Text color="third" p="20px 0" textAlign="center">
+                Jestli jsi spokojený se svým receptem, neváhej ho odeslat. Tvůj recept bude po kontrole dostupná veřejnosti.
+              </Text>
+              <Button text="Potvrdit" maxW="220px" type="submit" />
+            </Column>
+          </StyledForm>
+        </Row>
       </PageContent>
     </>
   );

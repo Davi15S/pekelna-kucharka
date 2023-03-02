@@ -28,10 +28,10 @@ function IngredientItem(props: {
     <IngredientItemWrapper gap="20px" p="20px" m="10px 0">
       <InputsWrapper minW={250}>
         <Row gap="20px">
-          <Input title="Název" onChange={(e) => setTitle(e.currentTarget.value)} value={props.ingredient.ingredient} />
+          <Input title="Název" onChange={(e) => setTitle(e.currentTarget.value)} value={props.ingredient.ingredient} required />
         </Row>
         <Row gap="20px">
-          <Input title="Množství" maxW="150px" onChange={(e) => setAmount(e.currentTarget.value)} value={props.ingredient.amount} />
+          <Input title="Množství" maxW="150px" onChange={(e) => setAmount(e.currentTarget.value)} value={props.ingredient.amount} required />
           <List listItems={props.category} title="Jednotky" onClick={(e) => setUnit(e)} value={props.ingredient.unit} />
         </Row>
       </InputsWrapper>

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Theme } from "@styles/theme";
-import Image from "next/image";
+import { default as NextImage } from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -52,7 +52,7 @@ export const Column = styled.div<{
   max-width: ${({ maxW }) => (maxW ? maxW : "")};
 `;
 
-export const ImageWrapper = styled(Image)<{
+export const ImageWrapper = styled(NextImage)<{
   w?: React.CSSProperties["width"];
   h?: React.CSSProperties["height"];
   mobileW?: React.CSSProperties["width"];
@@ -76,6 +76,11 @@ export const ImageWrapper = styled(Image)<{
   @media only screen and (max-width: 1024px) {
     ${({ mobileW }) => (mobileW ? `width: ${mobileW};` : "")}
   }
+`;
+
+export const Image = styled(NextImage)<{ objectFit?: React.CSSProperties["objectFit"]; borderRadius?: React.CSSProperties["borderRadius"] }>`
+  object-fit: ${({ objectFit }) => (objectFit ? objectFit : "")};
+  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
 `;
 
 export const Text = styled.p<{

@@ -7,3 +7,7 @@ export const InputsWrapper = styled.div<{ p?: React.CSSProperties["padding"]; mi
   gap: 20px;
   padding: ${({ p }) => (p ? p : "0")};
 `;
+
+export const StyledForm = styled.form`
+  width: 100%;
+`;

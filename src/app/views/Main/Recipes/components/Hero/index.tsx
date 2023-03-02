@@ -10,7 +10,7 @@ function Hero() {
       <MainTitle>Katalog receptů</MainTitle>
       <SubTitle>Scelerisque elit hendrerit turpis lectus neque ipsum, egestas nunc elementum.</SubTitle>
       <Row justifyContent="center" p="50px 30px 0 30px">
-        <Input maxW="500px" placeholder="Hledat" icon={<BiSearch size={20} color={"#111111"} />} />
+        <Input h="100%" maxW="500px" placeholder="Hledat" icon={<BiSearch size={20} color={"#111111"} />} />
       </Row>
     </Column>
   );
