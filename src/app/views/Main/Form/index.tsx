@@ -15,7 +15,7 @@ import { RecipeForm } from "@shared/recipe";
 
 function Form() {
   usePageBackground(undefined);
-  const [category, setCategory] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
+  const [category, ,] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
   const [recipe, setRecipe] = useState<RecipeForm>({
     title: "",
     author: undefined,

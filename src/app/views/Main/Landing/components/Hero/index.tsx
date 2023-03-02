@@ -10,7 +10,7 @@ function Hero() {
       <MainTitle m="0 0 30px 0">Všechny recepty pálivých jídel na jednom místě</MainTitle>
       <SubTitle>Objevujte s námi veškeré recepty na pálivá jídla, vytvořená naší skvělou pekelnou komunitou</SubTitle>
       <Row justifyContent="center" p="50px 30px 0 30px">
-        <Input maxW="500px" placeholder="Hledat" icon={<BiSearch size={20} color={"#111111"} />} />
+        <Input h="100%" maxW="500px" placeholder="Hledat" icon={<BiSearch size={20} color={"#111111"} />} />
       </Row>
     </HeroWrapper>
   );

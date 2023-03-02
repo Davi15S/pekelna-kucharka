@@ -15,6 +15,7 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
+      "@api/*": ["./src/app/api/*"],
       "@views/*": ["./src/app/views/*"],
       "@components/*": ["./src/app/components/*"],
       "@assets/*": ["./src/app/assets/*"],
