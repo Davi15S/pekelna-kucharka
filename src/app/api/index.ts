@@ -1,6 +1,6 @@
 export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod = "GET", data?: unknown, formData?: FormData) => {
   const headers = {
-    Authorization: token ? token : "",
+    Authorization: token ? `Bearer ${token}` : "",
     ...(!formData && { "Content-Type": "application/json" }),
   };
 
@@ -9,14 +9,10 @@ export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod
     headers,
     body: formData ?? JSON.stringify(data),
   });
-  try {
-    const res = await response.json();
-    if (res.error) {
-      return res.error;
-    } else {
-      return res.data as T;
-    }
-  } catch {
-    return;
+  const res = await response.json();
+  if (res.error) {
+    throw res.error as Error;
+  } else {
+    return res as T;
   }
 };

@@ -17,7 +17,7 @@ function Landing() {
   useEffect(() => {
     const fetchData = async () => {
       const res = await getRecipes();
-      console.log(res);
+      console.log(res.data);
     };
 
     fetchData();

@@ -1,5 +1,6 @@
+import { User } from "@shared/user";
 import { fetchApi } from "..";
 
-export const craeteUser = (email: string, username: string, password: string) => {
-  return fetchApi("auth/local/register", undefined, "POST", { email, username, password });
+export const getMe = (token: string) => {
+  return fetchApi<User>("users/me", token);
 };

@@ -1,4 +1,4 @@
-import { craeteUser } from "@api/user";
+import { createUser } from "@api/auth";
 import { Row, StyledLink, Text } from "@app/styled";
 import Button from "@components/Button";
 import React, { useState } from "react";
@@ -13,7 +13,7 @@ function RegisterInputs() {
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password == passwordConfirm) {
-      const res = await craeteUser(email, username, password);
+      const res = await createUser(email, username, password);
       console.log(res);
     } else {
       console.log("Wrong passwords!");
