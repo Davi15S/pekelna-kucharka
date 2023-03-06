@@ -78,9 +78,28 @@ export const ImageWrapper = styled(NextImage)<{
   }
 `;
 
-export const Image = styled(NextImage)<{ objectFit?: React.CSSProperties["objectFit"]; borderRadius?: React.CSSProperties["borderRadius"] }>`
+export const Image = styled(NextImage)<{ objectFit?: React.CSSProperties["objectFit"] }>`
   object-fit: ${({ objectFit }) => (objectFit ? objectFit : "")};
+`;
+
+export const ImageContainer = styled.div<{
+  borderRadius?: React.CSSProperties["borderRadius"];
+  w?: React.CSSProperties["width"];
+  h?: React.CSSProperties["height"];
+  maxW?: React.CSSProperties["maxWidth"];
+}>`
+  position: relative;
+  width: ${({ w }) => (w ? w : "100%")};
+  height: ${({ h }) => (h ? h : "100%")};
+  max-width: ${({ maxW }) => (maxW ? maxW : "auto")};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
+  overflow: hidden;
+
+  :after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
 `;
 
 export const Text = styled.p<{

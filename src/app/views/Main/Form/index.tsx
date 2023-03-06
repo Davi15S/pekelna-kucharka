@@ -1,4 +1,4 @@
-import { Column, Image, Row, Text } from "@app/styled";
+import { Column, Row, Text } from "@app/styled";
 import BgTitle from "@components/BgTitle";
 import Button from "@components/Button";
 import TextArea from "@views/Main/Form/components/TextArea";
@@ -18,13 +18,12 @@ import { TextArea as TextAreaStyled } from "./components/TextArea/styled";
 function Form() {
   usePageBackground(undefined);
   const [category, ,] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
   const [recipe, setRecipe] = useState<RecipeForm>({
     title: "",
     author: undefined,
     description: "",
     ingredients: [{ ingredient: "", amount: "", unit: "" }],
-    images: [],
     category: category[0],
     cookingTime: "",
     process: [""],
@@ -55,7 +54,18 @@ function Form() {
 
   const handleCreateRecipe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await createRecipe(recipe);
+
+    const form = new FormData();
+    images.forEach((file) => form.append(`files.images`, file));
+    form.append("data", JSON.stringify(recipe));
+
+    const res = await createRecipe(form);
+
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/api/recipes`, {
+    //   method: "POST",
+    //   body: form,
+    // });
+
     console.log(res);
   };
 
@@ -76,14 +86,7 @@ function Form() {
               <Text fontWeight="800" fontSize="30px" p="0 0 20px 0" textAlign="start">
                 Informace
               </Text>
-              <Column w="100%">
-                <UploadInput handleClick={(images) => setImages(images)} />
-                <Row maxW="100%" flexWrap="wrap">
-                  {images.map((image, i) => (
-                    <Image key={i} src={image} alt="" width={200} height={200} objectFit="cover" borderRadius="15px" />
-                  ))}
-                </Row>
-              </Column>
+              <UploadInput handleSetImages={(files) => setImages(files)} />
               <Input
                 p="40px 0 0 0"
                 title="Název receptu"
@@ -102,7 +105,12 @@ function Form() {
                   <List listItems={category} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} />
                 </InputsWrapper>
                 <InputsWrapper p="20px 0 0 0">
-                  <Input title="Délka přípravy (minuty)" required />
+                  <Input
+                    title="Délka přípravy (minuty)"
+                    required
+                    onChange={(e) => handleSetRecipe("cookingTime", e.currentTarget.value)}
+                    value={recipe.cookingTime}
+                  />
                   <Input title="Počet porcí" required />
                 </InputsWrapper>
                 <Column w="100%" p="40px 0 0 0">

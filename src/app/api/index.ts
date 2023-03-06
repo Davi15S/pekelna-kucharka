@@ -1,13 +1,13 @@
-export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod = "GET", body?: unknown) => {
+export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod = "GET", data?: unknown, formData?: FormData) => {
   const headers = {
-    "Content-Type": "application/json",
     Authorization: token ? token : "",
+    ...(!formData && { "Content-Type": "application/json" }),
   };
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/api/${url}`, {
     method,
     headers,
-    body: method == "GET" ? null : JSON.stringify({ data: body }),
+    body: formData ?? JSON.stringify(data),
   });
   try {
     const res = await response.json();

@@ -23,3 +23,11 @@ export const Icon = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const ImagesWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  width: 100%;
+  gap: 10px;
+  padding-top: 20px;
+`;
