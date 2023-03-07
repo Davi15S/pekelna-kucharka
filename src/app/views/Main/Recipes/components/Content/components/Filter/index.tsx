@@ -37,7 +37,6 @@ function Filter() {
             </div>
           )}
           onChange={(value) => {
-            console.log(value);
             setCurrentValue(value);
           }}
         />

@@ -6,7 +6,6 @@ const secret = process.env.JWT_SECRET;
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
-  console.log(token);
 
   if (request.url.includes("/login") || request.url.includes("/register")) {
     if (token) {
@@ -15,12 +14,9 @@ export async function middleware(request: NextRequest) {
   } else {
     if (token) {
       const { payload } = await jwtVerify(token, new TextEncoder().encode(secret));
-      console.log(payload);
-
       if (!payload) {
         Cookies.remove("token");
       }
-      console.log(payload);
     } else {
       return NextResponse.redirect(new URL("/login", request.url));
     }

@@ -46,7 +46,7 @@ function Form() {
   };
 
   const handleSetRecipeArray = <T,>(key: keyof RecipeForm, index: number, value: T) => {
-    const updatedIngredients = [...(recipe[key] as Array<T>)];
+    const updatedIngredients = [...(recipe[key] as T[])];
     updatedIngredients[index] = value;
     const updatedRecipe = { ...recipe, [key]: updatedIngredients };
     setRecipe(updatedRecipe);

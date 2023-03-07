@@ -14,8 +14,8 @@ function LoginInputs() {
     e.preventDefault();
     const res = await loginUser(email, password).catch((e: Error) => console.log(e));
     if (res?.jwt) {
-      console.log(res.jwt);
       Cookie.set("token", res.jwt);
+      window.location.replace("/");
     }
   };
 

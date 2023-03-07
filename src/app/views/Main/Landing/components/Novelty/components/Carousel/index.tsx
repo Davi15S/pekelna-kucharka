@@ -17,14 +17,14 @@ function Carousel() {
 
   return (
     <CarouselWrapper>
-      <CarouselButtonWrapper left justifyContent="center">
+      <CarouselButtonWrapper left justifyContent="center" shadow>
         {currentSlide == 0 ? null : (
           <CarouselButton onClick={() => carouselButtonHandle(true)}>
             <MdOutlineArrowBackIosNew size={20} color={"white"} />
           </CarouselButton>
         )}
       </CarouselButtonWrapper>
-      <CarouselButtonWrapper justifyContent="center">
+      <CarouselButtonWrapper justifyContent="center" shadow>
         {currentSlide >= items.length - 1 ? null : (
           <CarouselButton onClick={() => carouselButtonHandle(false)}>
             <MdOutlineArrowForwardIos size={20} color={"white"} />
@@ -38,6 +38,8 @@ function Carousel() {
         showArrows={false}
         showIndicators={false}
         showThumbs={false}
+        swipeable={true}
+        emulateTouch={true}
       >
         {items.map((item, index) => (
           <CarouselItem key={index} />

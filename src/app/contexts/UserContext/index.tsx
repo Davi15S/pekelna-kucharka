@@ -1,9 +1,11 @@
 import { User } from "@shared/user";
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
-export const UserContext = createContext<{ user: User | null; setUser: (user: User | null) => void }>({
-  user: null,
-  setUser: () => null,
+export const UserContext = createContext<{ user: User | undefined; setUser: (user: User | undefined) => void }>({
+  user: undefined,
+  setUser: () => undefined,
 });
+
+export const useUser = () => useContext(UserContext);
 
 export const UserProvider = UserContext.Provider;
