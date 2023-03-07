@@ -14,8 +14,6 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   const [bgHeight, setBgHeight] = useState<string>();
   const [active, setActive] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | undefined>();
 
   const handleNavbar = async () => {
     if (active) {
@@ -30,24 +28,12 @@ function MainLayout({ children }: { children: React.ReactNode }) {
     setIsFixed(!isFixed);
   };
 
-  useEffect(() => {
-    const fetchMe = async () => {
-      const token = Cookies.get("token");
-      setToken(token);
-      if (token) {
-        await getMe(token).then((user) => setUser(user));
-      }
-    };
-
-    fetchMe();
-  }, []);
-
   return (
     <>
       <PageBackgroundProvider value={{ bgImage, setBgImage, bgHeight, setBgHeight }}>
         <PageFixedContextProvider value={{ isFixed, handleIsFixed }}>
           <Page>
-            <Navbar active={active} handleClick={handleNavbar} user={user} />
+            <Navbar active={active} handleClick={handleNavbar} />
             {children}
           </Page>
           <Footer />

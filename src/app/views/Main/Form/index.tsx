@@ -58,14 +58,7 @@ function Form() {
     const form = new FormData();
     images.forEach((file) => form.append(`files.images`, file));
     form.append("data", JSON.stringify(recipe));
-
     const res = await createRecipe(form);
-
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/api/recipes`, {
-    //   method: "POST",
-    //   body: form,
-    // });
-
     console.log(res);
   };
 

@@ -9,7 +9,7 @@ import { ImageWrapper, Row } from "@app/styled";
 import MobileNavbar from "./components/MobileNavbar";
 import { User } from "@shared/user";
 
-function Navbar(props: { active: boolean; handleClick: () => void; user: User | null }) {
+function Navbar(props: { active: boolean; handleClick: () => void }) {
   return (
     <NavbarWrapper justifyContent="center" alignItems="center">
       <LogoWrapper>
@@ -23,7 +23,7 @@ function Navbar(props: { active: boolean; handleClick: () => void; user: User | 
           <LinkComponent text="Magazín" link="/magazine" />
         </Row>
         <Row justifyContent="flex-end" alignItems="center" w="max-content">
-          {props.user ? <LinkComponent text={props.user.username} link="" /> : <LinkComponent text="Přihlásit se" link="/login" />}
+          {/* {props.user ? <LinkComponent text={props.user.username} link="" /> : <LinkComponent text="Přihlásit se" link="/login" />} */}
           <Link href="" style={{ margin: "0 15px 0 0" }}>
             <AiOutlineInstagram size={25} color={"white"} />
           </Link>
