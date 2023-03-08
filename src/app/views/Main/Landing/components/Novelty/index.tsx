@@ -1,4 +1,4 @@
-import { Column, Row } from "@app/styled";
+import { Column } from "@app/styled";
 import BgTitle from "@components/BgTitle";
 import React from "react";
 import Carousel from "./components/Carousel";

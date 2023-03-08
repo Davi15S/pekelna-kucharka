@@ -26,6 +26,7 @@ function Navbar(props: { active: boolean; handleClick: () => void }) {
         </Row>
         <Row justifyContent="flex-end" alignItems="center" w="max-content">
           {user ? <LinkComponent text="Účet" link="" /> : <LinkComponent text="Přihlásit se" link="/login" />}
+          {user ? <LinkComponent text="Vytvořit recept" link="/recipes/new" /> : null}
           <Link href="" style={{ margin: "0 15px 0 0" }}>
             <AiOutlineInstagram size={25} color={"white"} />
           </Link>

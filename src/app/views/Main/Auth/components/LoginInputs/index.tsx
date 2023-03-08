@@ -14,8 +14,12 @@ function LoginInputs() {
     e.preventDefault();
     const res = await loginUser(email, password).catch((e: Error) => console.log(e));
     if (res?.jwt) {
-      Cookie.set("token", res.jwt);
-      window.location.replace("/");
+      if (res.user.confirmed && !res.user.blocked) {
+        Cookie.set("token", res.jwt);
+        window.location.replace("/");
+      } else {
+        console.error("User is not confirmed");
+      }
     }
   };
 
@@ -25,7 +29,7 @@ function LoginInputs() {
         <Text fontSize="13px">nebo</Text>
       </Seperator>
       <form style={{ width: "100%" }} onSubmit={(e) => handleLogin(e)}>
-        <Input placeholder="Email" onChange={(e) => setEmail(e.currentTarget.value)} required type="email" />
+        <Input placeholder="Email" onChange={(e) => setEmail(e.currentTarget.value)} required type="email" autoComplete="email" />
         <Input placeholder="Heslo" onChange={(e) => setPassword(e.currentTarget.value)} required type="password" />
         <Row justifyContent="flex-end" p="15px 0 0 0">
           <StyledLink href="/forgot" fontSize="13px" underline underlineW="1px">

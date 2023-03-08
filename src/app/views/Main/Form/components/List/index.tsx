@@ -1,5 +1,5 @@
 import { Column, Text } from "@app/styled";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { InputWrapper } from "../Input/styled";
 import { IoIosArrowDown } from "react-icons/io";
 import { Arrow, ListItem, ListItems } from "./styled";
@@ -14,11 +14,27 @@ function List(props: {
   value: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+
+  function useOutsideAlerter(ref: React.MutableRefObject<any>) {
+    useEffect(() => {
+      function handleClickOutside(event: Event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setIsOpen(false);
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
 
   return (
     <Column w={props.w ? props.w : "100%"} p={props.p} maxW={props.maxW}>
       {props.title && <Text p="0 0 8px 0">{props.title}</Text>}
-      <InputWrapper alignItems={"center"} p="0 20px" justifyContent="space-between" onClick={() => setIsOpen(!isOpen)} clickable>
+      <InputWrapper ref={wrapperRef} alignItems={"center"} p="0 20px" justifyContent="space-between" onClick={() => setIsOpen(!isOpen)} clickable>
         <Text fontSize="16px" color="third" fontWeight="400">
           {props.value}
         </Text>
