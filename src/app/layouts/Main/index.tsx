@@ -9,7 +9,7 @@ import { User } from "@shared/user";
 import Cookies from "js-cookie";
 import { getMe } from "@api/user";
 import { UserProvider } from "@contexts/UserContext";
-import { disableScroll, enableScroll } from "@app/utils";
+import { disableScroll, enableScroll, getToken } from "@app/utils";
 
 function MainLayout({ children }: { children: React.ReactNode }) {
   const [bgImage, setBgImage] = useState<StaticImageData>();
@@ -30,7 +30,8 @@ function MainLayout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const fetchMe = async () => {
-      const token = Cookies.get("token");
+      const token = getToken();
+      console.log(token);
       if (token) {
         await getMe(token).then((user) => {
           setUser(user);
