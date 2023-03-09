@@ -38,7 +38,7 @@ function List(props: {
       {props.title && <Text p="0 0 8px 0">{props.title}</Text>}
       <InputWrapper ref={wrapperRef} alignItems={"center"} p="0 20px" justifyContent="space-between" onClick={() => setIsOpen(!isOpen)} clickable>
         <Text fontSize="16px" color="third" fontWeight="400">
-          {props.pepperList ? <PepperRating rating={+props.value + 1} w="25px" /> : props.value}
+          {props.pepperList ? <PepperRating rating={+props.value} w="25px" /> : props.value}
         </Text>
         <Arrow isOpen={isOpen}>
           <IoIosArrowDown size={25} />
@@ -49,8 +49,8 @@ function List(props: {
               <>
                 {[...Array(5)].map((x, i) => {
                   return (
-                    i != +props.value && (
-                      <ListItem p="10px 20px" color="third" key={i} onClick={() => props.onClick(i.toString())}>
+                    i + 1 != +props.value && (
+                      <ListItem p="10px 20px" color="third" key={i} onClick={() => props.onClick((i + 1).toString())}>
                         <PepperRating rating={i + 1} w="25px" />
                       </ListItem>
                     )

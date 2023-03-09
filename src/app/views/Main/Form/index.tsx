@@ -14,12 +14,19 @@ import { StyledForm, InputsWrapper } from "./styled";
 import { RecipeForm } from "@shared/recipe";
 import { createRecipe } from "@api/recipes";
 import { TextArea as TextAreaStyled } from "./components/TextArea/styled";
+import { disableScroll, enableScroll, getToken } from "@app/utils";
+import SentConfirmation from "./components/SentConfirmation";
+import { useRouter } from "next/router";
 
 function Form() {
   usePageBackground(undefined);
+  usePageTitle("Vytvoření receptu");
+
+  const router = useRouter();
   const [category, ,] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
   const [unitList, ,] = useState<string[]>(["g", "kg", "litr"]);
   const [images, setImages] = useState<File[]>([]);
+  const [sent, setSent] = useState(false);
   const [recipe, setRecipe] = useState<RecipeForm>({
     title: "",
     author: undefined,
@@ -32,8 +39,6 @@ function Form() {
     creationTime: "",
     recipeOrigin: [],
   });
-
-  usePageTitle("Vytvoření receptu");
 
   const handleSetRecipe = (key: keyof RecipeForm, value: string) => {
     const result = (Object.keys(recipe) as Array<keyof typeof key>).reduce(
@@ -59,12 +64,23 @@ function Form() {
     const form = new FormData();
     images.forEach((file) => form.append(`files.images`, file));
     form.append("data", JSON.stringify(recipe));
-    const res = await createRecipe(form);
-    console.log(res);
+    const res = await createRecipe(form, getToken());
+    if (res) {
+      setSent(true);
+      disableScroll();
+    }
   };
 
   return (
     <>
+      {sent && (
+        <SentConfirmation
+          onClick={() => {
+            enableScroll();
+            router.push("/");
+          }}
+        />
+      )}
       <BgTitle title="Vytvoření" top="20px" mobileTop="10vh" left="-10vw" />
       <BgTitle title="Receptu" top="65vh" left="35vw" mobileTop="80vh" mobileLeft="55vw" />
       <PageContent topP>

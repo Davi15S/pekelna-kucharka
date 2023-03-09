@@ -8,7 +8,8 @@ import { PageFixedContextProvider } from "@contexts/PageFixedContext";
 import { User } from "@shared/user";
 import Cookies from "js-cookie";
 import { getMe } from "@api/user";
-import { UserProvider, useUser } from "@contexts/UserContext";
+import { UserProvider } from "@contexts/UserContext";
+import { disableScroll, enableScroll } from "@app/utils";
 
 function MainLayout({ children }: { children: React.ReactNode }) {
   const [bgImage, setBgImage] = useState<StaticImageData>();
@@ -19,11 +20,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleNavbar = async () => {
-    if (active) {
-      document.body.classList.remove("openNavbar");
-    } else {
-      document.body.classList.add("openNavbar");
-    }
+    active ? enableScroll() : disableScroll();
     setActive(!active);
   };
 

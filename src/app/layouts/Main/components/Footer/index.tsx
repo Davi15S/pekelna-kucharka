@@ -1,4 +1,4 @@
-import { Column, Row } from "@app/styled";
+import { Row } from "@app/styled";
 import React from "react";
 import { GoFlame } from "react-icons/go";
 import { FooterText, FooterWrapper } from "./styled";
