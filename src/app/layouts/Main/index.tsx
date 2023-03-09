@@ -8,7 +8,7 @@ import { PageFixedContextProvider } from "@contexts/PageFixedContext";
 import { User } from "@shared/user";
 import Cookies from "js-cookie";
 import { getMe } from "@api/user";
-import { UserProvider } from "@contexts/UserContext";
+import { UserProvider, useUser } from "@contexts/UserContext";
 
 function MainLayout({ children }: { children: React.ReactNode }) {
   const [bgImage, setBgImage] = useState<StaticImageData>();
@@ -41,6 +41,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
         });
       } else {
         setIsLoading(false);
+        setUser(undefined);
       }
     };
 

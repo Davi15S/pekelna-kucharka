@@ -18,6 +18,7 @@ import { TextArea as TextAreaStyled } from "./components/TextArea/styled";
 function Form() {
   usePageBackground(undefined);
   const [category, ,] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
+  const [unitList, ,] = useState<string[]>(["g", "kg", "litr"]);
   const [images, setImages] = useState<File[]>([]);
   const [recipe, setRecipe] = useState<RecipeForm>({
     title: "",
@@ -27,7 +28,7 @@ function Form() {
     category: category[0],
     cookingTime: "",
     process: [""],
-    spiciness: "",
+    spiciness: "1",
     creationTime: "",
     recipeOrigin: [],
   });
@@ -95,7 +96,7 @@ function Form() {
               <Column w="100%" p="30px 0 0 0">
                 <InputsWrapper p="30px 0 0 0">
                   <List listItems={category} title="Kategorie" onClick={(e) => handleSetRecipe("category", e)} value={recipe.category} />
-                  <List listItems={category} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} />
+                  <List listItems={category} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} pepperList />
                 </InputsWrapper>
                 <InputsWrapper p="20px 0 0 0">
                   <Input
@@ -115,11 +116,11 @@ function Form() {
                       <IngredientItem
                         onlyOne={recipe.ingredients.length <= 1}
                         handleClick={() => setRecipe((prevState) => ({ ...prevState, ingredients: prevState.ingredients.filter((prevItem, _i) => _i !== i) }))}
-                        category={category}
                         key={i}
                         setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)}
                         index={i}
                         ingredient={ingredient}
+                        unitList={unitList}
                       />
                     ))}
                     <Button

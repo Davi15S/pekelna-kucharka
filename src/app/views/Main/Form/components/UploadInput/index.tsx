@@ -31,7 +31,8 @@ function UploadInput(props: { handleSetImages: (images: File[]) => void }) {
         type="file"
         ref={hiddenFileInput}
         hidden
-        accept="image/png, image/jpeg"
+        accept="image/png, image/jpeg, image/webp"
+        multiple
         onChange={(e) => {
           if (e.target.files) {
             const files = Array.from(e.target.files);
