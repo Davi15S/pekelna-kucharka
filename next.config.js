@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['media.vanityfair.com'],
+    domains: ["media.vanityfair.com", "localhost"],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

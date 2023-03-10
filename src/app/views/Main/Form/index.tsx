@@ -39,6 +39,8 @@ function Form() {
     process: [""],
     spiciness: "1",
     recipeOrigin: [],
+    publishedAt: null,
+    numberOfServings: "1",
   });
 
   const handleSetRecipe = (key: keyof RecipeForm, value: string) => {
@@ -67,22 +69,22 @@ function Form() {
     form.append("data", JSON.stringify(recipe));
     console.log(recipe);
     const res = await createRecipe(form, getToken());
-    // if (res) {
-    //   setSent(true);
-    //   disableScroll();
-    // }
+    if (res) {
+      setSent(true);
+      disableScroll();
+    }
   };
 
   return (
     <>
-      {/* {sent && (
+      {sent && (
         <SentConfirmation
           onClick={() => {
             enableScroll();
             router.push("/");
           }}
         />
-      )} */}
+      )}
       <BgTitle title="Vytvoření" top="20px" mobileTop="10vh" left="-10vw" />
       <BgTitle title="Receptu" top="65vh" left="35vw" mobileTop="80vh" mobileLeft="55vw" />
       <PageContent topP>
@@ -123,7 +125,12 @@ function Form() {
                     onChange={(e) => handleSetRecipe("cookingTime", e.currentTarget.value)}
                     value={recipe.cookingTime}
                   />
-                  <Input title="Počet porcí" required />
+                  <Input
+                    title="Počet porcí"
+                    required
+                    onChange={(e) => handleSetRecipe("numberOfServings", e.currentTarget.value)}
+                    value={recipe.numberOfServings}
+                  />
                 </InputsWrapper>
                 <Column w="100%" p="40px 0 0 0">
                   <Text fontWeight="500" fontSize="18px">

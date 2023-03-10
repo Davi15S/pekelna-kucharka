@@ -1,16 +1,17 @@
-import { Row, Text } from "@app/styled";
+import { Text } from "@app/styled";
 import React from "react";
+import { ItemWrapper } from "../../../Description/components/Item/styled";
 
 function Item(props: { amount: string; unit: string; ingredient: string }) {
   return (
-    <Row p="0 0 10px 0">
-      <Text color="error" fontWeight="600">
+    <ItemWrapper p="0 0 10px 0">
+      <Text color="error" fontWeight="600" p="0 10px 10px 0">
         {props.amount} {props.unit}
       </Text>
-      <Text p="0 0 0 10px" color="secondary" fontWeight="600">
+      <Text color="secondary" fontWeight="600">
         {props.ingredient}
       </Text>
-    </Row>
+    </ItemWrapper>
   );
 }
 

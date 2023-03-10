@@ -2,11 +2,13 @@ import { Column, Row, Text } from "@app/styled";
 import styled from "@emotion/styled";
 
 export const ItemWrapper = styled(Row)`
-  border-radius: 20px;
+  border-radius: 30px;
   box-shadow: ${({ theme }) => theme.shadow.trend};
   background-color: ${({ theme }) => theme.background.primary};
   transition: all 300ms ease-in-out;
   cursor: pointer;
+  overflow: hidden;
+  min-height: 280px;
 
   @media only screen and (max-width: 786px) {
     flex-direction: column;
@@ -20,6 +22,8 @@ export const ItemWrapper = styled(Row)`
 `;
 
 export const MobilePicture = styled.div`
+  width: 100%;
+  padding-bottom: 10px;
   @media only screen and (min-width: 786px) {
     display: none;
   }
@@ -32,20 +36,10 @@ export const Title = styled.h4`
 `;
 
 export const Description = styled(Text)`
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: 2ex;
-  height: 6ex;
-  position: relative;
-
-  ::before {
-    content: "...";
-    bottom: 0;
-    height: 2ex;
-    right: 0;
-    left: 50%;
-    background-color: ${({ theme }) => theme.background.primary};
-    position: absolute;
-  }
 `;
 
 export const CategoryWrapper = styled.div`

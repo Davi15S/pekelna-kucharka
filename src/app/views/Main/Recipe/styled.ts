@@ -6,7 +6,7 @@ export const ColumnContent = styled(Column)<{ left?: boolean }>`
 
   @media only screen and (max-width: 1024px) {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     padding-left: 0;
   }
 `;

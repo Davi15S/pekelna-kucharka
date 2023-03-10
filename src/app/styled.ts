@@ -87,6 +87,8 @@ export const ImageContainer = styled.div<{
   w?: React.CSSProperties["width"];
   h?: React.CSSProperties["height"];
   maxW?: React.CSSProperties["maxWidth"];
+  m?: React.CSSProperties["margin"];
+  mobileHide?: boolean;
 }>`
   position: relative;
   width: ${({ w }) => (w ? w : "100%")};
@@ -94,6 +96,11 @@ export const ImageContainer = styled.div<{
   max-width: ${({ maxW }) => (maxW ? maxW : "auto")};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
   overflow: hidden;
+  margin: ${({ m }) => (m ? m : "")};
+
+  @media only screen and (max-width: 786px) {
+    ${({ mobileHide }) => (mobileHide ? "display: none;" : "")}
+  }
 
   :after {
     content: "";

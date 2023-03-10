@@ -1,4 +1,4 @@
-import { Column, ImageWrapper, Row, Text } from "@app/styled";
+import { ImageWrapper, Row, Text } from "@app/styled";
 import React from "react";
 import { CommentImage, CommentWrapper } from "./styled";
 

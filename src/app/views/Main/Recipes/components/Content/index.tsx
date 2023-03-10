@@ -1,12 +1,24 @@
+import { getRecipes } from "@api/recipes";
 import { Column, Row } from "@app/styled";
 import BgTitle from "@components/BgTitle";
 import Button from "@components/Button";
-import React from "react";
+import { Recipe } from "@shared/recipe";
+import React, { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import RecipeItem from "./components/RecipeItem";
 import { ContentWrapper, RecipesWrapper } from "./styled";
 
 function Content() {
+  const [recipes, setRecipes] = useState<{ data: Recipe[] }>();
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      await getRecipes().then((data) => setRecipes(data));
+    };
+
+    fetchRecipes();
+  }, []);
+
   return (
     <Column w="100%">
       <BgTitle title="Katalog" top="-80px" mobileTop="0px" />
@@ -15,15 +27,16 @@ function Content() {
         <Filter />
         <RecipesWrapper w="65%" alignItems="center">
           <Row p="0 0 30px 0">
-            <Row>Nalezeno 21 receptů</Row>
+            <Row>Nalezeno {recipes?.data.length} receptů</Row>
             <Row justifyContent="flex-end">Seřadit podle: Nejnovější</Row>
           </Row>
-          <RecipeItem />
-          <RecipeItem />
-          <RecipeItem />
-          <RecipeItem />
-          <RecipeItem />
-          <RecipeItem />
+          {recipes && (
+            <>
+              {recipes.data.map((recipe) => (
+                <RecipeItem key={recipe.id} recipe={recipe.attributes} id={recipe.id} />
+              ))}
+            </>
+          )}
         </RecipesWrapper>
       </ContentWrapper>
       <Row p="40px 0 0 0" justifyContent="center">
