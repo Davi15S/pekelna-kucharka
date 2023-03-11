@@ -1,3 +1,5 @@
+import { removeCookie, setToStorage } from "@app/utils";
+
 export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod = "GET", data?: unknown, formData?: FormData) => {
   const headers = {
     Authorization: token ? `Bearer ${token}` : "",
@@ -7,10 +9,13 @@ export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod
   const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/api/${url}`, {
     method,
     headers,
+    credentials: "include",
     body: formData ?? JSON.stringify(data),
   });
   const res = await response.json();
   if (res.error) {
+    removeCookie("token");
+    setToStorage(null, "refreshToken");
     throw res.error as Error;
   } else {
     return res as T;

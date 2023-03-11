@@ -1,10 +1,10 @@
-import { loginUser } from "@api/auth";
+import { getRefreshToken, loginUser } from "@api/auth";
 import { Row, StyledLink, Text } from "@app/styled";
 import Button from "@components/Button";
 import React, { useState } from "react";
 import Input from "../Input";
 import { Seperator } from "./styled";
-import Cookie from "js-cookie";
+import { setCookie, setToStorage } from "@app/utils";
 
 function LoginInputs() {
   const [email, setEmail] = useState("");
@@ -15,7 +15,8 @@ function LoginInputs() {
     const res = await loginUser(email, password).catch((e: Error) => console.log(e));
     if (res?.jwt) {
       if (res.user.confirmed && !res.user.blocked) {
-        Cookie.set("token", res.jwt);
+        setCookie("token", res.jwt);
+        await getRefreshToken(res.jwt).then((data) => setToStorage(data.refreshToken, "refreshToken"));
         window.location.replace("/");
       } else {
         console.error("User is not confirmed");

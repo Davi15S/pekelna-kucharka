@@ -6,10 +6,10 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { PageFixedContextProvider } from "@contexts/PageFixedContext";
 import { User } from "@shared/user";
-import Cookies from "js-cookie";
 import { getMe } from "@api/user";
 import { UserProvider } from "@contexts/UserContext";
-import { disableScroll, enableScroll, getToken } from "@app/utils";
+import { disableScroll, enableScroll, refreshToken } from "@app/utils";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function MainLayout({ children }: { children: React.ReactNode }) {
   const [bgImage, setBgImage] = useState<StaticImageData>();
@@ -30,16 +30,16 @@ function MainLayout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const fetchMe = async () => {
-      const token = getToken();
-      console.log(token);
-      if (token) {
-        await getMe(token).then((user) => {
-          setUser(user);
-          setIsLoading(false);
-        });
+      const rfToken = await refreshToken();
+      if (rfToken) {
+        await getMe(rfToken.jwt)
+          .then((user) => {
+            setUser(user);
+            setIsLoading(false);
+          })
+          .catch(() => setIsLoading(false));
       } else {
         setIsLoading(false);
-        setUser(undefined);
       }
     };
 
@@ -49,17 +49,19 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {!isLoading && (
-        <PageBackgroundProvider value={{ bgImage, setBgImage, bgHeight, setBgHeight }}>
-          <PageFixedContextProvider value={{ isFixed, handleIsFixed }}>
-            <UserProvider value={{ user, setUser }}>
-              <Page>
-                <Navbar active={active} handleClick={handleNavbar} />
-                {children}
-              </Page>
-            </UserProvider>
-            <Footer />
-          </PageFixedContextProvider>
-        </PageBackgroundProvider>
+        <ProtectedRoutes>
+          <PageBackgroundProvider value={{ bgImage, setBgImage, bgHeight, setBgHeight }}>
+            <PageFixedContextProvider value={{ isFixed, handleIsFixed }}>
+              <UserProvider value={{ user, setUser }}>
+                <Page>
+                  <Navbar active={active} handleClick={handleNavbar} />
+                  {children}
+                </Page>
+              </UserProvider>
+              <Footer />
+            </PageFixedContextProvider>
+          </PageBackgroundProvider>
+        </ProtectedRoutes>
       )}
     </>
   );
