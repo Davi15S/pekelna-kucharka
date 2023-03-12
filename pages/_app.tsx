@@ -7,6 +7,7 @@ import { useState } from "react";
 import "@styles/global.css";
 import { theme } from "../src/styles/theme";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import AuthProvider from "@contexts/AuthContext";
 
 type ComponentLayout = AppProps & {
   Component: AppProps["Component"] & {
@@ -28,11 +29,11 @@ export default function App({ Component, pageProps }: ComponentLayout) {
             <Component {...pageProps} />
           </Component.PageLayout>
         ) : (
-          <>
+          <AuthProvider>
             <MainLayout>
               <Component {...pageProps} />
             </MainLayout>
-          </>
+          </AuthProvider>
         )}
       </PageTitleProvider>
     </ThemeProvider>

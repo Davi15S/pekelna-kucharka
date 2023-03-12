@@ -4,7 +4,7 @@ import Button from "@components/Button";
 import React, { useState } from "react";
 import Input from "../Input";
 import { Seperator } from "./styled";
-import { setCookie, setToStorage } from "@app/utils";
+import { setToStorage } from "@app/utils";
 
 function LoginInputs() {
   const [email, setEmail] = useState("");
@@ -15,7 +15,7 @@ function LoginInputs() {
     const res = await loginUser(email, password).catch((e: Error) => console.log(e));
     if (res?.jwt) {
       if (res.user.confirmed && !res.user.blocked) {
-        setCookie("token", res.jwt);
+        setToStorage(res.jwt, "token");
         await getRefreshToken(res.jwt).then((data) => setToStorage(data.refreshToken, "refreshToken"));
         window.location.replace("/");
       } else {

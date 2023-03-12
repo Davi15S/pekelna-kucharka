@@ -1,4 +1,4 @@
-import { removeCookie, setToStorage } from "@app/utils";
+import { clearStorage } from "@app/utils";
 
 export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod = "GET", data?: unknown, formData?: FormData) => {
   const headers = {
@@ -14,8 +14,7 @@ export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod
   });
   const res = await response.json();
   if (res.error) {
-    removeCookie("token");
-    setToStorage(null, "refreshToken");
+    clearStorage();
     throw res.error as Error;
   } else {
     return res as T;

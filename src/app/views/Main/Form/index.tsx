@@ -17,7 +17,7 @@ import { TextArea as TextAreaStyled } from "./components/TextArea/styled";
 import { disableScroll, enableScroll, getToken } from "@app/utils";
 import SentConfirmation from "./components/SentConfirmation";
 import { useRouter } from "next/router";
-import { useUser } from "@contexts/UserContext";
+import { useAuth } from "@contexts/AuthContext";
 
 function Form() {
   usePageBackground(undefined);
@@ -28,7 +28,7 @@ function Form() {
   const [unitList, ,] = useState<string[]>(["g", "kg", "litr"]);
   const [images, setImages] = useState<File[]>([]);
   const [sent, setSent] = useState(false);
-  const { user } = useUser();
+  const { user } = useAuth();
   const [recipe, setRecipe] = useState<RecipeForm>({
     title: "",
     author: user?.id,

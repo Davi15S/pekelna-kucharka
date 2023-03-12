@@ -7,10 +7,10 @@ import Link from "next/link";
 import Logo from "@assets/Logo.svg";
 import { ImageWrapper, Row } from "@app/styled";
 import MobileNavbar from "./components/MobileNavbar";
-import { useUser } from "@contexts/UserContext";
+import { useAuth } from "@contexts/AuthContext";
 
 function Navbar(props: { active: boolean; handleClick: () => void }) {
-  const { user } = useUser();
+  const { user } = useAuth();
 
   return (
     <NavbarWrapper justifyContent="center" alignItems="center">
