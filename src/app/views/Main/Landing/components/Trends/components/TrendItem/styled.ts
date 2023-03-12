@@ -7,7 +7,7 @@ export const TrendItemWrapper = styled(Column)<{ offset?: boolean }>`
   border-radius: 20px;
   overflow: hidden;
   max-width: 400px;
-  box-shadow: ${({ theme }) => theme.shadow.trend};
+  box-shadow: ${({ theme }) => theme.shadow.default};
   cursor: pointer;
   transition: all 300ms ease-in-out;
   position: relative;
@@ -15,7 +15,7 @@ export const TrendItemWrapper = styled(Column)<{ offset?: boolean }>`
   justify-self: center;
 
   :hover {
-    box-shadow: ${({ theme }) => theme.shadow.trendHover};
+    box-shadow: ${({ theme }) => theme.shadow.hover};
   }
 `;
 

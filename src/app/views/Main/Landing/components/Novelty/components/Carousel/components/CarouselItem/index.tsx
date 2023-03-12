@@ -1,29 +1,35 @@
-import { ImageWrapper, Row, Text } from "@app/styled";
+import { Column, Image, ImageContainer, Row, Text } from "@app/styled";
 import Button from "@components/Button";
 import PepperRating from "@components/PepperRating";
 import React from "react";
-import CarouselImage from "@assets/carouselItem/carouselImage.jpeg";
 import { CarouselItemWrapper, ItemColumn } from "./styled";
+import { SubTitle } from "@views/Main/Landing/components/Trends/components/TrendItem/styled";
+import { useRouter } from "next/router";
 
-function CarouselItem(props: { title: string; spiceness: number }) {
+function CarouselItem(props: { title: string; spiceness: number; description: string; image: string; id: string }) {
+  const router = useRouter();
+
   return (
     <Row justifyContent="center">
       <CarouselItemWrapper w="80%" alignItems="center" p="50px 0">
         <ItemColumn w="60%" p="0 50px 0 0">
-          <Row>
-            <PepperRating rating={props.spiceness} w={30} h={30} />
-          </Row>
-          <Text fontWeight="bold" fontSize="30px" color="primary" p="20px 0">
-            {props.title}
-          </Text>
-          <Text fontSize="16px" fontWeight="400" color="third">
-            Sollicitudin et nisl feugiat in libero suscipit arcu. Et ultricies tincidunt nulla sapien aenean diam accumsan, in arcu. Vel cras proin gravida
-            feugiat massa. Magna nibh posuere lobortis nunc, est. Pharetra enim pellentesque.
-          </Text>
-          <Button text="Celý recept" m="70px 0 0 0" maxW="220px" color="red" />
+          <Column w="100%">
+            <Row>
+              <PepperRating rating={props.spiceness} w={30} h={30} />
+            </Row>
+            <Text fontWeight="bold" fontSize="30px" color="primary" p="20px 0">
+              {props.title}
+            </Text>
+            <SubTitle fontSize="16px" fontWeight="400" color="third">
+              {props.description}
+            </SubTitle>
+            <Button text="Celý recept" m="40px 0 0 0" maxW="220px" color="red" onClick={() => router.push(`/recipes/${props.id}`)} />
+          </Column>
         </ItemColumn>
-        <ItemColumn w="40%" justifyContent="center">
-          <ImageWrapper src={CarouselImage} alt="" borderRadius="20px" shadow />
+        <ItemColumn w="45%">
+          <ImageContainer borderRadius="20px" w="100%" maxH="300px" shadow>
+            <Image src={props.image} alt="" objectFit="cover" fill />
+          </ImageContainer>
         </ItemColumn>
       </CarouselItemWrapper>
     </Row>

@@ -2,7 +2,7 @@ import { Column, Row } from "@app/styled";
 import styled from "@emotion/styled";
 
 export const CommentWrapper = styled(Column)`
-  box-shadow: ${({ theme }) => theme.shadow.trend};
+  box-shadow: ${({ theme }) => theme.shadow.default};
   border-radius: 20px;
   min-width: 400px;
   max-width: fit-content;

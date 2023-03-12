@@ -69,7 +69,7 @@ export const ImageWrapper = styled(NextImage)<{
   max-width: ${({ maxW }) => (maxW ? maxW : "auto")};
   max-height: ${({ maxH }) => (maxH ? maxH : "auto")};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
-  box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.trend : "")};
+  box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.default : "")};
   object-fit: ${({ objectFit }) => (objectFit ? objectFit : "")};
   margin: ${({ m }) => (m ? m : "")};
 
@@ -90,6 +90,8 @@ export const ImageContainer = styled.div<{
   maxH?: React.CSSProperties["maxHeight"];
   m?: React.CSSProperties["margin"];
   mobileHide?: boolean;
+  shadow?: boolean;
+  theme?: Theme;
 }>`
   position: relative;
   width: ${({ w }) => (w ? w : "100%")};
@@ -99,6 +101,7 @@ export const ImageContainer = styled.div<{
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
   overflow: hidden;
   margin: ${({ m }) => (m ? m : "")};
+  box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.default : "")};
 
   @media only screen and (max-width: 786px) {
     ${({ mobileHide }) => (mobileHide ? "display: none;" : "")}

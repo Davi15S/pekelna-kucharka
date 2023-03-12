@@ -1,3 +1,4 @@
+import { getImage } from "@app/utils";
 import { Recipe } from "@shared/recipe";
 import React, { useState } from "react";
 import { MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
@@ -37,15 +38,26 @@ function Carousel({ recipes }: { recipes: Recipe[] }) {
         swipeable={true}
         emulateTouch={true}
       >
-        {recipes.map((recipe) => (
-          <CarouselItem key={recipe.id} title={recipe.attributes.title} spiceness={+recipe.attributes.spiciness} />
-        ))}
+        {recipes.slice(0, 5).map((recipe, i) => {
+          return (
+            <CarouselItem
+              key={recipe.id}
+              title={recipe.attributes.title}
+              spiceness={+recipe.attributes.spiciness}
+              description={recipe.attributes.description}
+              image={getImage(recipe.attributes.images.data[0].attributes.url)}
+              id={recipe.id}
+            />
+          );
+        })}
       </StyledCarousel>
-      <IndicatorsWrapper justifyContent="center">
-        {recipes.map((item, index) => (
-          <Indicator key={index} active={index == currentSlide ? true : false} onClick={() => setCurrentSlide(index)} />
-        ))}
-      </IndicatorsWrapper>
+      {recipes.length > 1 && (
+        <IndicatorsWrapper justifyContent="center">
+          {recipes.map((item, index) => (
+            <Indicator key={index} active={index == currentSlide ? true : false} onClick={() => setCurrentSlide(index)} />
+          ))}
+        </IndicatorsWrapper>
+      )}
     </CarouselWrapper>
   );
 }

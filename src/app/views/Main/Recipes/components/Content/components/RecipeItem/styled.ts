@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 export const ItemWrapper = styled(Row)`
   border-radius: 30px;
-  box-shadow: ${({ theme }) => theme.shadow.trend};
+  box-shadow: ${({ theme }) => theme.shadow.default};
   background-color: ${({ theme }) => theme.background.primary};
   transition: all 300ms ease-in-out;
   cursor: pointer;
@@ -17,7 +17,7 @@ export const ItemWrapper = styled(Row)`
   }
 
   :hover {
-    box-shadow: ${({ theme }) => theme.shadow.trendHover};
+    box-shadow: ${({ theme }) => theme.shadow.hover};
   }
 `;
 

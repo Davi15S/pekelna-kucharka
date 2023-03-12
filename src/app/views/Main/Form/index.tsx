@@ -25,7 +25,7 @@ function Form() {
 
   const router = useRouter();
   const [category, ,] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
-  const [unitList, ,] = useState<string[]>(["g", "kg", "litr"]);
+  const [unitList, ,] = useState<string[]>(["g", "kg", "litr", "lžíce", "lžička"]);
   const [images, setImages] = useState<File[]>([]);
   const [sent, setSent] = useState(false);
   const { user } = useAuth();

@@ -15,7 +15,7 @@ function Filter() {
     <FilterWrapper>
       <FilterItem title="Kategorie" filterInputArr={filter.category} />
       <FilterItem title="Úroveň pálivosti" peppers={filter.peppers} />
-      <FilterItem title="Úroveň pálivosti" filterInputArr={filter.source} />
+      <FilterItem title="Původ jídel" filterInputArr={filter.source} />
       <SliderWrapper>
         <Text fontSize="20px" fontWeight="700" p="0 0 45px 0">
           Doba přípravy

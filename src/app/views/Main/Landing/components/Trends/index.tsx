@@ -20,7 +20,7 @@ function Trends({ recipes }: { recipes: Recipe[] }) {
           enim sem ac. Lectus facilisi diam sapien, semper nunc.
         </SubTitle>
         <ItemsWrapper>
-          {recipes.map((recipe) => (
+          {recipes.slice(0, 6).map((recipe) => (
             <TrendItem
               key={recipe.id}
               image={getImage(recipe.attributes.images.data[0].attributes.url)}
