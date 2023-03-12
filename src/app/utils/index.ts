@@ -9,11 +9,9 @@ export const refreshToken = async () => {
       .then((res) => {
         setToStorage(res.jwt, "token");
         setToStorage(res.refreshToken, "refreshToken");
-        return res;
       })
       .catch(() => {
         clearStorage();
-        return;
       });
   }
 };
@@ -38,3 +36,5 @@ export const setToStorage = (value: string | null, key: string) => {
     localStorage.removeItem(key);
   }
 };
+
+export const protectedRoutes = ["/recipes/new"];

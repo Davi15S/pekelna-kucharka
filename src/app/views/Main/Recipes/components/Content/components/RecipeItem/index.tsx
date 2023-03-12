@@ -33,10 +33,7 @@ function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
           <DescriptionStat />
         </Row>
         <Row p="10px 0 20px 0">
-          <Description color="third">
-            Dictumst sed aliquam faucibus adipiscing aliquam. Morbi duis tincidunt facilisis in. Lorem morbi amet, semper nunc eu platea at tristique nunc.
-            Sollicitudin eu portaSollicitudin eu portaSollicitudin eu portaSollicitudin eu portaSollicitudin eu porta
-          </Description>
+          <Description color="third">{props.recipe.description}</Description>
         </Row>
         <CategoryWrapper>
           <Button text={props.recipe.category} color="red" transparent borderRadius="25px" m="0 20px 0 0" maxW="120px" />

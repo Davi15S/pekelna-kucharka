@@ -4,7 +4,7 @@ import React, { createContext } from "react";
 export const PageBackgroundContext = createContext<{
   bgImage: StaticImageData | undefined;
   setBgImage: (bgImage: StaticImageData | undefined) => void;
-  bgHeight: string | undefined;
+  bgHeight: React.CSSProperties["height"] | undefined;
   setBgHeight: (bgImage: string) => void;
 }>({
   bgImage: undefined,

@@ -26,12 +26,12 @@ function Content() {
       <ContentWrapper justifyContent="space-around">
         <Filter />
         <RecipesWrapper w="65%" alignItems="center">
-          <Row p="0 0 30px 0">
-            <Row>Nalezeno {recipes?.data.length} receptů</Row>
-            <Row justifyContent="flex-end">Seřadit podle: Nejnovější</Row>
-          </Row>
           {recipes && (
             <>
+              <Row p="0 0 30px 0">
+                <Row>Nalezeno {recipes?.data.length} receptů</Row>
+                <Row justifyContent="flex-end">Seřadit podle: Nejnovější</Row>
+              </Row>
               {recipes.data.map((recipe) => (
                 <RecipeItem key={recipe.id} recipe={recipe.attributes} id={recipe.id} />
               ))}

@@ -40,6 +40,8 @@ export const Description = styled(Text)`
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  line-height: normal;
+  min-height: calc(3rem + (3 * 6px));
 `;
 
 export const CategoryWrapper = styled.div`
