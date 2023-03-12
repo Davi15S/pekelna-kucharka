@@ -11,6 +11,7 @@ export const ItemsWrapper = styled.div`
   grid-template-columns: repeat(1, 1fr);
   gap: 40px 25px;
   padding-top: 80px;
+  width: 100%;
 
   @media only screen and (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);

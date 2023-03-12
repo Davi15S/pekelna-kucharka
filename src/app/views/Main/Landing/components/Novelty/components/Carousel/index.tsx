@@ -1,18 +1,14 @@
+import { Recipe } from "@shared/recipe";
 import React, { useState } from "react";
 import { MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
 import CarouselItem from "./components/CarouselItem";
 import { CarouselButton, CarouselButtonWrapper, CarouselWrapper, Indicator, IndicatorsWrapper, StyledCarousel } from "./styled";
 
-function Carousel() {
+function Carousel({ recipes }: { recipes: Recipe[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [items, setItems] = useState([
-    { title: "dhasuihdaus", subTitle: "hduiashduis", img: "dhasuishd" },
-    { title: "dhasuihdaus", subTitle: "hduiashduis", img: "dhasuishd" },
-    { title: "dhasuihdaus", subTitle: "hduiashduis", img: "dhasuishd" },
-  ]);
 
   const carouselButtonHandle = (left?: boolean) => {
-    setCurrentSlide(left ? (currentSlide != 0 ? currentSlide - 1 : items.length - 1) : currentSlide >= items.length - 1 ? 0 : currentSlide + 1);
+    setCurrentSlide(left ? (currentSlide != 0 ? currentSlide - 1 : recipes.length - 1) : currentSlide >= recipes.length - 1 ? 0 : currentSlide + 1);
   };
 
   return (
@@ -25,7 +21,7 @@ function Carousel() {
         )}
       </CarouselButtonWrapper>
       <CarouselButtonWrapper justifyContent="center" shadow>
-        {currentSlide >= items.length - 1 ? null : (
+        {currentSlide >= recipes.length - 1 ? null : (
           <CarouselButton onClick={() => carouselButtonHandle(false)}>
             <MdOutlineArrowForwardIos size={20} color={"white"} />
           </CarouselButton>
@@ -41,12 +37,12 @@ function Carousel() {
         swipeable={true}
         emulateTouch={true}
       >
-        {items.map((item, index) => (
-          <CarouselItem key={index} />
+        {recipes.map((recipe) => (
+          <CarouselItem key={recipe.id} title={recipe.attributes.title} spiceness={+recipe.attributes.spiciness} />
         ))}
       </StyledCarousel>
       <IndicatorsWrapper justifyContent="center">
-        {items.map((item, index) => (
+        {recipes.map((item, index) => (
           <Indicator key={index} active={index == currentSlide ? true : false} onClick={() => setCurrentSlide(index)} />
         ))}
       </IndicatorsWrapper>

@@ -5,16 +5,16 @@ import React from "react";
 import CarouselImage from "@assets/carouselItem/carouselImage.jpeg";
 import { CarouselItemWrapper, ItemColumn } from "./styled";
 
-function CarouselItem() {
+function CarouselItem(props: { title: string; spiceness: number }) {
   return (
     <Row justifyContent="center">
       <CarouselItemWrapper w="80%" alignItems="center" p="50px 0">
         <ItemColumn w="60%" p="0 50px 0 0">
           <Row>
-            <PepperRating rating={2} w={30} h={30} />
+            <PepperRating rating={props.spiceness} w={30} h={30} />
           </Row>
           <Text fontWeight="bold" fontSize="30px" color="primary" p="20px 0">
-            Ultricies tortor posue vitae, fringill
+            {props.title}
           </Text>
           <Text fontSize="16px" fontWeight="400" color="third">
             Sollicitudin et nisl feugiat in libero suscipit arcu. Et ultricies tincidunt nulla sapien aenean diam accumsan, in arcu. Vel cras proin gravida

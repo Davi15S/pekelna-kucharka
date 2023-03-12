@@ -8,6 +8,7 @@ import Button from "@components/Button";
 import { useRouter } from "next/router";
 import { RecipeAttributes } from "@shared/recipe";
 import { getImage } from "@app/utils";
+import PepperRating from "@components/PepperRating";
 
 function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
   const navigate = useRouter();
@@ -30,7 +31,7 @@ function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
             }`}
           />
           <DescriptionStat icon={<AiOutlineStar size={20} color={"#ED4040"} />} text="4/5" />
-          <DescriptionStat />
+          <PepperRating p="0 20px 10px 0" rating={+props.recipe.spiciness} w="22px" h="22px" />
         </Row>
         <Row p="10px 0 20px 0">
           <Description color="third">{props.recipe.description}</Description>

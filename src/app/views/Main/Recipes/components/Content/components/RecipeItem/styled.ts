@@ -36,12 +36,15 @@ export const Title = styled.h4`
 `;
 
 export const Description = styled(Text)`
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: normal;
-  min-height: calc(3rem + (3 * 6px));
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  white-space: pre-wrap;
+  line-height: 1.8ex;
+  height: 7.2ex;
+  line-height: 20px;
+  color: ${({ theme }) => theme.colors.third};
 `;
 
 export const CategoryWrapper = styled.div`

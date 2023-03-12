@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 
 export const TrendItemWrapper = styled(Column)<{ offset?: boolean }>`
   min-width: 300px;
+  width: 100%;
   border-radius: 20px;
   overflow: hidden;
   max-width: 400px;
@@ -11,6 +12,7 @@ export const TrendItemWrapper = styled(Column)<{ offset?: boolean }>`
   transition: all 300ms ease-in-out;
   position: relative;
   height: max-content;
+  justify-self: center;
 
   :hover {
     box-shadow: ${({ theme }) => theme.shadow.trendHover};
