@@ -46,24 +46,18 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
   }, [currentValue]);
 
   useEffect(() => {
-    (async () => {
-      const filterQuery: IFilterQuery = {
-        filters: {
-          spiciness: {
-            $in: filters.spiceness,
-          },
+    const filterQuery: IFilterQuery = {
+      filters: {
+        spiciness: {
+          $in: filters.spiceness,
         },
-      };
-
-      const query = qs.stringify(filterQuery, {
-        encodeValuesOnly: true,
-      });
-
-      console.log(query);
-
-      router.push({ pathname: router.pathname, query: query ?? "" }, undefined, { scroll: false });
-      setQuery(query);
-    })();
+      },
+    };
+    const query = qs.stringify(filterQuery, {
+      encodeValuesOnly: true,
+    });
+    router.push({ pathname: router.pathname, query: query ?? "" }, undefined, { scroll: false });
+    setQuery(query);
   }, [filters]);
 
   useEffect(() => {
