@@ -1,4 +1,3 @@
-import { getRecipes } from "@api/recipes";
 import { Column, Row } from "@app/styled";
 import BgTitle from "@components/BgTitle";
 import Button from "@components/Button";

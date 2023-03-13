@@ -13,15 +13,13 @@ export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod
     body: formData ?? JSON.stringify(data),
     signal,
   }).catch(() => {
-    return null;
+    throw undefined;
   });
-  if (response) {
-    const res = await response.json();
-    if (res.error) {
-      clearStorage();
-      throw res.error as Error;
-    } else {
-      return res as T;
-    }
+  const res = await response.json();
+  if (res.error) {
+    clearStorage();
+    throw res.error as Error;
+  } else {
+    return res as T;
   }
 };
