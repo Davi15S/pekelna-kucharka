@@ -56,7 +56,7 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
     const query = qs.stringify(filterQuery, {
       encodeValuesOnly: true,
     });
-    router.push({ pathname: router.pathname, query: query ?? "" }, undefined, { scroll: false });
+    router.push({ pathname: router.pathname, query: query }, undefined, { scroll: false });
     setQuery(query);
   }, [filters]);
 
@@ -73,7 +73,7 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
   useEffect(() => {
     const query = qs.parse(window.location.search.substring(1)) as unknown as IFilterQuery;
     setFilters((prevState) => ({ ...prevState, spiceness: query.filters?.spiciness?.$in ?? [] }));
-  }, []);
+  }, [router.asPath]);
 
   return (
     <FilterWrapper>

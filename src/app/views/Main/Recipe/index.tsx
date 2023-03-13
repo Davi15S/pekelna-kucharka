@@ -1,6 +1,6 @@
 import { Row, Text } from "@app/styled";
 import { PageContent } from "@layouts/Main/components/Page/styled";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ColumnContent, PageWrapper } from "./styled";
 import Gallery from "./components/Gallery";
 import usePageBackground from "@hooks/usePageBackground";
@@ -9,18 +9,10 @@ import Ingredients from "./components/Ingredients";
 import Button from "@components/Button";
 import Process from "./components/Process";
 import Comments from "./components/Comments";
-import { getRecipe } from "@api/recipes";
 import { RecipeAttributes } from "@shared/recipe";
 
-function Recipe(props: { id: string }) {
+function Recipe({ recipe }: { recipe: RecipeAttributes }) {
   usePageBackground(undefined);
-  const [recipe, setRecipe] = useState<RecipeAttributes>();
-
-  useEffect(() => {
-    (async () => {
-      await getRecipe(props.id).then((data) => setRecipe(data.data.attributes));
-    })();
-  }, []);
 
   return (
     <PageContent topP w="100%">

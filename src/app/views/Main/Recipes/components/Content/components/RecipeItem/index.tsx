@@ -27,7 +27,7 @@ function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
           <DescriptionStat
             icon={<BiCommentDetail size={20} color={"#ED4040"} />}
             text={`${props.recipe.comments.data.length.toString()} ${
-              props.recipe.comments.data.length > 4 && props.recipe.comments.data.length != 0 ? "recenzí" : "recenze"
+              props.recipe.comments.data.length > 4 || props.recipe.comments.data.length == 0 ? "recenzí" : "recenze"
             }`}
           />
           <DescriptionStat icon={<AiOutlineStar size={20} color={"#ED4040"} />} text="4/5" />
