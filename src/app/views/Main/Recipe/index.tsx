@@ -17,11 +17,9 @@ function Recipe(props: { id: string }) {
   const [recipe, setRecipe] = useState<RecipeAttributes>();
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       await getRecipe(props.id).then((data) => setRecipe(data.data.attributes));
-    };
-
-    fetchData();
+    })();
   }, []);
 
   return (

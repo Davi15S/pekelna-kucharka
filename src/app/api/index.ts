@@ -1,6 +1,6 @@
 import { clearStorage } from "@app/utils";
 
-export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod = "GET", data?: unknown, formData?: FormData) => {
+export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod = "GET", data?: unknown, formData?: FormData, signal?: AbortSignal) => {
   const headers = {
     Authorization: token ? `Bearer ${token}` : "",
     ...(!formData && { "Content-Type": "application/json" }),
@@ -11,12 +11,17 @@ export const fetchApi = async <T>(url: string, token?: string, method: ApiMethod
     headers,
     credentials: "include",
     body: formData ?? JSON.stringify(data),
+    signal,
+  }).catch(() => {
+    return null;
   });
-  const res = await response.json();
-  if (res.error) {
-    clearStorage();
-    throw res.error as Error;
-  } else {
-    return res as T;
+  if (response) {
+    const res = await response.json();
+    if (res.error) {
+      clearStorage();
+      throw res.error as Error;
+    } else {
+      return res as T;
+    }
   }
 };

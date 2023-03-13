@@ -16,7 +16,7 @@ function LoginInputs() {
     if (res?.jwt) {
       if (res.user.confirmed && !res.user.blocked) {
         setToStorage(res.jwt, "token");
-        await getRefreshToken(res.jwt).then((data) => setToStorage(data.refreshToken, "refreshToken"));
+        await getRefreshToken(res.jwt).then((data) => data && setToStorage(data.refreshToken, "refreshToken"));
         window.location.replace("/");
       } else {
         console.error("User is not confirmed");

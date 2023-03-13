@@ -17,16 +17,14 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    const fetchUser = async () => {
+    (async () => {
       await refreshToken();
       const token = getFromStorage("token");
       if (token) {
         await loginWithToken(token);
       }
       setIsLoading(false);
-    };
-
-    fetchUser();
+    })();
   }, []);
 
   const loginWithToken = async (token: string) => {

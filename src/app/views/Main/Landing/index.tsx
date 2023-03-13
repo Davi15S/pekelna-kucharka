@@ -8,22 +8,11 @@ import Favourite from "./components/Favourite";
 import { PageContent } from "@layouts/Main/components/Page/styled";
 import Trends from "./components/Trends";
 import Novelty from "./components/Novelty";
-import { getRecipes } from "@api/recipes";
 import { Recipe } from "@shared/recipe";
 
-function Landing() {
+function Landing({ recipes }: { recipes: Recipe[] }) {
   usePageTitle(undefined);
   usePageBackground(landingBg, "100vh");
-  const [recipes, setRecipes] = useState<Recipe[]>();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getRecipes();
-      setRecipes(res.data);
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <>
@@ -31,12 +20,8 @@ function Landing() {
         <Hero />
         <Stats />
         <Favourite />
-        {recipes && (
-          <>
-            <Trends recipes={recipes} />
-            <Novelty recipes={recipes} />
-          </>
-        )}
+        <Trends recipes={recipes} />
+        <Novelty recipes={recipes} />
       </PageContent>
     </>
   );
