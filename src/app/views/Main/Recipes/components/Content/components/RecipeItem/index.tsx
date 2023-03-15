@@ -7,7 +7,6 @@ import DescriptionStat from "./components/DescriptionStat";
 import Button from "@components/Button";
 import { useRouter } from "next/router";
 import { RecipeAttributes } from "@shared/recipe";
-import { getImage } from "@app/utils";
 import PepperRating from "@components/PepperRating";
 
 function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
@@ -17,7 +16,7 @@ function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
     <ItemWrapper alignItems="center" justifyContent="space-between" w="100%" m="15px 0" onClick={() => navigate.push(`/recipes/${props.id}`)}>
       <MobilePicture>
         <ImageContainer w="100%" h="250px" borderRadius="20px">
-          <Image src={getImage(props.recipe.images.data[0].attributes.url)} alt="" fill objectFit="cover" />
+          <Image src={props.recipe.images.data[0].attributes.url} alt="" fill objectFit="cover" />
         </ImageContainer>
       </MobilePicture>
       <ContentWrapper w="60%" p="30px 0 30px 30px">
@@ -26,8 +25,8 @@ function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
           <DescriptionStat icon={<AiOutlineClockCircle size={20} color={"#ED4040"} />} text={`${props.recipe.cookingTime} min`} />
           <DescriptionStat
             icon={<BiCommentDetail size={20} color={"#ED4040"} />}
-            text={`${props.recipe.comments.data.length.toString()} ${
-              props.recipe.comments.data.length > 4 || props.recipe.comments.data.length == 0 ? "recenzí" : "recenze"
+            text={`${props.recipe.comments?.data.length.toString() ?? "0"} ${
+              props.recipe.comments ? (props.recipe.comments.data.length > 4 ? "recenzí" : "recenze") : "recenzí"
             }`}
           />
           <DescriptionStat icon={<AiOutlineStar size={20} color={"#ED4040"} />} text="4/5" />
@@ -41,7 +40,7 @@ function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
         </CategoryWrapper>
       </ContentWrapper>
       <ImageContainer w="280px" h="220px" borderRadius="20px" m="20px 30px 20px 30px" mobileHide>
-        <Image src={getImage(props.recipe.images.data[0].attributes.url)} alt="" fill objectFit="cover" />
+        <Image src={props.recipe.images.data[0].attributes.url} alt="" fill objectFit="cover" />
       </ImageContainer>
     </ItemWrapper>
   );

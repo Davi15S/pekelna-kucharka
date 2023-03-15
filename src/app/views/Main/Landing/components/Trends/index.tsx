@@ -6,7 +6,6 @@ import { ButtonWrapper, ItemsWrapper, SubTitle } from "./styled";
 import Button from "@components/Button";
 import { useRouter } from "next/router";
 import { Recipe } from "@shared/recipe";
-import { getImage } from "@app/utils";
 
 function Trends({ recipes }: { recipes: Recipe[] }) {
   const { push } = useRouter();
@@ -23,10 +22,10 @@ function Trends({ recipes }: { recipes: Recipe[] }) {
           {recipes.slice(0, 6).map((recipe) => (
             <TrendItem
               key={recipe.id}
-              image={getImage(recipe.attributes.images.data[0].attributes.url)}
+              image={recipe.attributes.images.data[0].attributes.url}
               title={recipe.attributes.title}
               subTitle={recipe.attributes.description}
-              comments={recipe.attributes.comments.data.length}
+              comments={recipe.attributes.comments?.data.length ?? 0}
               id={recipe.id}
               spiceness={+recipe.attributes.spiciness}
             />

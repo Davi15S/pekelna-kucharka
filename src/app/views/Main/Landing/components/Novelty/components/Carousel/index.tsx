@@ -1,4 +1,3 @@
-import { getImage } from "@app/utils";
 import { Recipe } from "@shared/recipe";
 import React, { useState } from "react";
 import { MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
@@ -45,7 +44,7 @@ function Carousel({ recipes }: { recipes: Recipe[] }) {
               title={recipe.attributes.title}
               spiceness={+recipe.attributes.spiciness}
               description={recipe.attributes.description}
-              image={getImage(recipe.attributes.images.data[0].attributes.url)}
+              image={recipe.attributes.images.data[0].attributes.url}
               id={recipe.id}
             />
           );

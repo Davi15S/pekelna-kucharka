@@ -25,8 +25,6 @@ export const enableScroll = () => (document.documentElement.style.overflowY = "a
 
 export const disableScroll = () => (document.documentElement.style.overflowY = "hidden");
 
-export const getImage = (imageLink: string) => `${process.env.NEXT_PUBLIC_SERVER}${imageLink}`;
-
 export const getFromStorage = (key: string) => localStorage.getItem(key) ?? null;
 
 export const setToStorage = (value: string | null, key: string) => {

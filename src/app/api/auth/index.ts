@@ -10,5 +10,5 @@ export const loginUser = (email: string, password: string) => {
 };
 
 export const getRefreshToken = (refreshToken: string) => {
-  return fetchApi<{ jwt: string; refreshToken: string }>("token/refresh", undefined, "POST", { refreshToken: refreshToken });
+  return fetchApi<{ jwt: string; refreshToken: string }>("token/refresh", undefined, "POST", { refreshToken });
 };

@@ -64,6 +64,7 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
     (async () => {
       const signal = controller.signal;
       const data = await getRecipes(query, signal);
+      console.log(data);
       setRecipes(data?.data);
     })();
 
