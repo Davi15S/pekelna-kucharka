@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import landingBg from "@assets/backgrounds/landingBackground.png";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
@@ -8,8 +8,9 @@ import Favourite from "./components/Favourite";
 import { PageContent } from "@layouts/Main/components/Page/styled";
 import Trends from "./components/Trends";
 import Novelty from "./components/Novelty";
+import { Recipe } from "@shared/recipe";
 
-function Landing() {
+function Landing({ recipes }: { recipes: Recipe[] }) {
   usePageTitle(undefined);
   usePageBackground(landingBg, "100vh");
 
@@ -19,8 +20,8 @@ function Landing() {
         <Hero />
         <Stats />
         <Favourite />
-        <Trends />
-        <Novelty />
+        <Trends recipes={recipes} />
+        <Novelty recipes={recipes} />
       </PageContent>
     </>
   );

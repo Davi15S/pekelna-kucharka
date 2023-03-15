@@ -19,6 +19,7 @@ export const InputStyled = styled.input<{ theme?: Theme; isForm?: boolean }>`
   border: none;
   font-size: 16px;
   margin-left: 10px;
+  height: 100%;
   background-color: transparent;
   color: ${({ theme, isForm }) => (isForm ? theme.colors.third : theme.background.primary)};
 

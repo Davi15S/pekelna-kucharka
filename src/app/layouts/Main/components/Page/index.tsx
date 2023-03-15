@@ -1,5 +1,4 @@
 import { PageBackgroundContext } from "@contexts/PageBackgroundContext";
-import ActivedGallery from "@views/Main/Recipe/components/Gallery/components/ActivedGallery";
 import React, { useContext } from "react";
 import { PageBackground, PageWrapper, Shadow } from "./styled";
 

@@ -6,7 +6,7 @@ import { LoginWrapper } from "./styled";
 import { FcGoogle } from "react-icons/fc";
 import usePageTitle from "@hooks/usePageTitle";
 import usePageBackground from "@hooks/usePageBackground";
-import { Column, Row, StyledLink, Text } from "@app/styled";
+import { Column } from "@app/styled";
 import LoginInputs from "./components/LoginInputs";
 import RegisterInputs from "./components/RegisterInputs";
 import BgTitle from "@components/BgTitle";
@@ -32,15 +32,6 @@ function Auth(props: { pathName: string }) {
           <Column h="auto" w="100%">
             {isLogin ? <LoginInputs /> : <RegisterInputs />}
           </Column>
-          <Button m="40px 20px 20px" text={isLogin ? "Přihlásit se" : "Vytvořit účet"} h="50px" />
-          <Row justifyContent="center" p="20px 0 0 0">
-            <Text p="0 5px 0 0" fontSize="13px">
-              {isLogin ? "Nemáte ještě účet?" : "Máte již účet?"}
-            </Text>
-            <StyledLink href={isLogin ? "/register" : "/login"} color="red" underline underlineW="1px" fontSize="13px">
-              {isLogin ? "Zaregistrujte se" : "Přihlásit se"}
-            </StyledLink>
-          </Row>
         </LoginWrapper>
       </PageContent>
     </>

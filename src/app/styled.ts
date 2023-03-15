@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Theme } from "@styles/theme";
-import Image from "next/image";
+import { default as NextImage } from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -52,7 +52,7 @@ export const Column = styled.div<{
   max-width: ${({ maxW }) => (maxW ? maxW : "")};
 `;
 
-export const ImageWrapper = styled(Image)<{
+export const ImageWrapper = styled(NextImage)<{
   w?: React.CSSProperties["width"];
   h?: React.CSSProperties["height"];
   mobileW?: React.CSSProperties["width"];
@@ -69,12 +69,48 @@ export const ImageWrapper = styled(Image)<{
   max-width: ${({ maxW }) => (maxW ? maxW : "auto")};
   max-height: ${({ maxH }) => (maxH ? maxH : "auto")};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
-  box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.trend : "")};
+  box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.default : "")};
   object-fit: ${({ objectFit }) => (objectFit ? objectFit : "")};
   margin: ${({ m }) => (m ? m : "")};
 
   @media only screen and (max-width: 1024px) {
     ${({ mobileW }) => (mobileW ? `width: ${mobileW};` : "")}
+  }
+`;
+
+export const Image = styled(NextImage)<{ objectFit?: React.CSSProperties["objectFit"] }>`
+  object-fit: ${({ objectFit }) => (objectFit ? objectFit : "")};
+`;
+
+export const ImageContainer = styled.div<{
+  borderRadius?: React.CSSProperties["borderRadius"];
+  w?: React.CSSProperties["width"];
+  h?: React.CSSProperties["height"];
+  maxW?: React.CSSProperties["maxWidth"];
+  maxH?: React.CSSProperties["maxHeight"];
+  m?: React.CSSProperties["margin"];
+  mobileHide?: boolean;
+  shadow?: boolean;
+  theme?: Theme;
+}>`
+  position: relative;
+  width: ${({ w }) => (w ? w : "100%")};
+  height: ${({ h }) => (h ? h : "100%")};
+  max-width: ${({ maxW }) => (maxW ? maxW : "auto")};
+  max-height: ${({ maxH }) => (maxH ? maxH : "auto")};
+  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
+  overflow: hidden;
+  margin: ${({ m }) => (m ? m : "")};
+  box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.default : "")};
+
+  @media only screen and (max-width: 786px) {
+    ${({ mobileHide }) => (mobileHide ? "display: none;" : "")}
+  }
+
+  :after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
   }
 `;
 

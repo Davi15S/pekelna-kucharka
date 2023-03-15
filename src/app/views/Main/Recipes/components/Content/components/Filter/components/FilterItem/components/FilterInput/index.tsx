@@ -1,16 +1,27 @@
 import { Row, Text } from "@app/styled";
-import React, { useState } from "react";
+import React from "react";
 import { CheckBox } from "./styled";
 import { BiCheck } from "react-icons/bi";
 import PepperRating from "@components/PepperRating";
+import { IFilter } from "@app/utils/types";
 
-function FilterInput(props: { title?: string; rating?: number }) {
-  const [checked, setChecked] = useState(false);
-
+function FilterInput(props: {
+  title: string;
+  rating?: number;
+  handleClick: (key: keyof IFilter, value: string, checked: boolean) => void;
+  query: keyof IFilter;
+  checked: boolean;
+}) {
   return (
     <Row alignItems="center" p="5px 0">
-      <CheckBox whileTap={{ scale: 1.1 }} checked={checked} onClick={() => setChecked(!checked)}>
-        {checked ? <BiCheck size={25} /> : null}
+      <CheckBox
+        whileTap={{ scale: 1.1 }}
+        checked={props.checked}
+        onClick={() => {
+          props.handleClick(props.query, props.rating?.toString() ?? props.title, !props.checked);
+        }}
+      >
+        {props.checked ? <BiCheck size={25} /> : null}
       </CheckBox>
       {props.rating ? (
         <Row p="0 0 0 15px">

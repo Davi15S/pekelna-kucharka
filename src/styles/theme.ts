@@ -12,8 +12,8 @@ export type Theme = {
     fourth: string;
   };
   shadow: {
-    trend: string;
-    trendHover: string;
+    default: string;
+    hover: string;
   };
   footer: {
     primary: string;
@@ -50,8 +50,8 @@ export const theme = {
     fourth: "#181818",
   },
   shadow: {
-    trend: "6px 12px 48px rgba(0, 0, 0, 0.75)",
-    trendHover: "2px 10px 100px rgba(0, 0, 0, 0.9);",
+    default: "6px 12px 20px rgba(0, 0, 0, 0.75)",
+    hover: "2px 10px 40px rgba(0, 0, 0, 0.9);",
   },
   footer: {
     primary: "#434343",

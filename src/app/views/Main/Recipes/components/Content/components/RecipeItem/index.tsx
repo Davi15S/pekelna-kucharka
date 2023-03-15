@@ -1,47 +1,47 @@
-import { ImageWrapper, Row } from "@app/styled";
+import { Image, ImageContainer, Row } from "@app/styled";
 import React from "react";
 import { CategoryWrapper, ContentWrapper, Description, ItemWrapper, MobilePicture, Title } from "./styled";
 import { AiOutlineClockCircle, AiOutlineStar } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import DescriptionStat from "./components/DescriptionStat";
 import Button from "@components/Button";
-import recipe from "@assets/recipes/recipe.jpg";
 import { useRouter } from "next/router";
+import { RecipeAttributes } from "@shared/recipe";
+import PepperRating from "@components/PepperRating";
 
-function RecipeItem() {
+function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
   const navigate = useRouter();
 
   return (
-    <ItemWrapper alignItems="center" justifyContent="space-between" w="100%" m="15px 0" onClick={() => navigate.push("/recipes/jdiusajdoisajdoisa")}>
+    <ItemWrapper alignItems="center" justifyContent="space-between" w="100%" m="15px 0" onClick={() => navigate.push(`/recipes/${props.id}`)}>
       <MobilePicture>
-        <ImageWrapper src={recipe} alt="" maxW="100%" borderRadius="20px" />
+        <ImageContainer w="100%" h="250px" borderRadius="20px">
+          <Image src={props.recipe.images.data[0].attributes.url} alt="" fill objectFit="cover" />
+        </ImageContainer>
       </MobilePicture>
       <ContentWrapper w="60%" p="30px 0 30px 30px">
-        <Title>Název receptu</Title>
+        <Title>{props.recipe.title}</Title>
         <Row alignItems="center" flexWrap="wrap">
-          <DescriptionStat icon={<AiOutlineClockCircle size={20} color={"#ED4040"} />} text="45 min" />
-          <DescriptionStat icon={<BiCommentDetail size={20} color={"#ED4040"} />} text="45 min" />
-          <DescriptionStat icon={<AiOutlineStar size={20} color={"#ED4040"} />} text="45 min" />
-          <DescriptionStat />
+          <DescriptionStat icon={<AiOutlineClockCircle size={20} color={"#ED4040"} />} text={`${props.recipe.cookingTime} min`} />
+          <DescriptionStat
+            icon={<BiCommentDetail size={20} color={"#ED4040"} />}
+            text={`${props.recipe.comments?.data.length.toString() ?? "0"} ${
+              props.recipe.comments ? (props.recipe.comments.data.length > 4 ? "recenzí" : "recenze") : "recenzí"
+            }`}
+          />
+          <DescriptionStat icon={<AiOutlineStar size={20} color={"#ED4040"} />} text="4/5" />
+          <PepperRating p="0 20px 10px 0" rating={+props.recipe.spiciness} w="22px" h="22px" />
         </Row>
-        <Row p="20px 0">
-          <Description color="third">
-            Dictumst sed aliquam faucibus adipiscing aliquam. Morbi duis tincidunt facilisis in. Lorem morbi amet, semper nunc eu platea at tristique nunc.
-            Sollicitudin eu portaSollicitudin eu portaSollicitudin eu portaSollicitudin eu portaSollicitudin eu porta
-          </Description>
+        <Row p="10px 0 20px 0">
+          <Description color="third">{props.recipe.description}</Description>
         </Row>
         <CategoryWrapper>
-          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
-          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
-          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
-          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
-          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
-          <Button text="Vietnamské" color="red" transparent borderRadius="25px" m="0 20px 0 0" />
+          <Button text={props.recipe.category} color="red" transparent borderRadius="25px" m="0 20px 0 0" maxW="120px" />
         </CategoryWrapper>
       </ContentWrapper>
-      <ContentWrapper w="37%" alignItems="center" justifyContent="center" h="100%" p="30px 30px 30px 0" picture>
-        <ImageWrapper src={recipe} alt="" maxW="100%" borderRadius="20px" />
-      </ContentWrapper>
+      <ImageContainer w="280px" h="220px" borderRadius="20px" m="20px 30px 20px 30px" mobileHide>
+        <Image src={props.recipe.images.data[0].attributes.url} alt="" fill objectFit="cover" />
+      </ImageContainer>
     </ItemWrapper>
   );
 }

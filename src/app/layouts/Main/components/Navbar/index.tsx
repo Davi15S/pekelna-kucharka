@@ -7,8 +7,11 @@ import Link from "next/link";
 import Logo from "@assets/Logo.svg";
 import { ImageWrapper, Row } from "@app/styled";
 import MobileNavbar from "./components/MobileNavbar";
+import { useAuth } from "@contexts/AuthContext";
 
 function Navbar(props: { active: boolean; handleClick: () => void }) {
+  const { user } = useAuth();
+
   return (
     <NavbarWrapper justifyContent="center" alignItems="center">
       <LogoWrapper>
@@ -22,7 +25,8 @@ function Navbar(props: { active: boolean; handleClick: () => void }) {
           <LinkComponent text="Magazín" link="/magazine" />
         </Row>
         <Row justifyContent="flex-end" alignItems="center" w="max-content">
-          <LinkComponent text="Přihlásit se" link="/login" />
+          {user ? <LinkComponent text="Účet" link="" /> : <LinkComponent text="Přihlásit se" link="/login" />}
+          {user ? <LinkComponent text="Vytvořit recept" link="/recipes/new" /> : null}
           <Link href="" style={{ margin: "0 15px 0 0" }}>
             <AiOutlineInstagram size={25} color={"white"} />
           </Link>

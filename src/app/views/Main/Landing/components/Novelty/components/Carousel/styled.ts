@@ -21,14 +21,14 @@ export const CarouselButtonWrapper = styled(Column)<{
   rightOffset?: React.CSSProperties["right"];
 }>`
   position: absolute;
-  z-index: 2;
+  z-index: 10;
   ${({ left, leftOffset, rightOffset }) =>
     left ? `align-items: start; left: ${leftOffset ? leftOffset : "0"};` : `align-items: flex-end; right: ${rightOffset ? rightOffset : "0"};`};
   ${({ left, theme, shadow }) =>
     shadow
       ? left
-        ? `background: linear-gradient(to right, ${theme.background.primary} 25%, transparent);`
-        : `background: linear-gradient(to left, ${theme.background.primary} 25%, transparent);`
+        ? `background: linear-gradient(to right, ${theme.background.primary} 35%, transparent);`
+        : `background: linear-gradient(to left, ${theme.background.primary} 35%, transparent);`
       : ""}
   width: 100px;
 

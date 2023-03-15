@@ -1,19 +1,50 @@
+import { getRefreshToken, loginUser } from "@api/auth";
 import { Row, StyledLink, Text } from "@app/styled";
-import React from "react";
+import Button from "@components/Button";
+import React, { useState } from "react";
 import Input from "../Input";
 import { Seperator } from "./styled";
+import { setToStorage } from "@app/utils";
 
 function LoginInputs() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const res = await loginUser(email, password).catch((e: Error) => console.log(e));
+    if (res?.jwt) {
+      if (res.user.confirmed && !res.user.blocked) {
+        setToStorage(res.jwt, "token");
+        await getRefreshToken(res.jwt).then((data) => data && setToStorage(data.refreshToken, "refreshToken"));
+        window.location.replace("/");
+      } else {
+        console.error("User is not confirmed");
+      }
+    }
+  };
+
   return (
     <>
       <Seperator justifyContent="center" alignItems="center">
         <Text fontSize="13px">nebo</Text>
       </Seperator>
-      <Input placeholder="Email" />
-      <Input placeholder="Heslo" />
-      <Row justifyContent="flex-end" p="15px 0 0 0">
-        <StyledLink href="/forgot" fontSize="13px" underline underlineW="1px">
-          Zapomněli jste heslo?
+      <form style={{ width: "100%" }} onSubmit={(e) => handleLogin(e)}>
+        <Input placeholder="Email" onChange={(e) => setEmail(e.currentTarget.value)} required type="email" autoComplete="email" />
+        <Input placeholder="Heslo" onChange={(e) => setPassword(e.currentTarget.value)} required type="password" />
+        <Row justifyContent="flex-end" p="15px 0 0 0">
+          <StyledLink href="/forgot" fontSize="13px" underline underlineW="1px">
+            Zapomněli jste heslo?
+          </StyledLink>
+        </Row>
+        <Button m="40px 0" text="Přihlásit se" h="50px" type="submit" />
+      </form>
+      <Row justifyContent="center" p="20px 0 0 0">
+        <Text p="0 5px 0 0" fontSize="13px">
+          Nemáte ještě účet?
+        </Text>
+        <StyledLink href="/register" color="red" underline underlineW="1px" fontSize="13px">
+          Zaregistrujte se
         </StyledLink>
       </Row>
     </>

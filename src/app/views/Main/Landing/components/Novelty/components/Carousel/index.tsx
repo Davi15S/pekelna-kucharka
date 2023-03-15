@@ -1,31 +1,27 @@
+import { Recipe } from "@shared/recipe";
 import React, { useState } from "react";
 import { MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
 import CarouselItem from "./components/CarouselItem";
 import { CarouselButton, CarouselButtonWrapper, CarouselWrapper, Indicator, IndicatorsWrapper, StyledCarousel } from "./styled";
 
-function Carousel() {
+function Carousel({ recipes }: { recipes: Recipe[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [items, setItems] = useState([
-    { title: "dhasuihdaus", subTitle: "hduiashduis", img: "dhasuishd" },
-    { title: "dhasuihdaus", subTitle: "hduiashduis", img: "dhasuishd" },
-    { title: "dhasuihdaus", subTitle: "hduiashduis", img: "dhasuishd" },
-  ]);
 
   const carouselButtonHandle = (left?: boolean) => {
-    setCurrentSlide(left ? (currentSlide != 0 ? currentSlide - 1 : items.length - 1) : currentSlide >= items.length - 1 ? 0 : currentSlide + 1);
+    setCurrentSlide(left ? (currentSlide != 0 ? currentSlide - 1 : recipes.length - 1) : currentSlide >= recipes.length - 1 ? 0 : currentSlide + 1);
   };
 
   return (
     <CarouselWrapper>
-      <CarouselButtonWrapper left justifyContent="center">
+      <CarouselButtonWrapper left justifyContent="center" shadow>
         {currentSlide == 0 ? null : (
           <CarouselButton onClick={() => carouselButtonHandle(true)}>
             <MdOutlineArrowBackIosNew size={20} color={"white"} />
           </CarouselButton>
         )}
       </CarouselButtonWrapper>
-      <CarouselButtonWrapper justifyContent="center">
-        {currentSlide >= items.length - 1 ? null : (
+      <CarouselButtonWrapper justifyContent="center" shadow>
+        {currentSlide >= recipes.length - 1 ? null : (
           <CarouselButton onClick={() => carouselButtonHandle(false)}>
             <MdOutlineArrowForwardIos size={20} color={"white"} />
           </CarouselButton>
@@ -38,16 +34,29 @@ function Carousel() {
         showArrows={false}
         showIndicators={false}
         showThumbs={false}
+        swipeable={true}
+        emulateTouch={true}
       >
-        {items.map((item, index) => (
-          <CarouselItem key={index} />
-        ))}
+        {recipes.slice(0, 5).map((recipe, i) => {
+          return (
+            <CarouselItem
+              key={recipe.id}
+              title={recipe.attributes.title}
+              spiceness={+recipe.attributes.spiciness}
+              description={recipe.attributes.description}
+              image={recipe.attributes.images.data[0].attributes.url}
+              id={recipe.id}
+            />
+          );
+        })}
       </StyledCarousel>
-      <IndicatorsWrapper justifyContent="center">
-        {items.map((item, index) => (
-          <Indicator key={index} active={index == currentSlide ? true : false} onClick={() => setCurrentSlide(index)} />
-        ))}
-      </IndicatorsWrapper>
+      {recipes.length > 1 && (
+        <IndicatorsWrapper justifyContent="center">
+          {recipes.map((item, index) => (
+            <Indicator key={index} active={index == currentSlide ? true : false} onClick={() => setCurrentSlide(index)} />
+          ))}
+        </IndicatorsWrapper>
+      )}
     </CarouselWrapper>
   );
 }

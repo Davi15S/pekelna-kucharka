@@ -1,32 +1,29 @@
 import { Column, Row } from "@app/styled";
 import BgTitle from "@components/BgTitle";
 import Button from "@components/Button";
-import { useRouter } from "next/router";
-import React from "react";
+import { Recipe } from "@shared/recipe";
+import React, { useState } from "react";
 import Filter from "./components/Filter";
 import RecipeItem from "./components/RecipeItem";
 import { ContentWrapper, RecipesWrapper } from "./styled";
 
 function Content() {
-  const { push } = useRouter();
+  const [recipes, setRecipes] = useState<Recipe[]>();
 
   return (
     <Column w="100%">
-      <BgTitle title="Katalog" top="-80px" />
+      <BgTitle title="Katalog" top="-80px" mobileTop="0px" />
       <BgTitle title="receptů" top="70px" left="20vw" mobileTop="40px" mobileLeft="25vw" />
       <ContentWrapper justifyContent="space-around">
-        <Filter />
+        <Filter setRecipes={(recipes) => setRecipes(recipes)} />
         <RecipesWrapper w="65%" alignItems="center">
           <Row p="0 0 30px 0">
-            <Row>Nalezeno 21 receptů</Row>
+            <Row>Nalezeno {recipes?.length} receptů</Row>
             <Row justifyContent="flex-end">Seřadit podle: Nejnovější</Row>
           </Row>
-          <RecipeItem />
-          <RecipeItem />
-          <RecipeItem />
-          <RecipeItem />
-          <RecipeItem />
-          <RecipeItem />
+          {recipes?.map((recipe) => (
+            <RecipeItem key={recipe.id} recipe={recipe.attributes} id={recipe.id} />
+          ))}
         </RecipesWrapper>
       </ContentWrapper>
       <Row p="40px 0 0 0" justifyContent="center">
