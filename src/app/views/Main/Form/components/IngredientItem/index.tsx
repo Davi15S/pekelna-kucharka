@@ -22,6 +22,7 @@ function IngredientItem(props: {
 
   useEffect(() => {
     props.setIngredient<Ingredient>("ingredients", props.index, { ingredient, amount, unit });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ingredient, amount, unit]);
 
   return (

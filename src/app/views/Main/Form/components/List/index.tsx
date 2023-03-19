@@ -19,6 +19,7 @@ function List(props: {
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function useOutsideAlerter(ref: React.MutableRefObject<any>) {
     useEffect(() => {
       function handleClickOutside(event: Event) {

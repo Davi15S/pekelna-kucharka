@@ -6,7 +6,7 @@ import { CarouselItemWrapper, ItemColumn } from "./styled";
 import { SubTitle } from "@views/Main/Landing/components/Trends/components/TrendItem/styled";
 import { useRouter } from "next/router";
 
-function CarouselItem(props: { title: string; spiceness: number; description: string; image: string; id: string }) {
+function CarouselItem(props: { title: string; spiciness: number; description: string; image: string; id: string }) {
   const router = useRouter();
 
   return (
@@ -15,7 +15,7 @@ function CarouselItem(props: { title: string; spiceness: number; description: st
         <ItemColumn w="60%" p="0 50px 0 0">
           <Column w="100%">
             <Row>
-              <PepperRating rating={props.spiceness} w={30} h={30} />
+              <PepperRating rating={props.spiciness} w={30} h={30} />
             </Row>
             <Text fontWeight="bold" fontSize="30px" color="primary" p="20px 0">
               {props.title}

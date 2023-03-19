@@ -1,6 +1,6 @@
 import { Column, Row } from "@app/styled";
 import BgTitle from "@components/BgTitle";
-import Button from "@components/Button";
+import Loading from "@components/Loading";
 import { Recipe } from "@shared/recipe";
 import React, { useState } from "react";
 import Filter from "./components/Filter";
@@ -21,14 +21,17 @@ function Content() {
             <Row>Nalezeno {recipes?.length} receptů</Row>
             <Row justifyContent="flex-end">Seřadit podle: Nejnovější</Row>
           </Row>
-          {recipes?.map((recipe) => (
-            <RecipeItem key={recipe.id} recipe={recipe.attributes} id={recipe.id} />
-          ))}
+          {recipes ? (
+            <>
+              {recipes.map((recipe) => (
+                <RecipeItem key={recipe.id} recipe={recipe.attributes} id={recipe.id} />
+              ))}
+            </>
+          ) : (
+            <Loading />
+          )}
         </RecipesWrapper>
       </ContentWrapper>
-      <Row p="40px 0 0 0" justifyContent="center">
-        <Button text="Zobrazit další" color="red" maxW="220px" h="45px" />
-      </Row>
     </Column>
   );
 }

@@ -1,6 +1,6 @@
 export interface IFilter {
   categories: string[];
-  spiceness: string[];
+  spiciness: string[];
   origin: string[];
   cookingTime: number | readonly number[];
 }

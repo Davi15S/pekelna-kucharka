@@ -1,4 +1,4 @@
-import { Column, ImageWrapper, Row, Text } from "@app/styled";
+import { ImageWrapper, Row, Text } from "@app/styled";
 import React, { useContext, useState } from "react";
 import recipeImage from "@assets/recipe/recipeImage.jpg";
 import recipeImage1 from "@assets/recipe/recipeImage1.jpg";

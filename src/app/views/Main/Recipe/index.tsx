@@ -32,9 +32,9 @@ function Recipe({ recipe }: { recipe: RecipeAttributes }) {
               <Button text={recipe.category} color="red" transparent borderRadius="25px" m="5px 1px 5px 1px" maxW="max-content" />
             </Row>
           </ColumnContent>
-          <ColumnContent w="100">
+          <ColumnContent w="100%">
             <Process mobile={true} process={recipe.process} />
-            <Comments />
+            <Comments comments={recipe.comments?.data} />
           </ColumnContent>
         </PageWrapper>
       )}

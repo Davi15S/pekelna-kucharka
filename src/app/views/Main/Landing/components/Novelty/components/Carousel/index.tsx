@@ -42,7 +42,7 @@ function Carousel({ recipes }: { recipes: Recipe[] }) {
             <CarouselItem
               key={recipe.id}
               title={recipe.attributes.title}
-              spiceness={+recipe.attributes.spiciness}
+              spiciness={+recipe.attributes.spiciness}
               description={recipe.attributes.description}
               image={recipe.attributes.images.data[0].attributes.url}
               id={recipe.id}

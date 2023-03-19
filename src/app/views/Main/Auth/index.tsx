@@ -19,6 +19,7 @@ function Auth(props: { pathName: string }) {
 
   useEffect(() => {
     setIsLogin(props.pathName == loginPath ? true : false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
