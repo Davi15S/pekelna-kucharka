@@ -1,11 +1,9 @@
-import { Column, Row } from "@app/styled";
+import { Column } from "@app/styled";
 import styled from "@emotion/styled";
 
 export const CommentWrapper = styled(Column)`
   box-shadow: ${({ theme }) => theme.shadow.default};
   border-radius: 20px;
-  max-width: fit-content;
-  flex: 1 1 400px;
 `;
 
 export const CommentImage = styled.div`

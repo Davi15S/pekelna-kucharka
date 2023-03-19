@@ -18,18 +18,24 @@ import { disableScroll, enableScroll, getToken } from "@app/utils";
 import SentConfirmation from "./components/SentConfirmation";
 import { useRouter } from "next/router";
 import { useAuth } from "@contexts/AuthContext";
+import { useBeforeunload } from "react-beforeunload";
+import isEqual from "lodash/isEqual";
 
 function Form() {
   usePageBackground(undefined);
   usePageTitle("Vytvoření receptu");
-
-  const router = useRouter();
+  const { user } = useAuth();
   const [category, ,] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
   const [unitList, ,] = useState<string[]>(["g", "kg", "litr", "lžíce", "lžička"]);
-  const [images, setImages] = useState<File[]>([]);
-  const [sent, setSent] = useState(false);
-  const { user } = useAuth();
-  const [recipe, setRecipe] = useState<RecipeForm>({
+  const router = useRouter();
+
+  useBeforeunload((event) => {
+    if (!isEqual(recipe, initRecipe) || images.length > 0) {
+      event.preventDefault();
+    }
+  });
+
+  const initRecipe: RecipeForm = {
     title: "",
     author: user?.id,
     description: "",
@@ -40,8 +46,12 @@ function Form() {
     spiciness: "1",
     recipeOrigin: [],
     publishedAt: null,
-    numberOfServings: "1",
-  });
+    numberOfServings: "0",
+  };
+
+  const [images, setImages] = useState<File[]>([]);
+  const [sent, setSent] = useState(false);
+  const [recipe, setRecipe] = useState<RecipeForm>(initRecipe);
 
   const handleSetRecipe = (key: keyof RecipeForm, value: string) => {
     const result = (Object.keys(recipe) as Array<keyof typeof key>).reduce(

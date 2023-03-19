@@ -10,5 +10,5 @@ export const createRecipe = (data: FormData, token: string) => {
 };
 
 export const getRecipe = (id: string) => {
-  return fetchApi<{ data: Recipe }>(`recipes/${id}?populate=*`);
+  return fetchApi<{ data: Recipe }>(`recipes/${id}?populate[0]=images&populate[1]=ingredients&populate[2]=author&populate[3]=comments.author`);
 };

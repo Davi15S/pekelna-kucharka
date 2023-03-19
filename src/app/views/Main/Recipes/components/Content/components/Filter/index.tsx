@@ -21,13 +21,14 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
   const [currentValue, setCurrentValue] = useState<number | readonly number[]>([]);
   const [filters, setFilters] = useState<IFilter>({
     categories: [],
-    spiceness: [],
+    spiciness: [],
     origin: [],
     cookingTime: currentValue,
   });
   const debounceQuery = useDebounce(query);
 
   const handleFilterClick = (key: keyof IFilter, value: string, checked: boolean) => {
+    setRecipes(undefined);
     const updatedFilter = [...(filters[key] as string[])];
     if (checked) {
       updatedFilter.push(value);
@@ -49,7 +50,7 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
     const filterQuery: IFilterQuery = {
       filters: {
         spiciness: {
-          $in: filters.spiceness,
+          $in: filters.spiciness,
         },
       },
     };
@@ -64,7 +65,6 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
     (async () => {
       const signal = controller.signal;
       const data = await getRecipes(query, signal);
-      console.log(data);
       setRecipes(data?.data);
     })();
 
@@ -73,13 +73,13 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
 
   useEffect(() => {
     const query = qs.parse(window.location.search.substring(1)) as unknown as IFilterQuery;
-    setFilters((prevState) => ({ ...prevState, spiceness: query.filters?.spiciness?.$in ?? [] }));
+    setFilters((prevState) => ({ ...prevState, spiciness: query.filters?.spiciness?.$in ?? [] }));
   }, [router.asPath]);
 
   return (
     <FilterWrapper>
       <FilterItem title="Kategorie" filterInputArr={filter.category} query="categories" onClick={handleFilterClick} value={filters.categories} />
-      <FilterItem title="Úroveň pálivosti" peppers={filter.peppers} query="spiceness" onClick={handleFilterClick} value={filters.spiceness} />
+      <FilterItem title="Úroveň pálivosti" peppers={filter.peppers} query="spiciness" onClick={handleFilterClick} value={filters.spiciness} />
       <FilterItem title="Původ jídel" filterInputArr={filter.source} query="origin" onClick={handleFilterClick} value={filters.origin} />
       <SliderWrapper>
         <Text fontSize="20px" fontWeight="700" p="0 0 45px 0">
