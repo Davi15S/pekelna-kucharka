@@ -15,6 +15,7 @@ function UploadInput(props: { handleSetImages: (images: File[]) => void }) {
 
   useEffect(() => {
     props.handleSetImages(files);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files]);
 
   return (

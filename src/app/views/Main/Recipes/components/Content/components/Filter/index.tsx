@@ -59,6 +59,7 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
     });
     router.push({ pathname: router.pathname, query: query }, undefined, { scroll: false });
     setQuery(query);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   useEffect(() => {
@@ -69,6 +70,7 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
     })();
 
     return () => controller.abort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceQuery]);
 
   useEffect(() => {

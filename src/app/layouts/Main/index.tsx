@@ -33,6 +33,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
     if (!isLoading && !isAuthenticated && pathIsProtected) {
       router.push("/login");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isAuthenticated, pathIsProtected]);
 
   if ((isLoading || !isAuthenticated) && pathIsProtected) {

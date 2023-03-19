@@ -1,5 +1,5 @@
 import { PageTitleContext } from "@contexts/PageTitleContext";
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 const usePageTitle = (title: string | undefined) => {
   const { setTitle } = useContext(PageTitleContext);
