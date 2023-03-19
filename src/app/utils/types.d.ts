@@ -10,5 +10,8 @@ export interface IFilterQuery {
     spiciness?: {
       $in: string[];
     };
+    category?: {
+      $in: string[];
+    };
   };
 }

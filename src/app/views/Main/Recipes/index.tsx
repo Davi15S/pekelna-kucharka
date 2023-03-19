@@ -5,15 +5,16 @@ import usePageTitle from "@hooks/usePageTitle";
 import { PageContent } from "@layouts/Main/components/Page/styled";
 import Hero from "./components/Hero";
 import Content from "./components/Content";
+import { Categories } from "@shared/categories";
 
-function Recipes() {
+function Recipes({ categories }: { categories: Categories }) {
   usePageBackground(recipesBg, "600px");
   usePageTitle("Recepty");
 
   return (
     <PageContent topP>
       <Hero />
-      <Content />
+      <Content categories={categories} />
     </PageContent>
   );
 }

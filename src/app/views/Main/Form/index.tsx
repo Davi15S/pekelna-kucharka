@@ -51,6 +51,7 @@ function Form() {
 
   const [images, setImages] = useState<File[]>([]);
   const [sent, setSent] = useState(false);
+  const [isBeingSent, setIsBeingSent] = useState(false);
   const [recipe, setRecipe] = useState<RecipeForm>(initRecipe);
 
   const handleSetRecipe = (key: keyof RecipeForm, value: string) => {
@@ -74,27 +75,23 @@ function Form() {
   const handleCreateRecipe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const form = new FormData();
-    images.forEach((file) => form.append(`files.images`, file));
-    form.append("data", JSON.stringify(recipe));
-    console.log(recipe);
-    const res = await createRecipe(form, getToken());
-    if (res) {
-      setSent(true);
+    if (!sent) {
+      const form = new FormData();
+      images.forEach((file) => form.append(`files.images`, file));
+      form.append("data", JSON.stringify(recipe));
+      setIsBeingSent(true);
       disableScroll();
+      const res = await createRecipe(form, getToken());
+      if (res) {
+        console.log("AHOJ");
+        setSent(true);
+      }
     }
   };
 
   return (
     <>
-      {sent && (
-        <SentConfirmation
-          onClick={() => {
-            enableScroll();
-            router.push("/");
-          }}
-        />
-      )}
+      {isBeingSent && <SentConfirmation sent={sent} />}
       <BgTitle title="Vytvoření" top="20px" mobileTop="10vh" left="-10vw" />
       <BgTitle title="Receptu" top="65vh" left="35vw" mobileTop="80vh" mobileLeft="55vw" />
       <PageContent topP>
@@ -144,7 +141,7 @@ function Form() {
                 </InputsWrapper>
                 <Column w="100%" p="40px 0 0 0">
                   <Text fontWeight="500" fontSize="18px">
-                    Suroviny na 1 porci
+                    Seznam surovin
                   </Text>
                   <Column w="100%" p="20px 0 0 0" alignItems="center">
                     {recipe.ingredients.map((ingredient, i) => (

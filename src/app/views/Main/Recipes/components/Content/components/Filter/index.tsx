@@ -8,16 +8,12 @@ import { useRouter } from "next/router";
 import { getRecipes } from "@api/recipes";
 import { Recipe } from "@shared/recipe";
 import useDebounce from "@hooks/useDebounce";
+import { Categories } from "@shared/categories";
 
-function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) => void }) {
+function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | undefined) => void; categories: Categories }) {
   const router = useRouter();
   const controller = new AbortController();
   const [query, setQuery] = useState<string | undefined>();
-  const [filter, ,] = useState({
-    category: ["Hlavní chod", "Polévka", "Omáčka", "Dezert", "Příloha", "Bezmasé jídlo"],
-    source: ["Mexická", "Vietnamská", "Čínská", "Česká", "Americká", "Indická"],
-    peppers: [5, 4, 3, 2, 1],
-  });
   const [currentValue, setCurrentValue] = useState<number | readonly number[]>([]);
   const [filters, setFilters] = useState<IFilter>({
     categories: [],
@@ -52,6 +48,9 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
         spiciness: {
           $in: filters.spiciness,
         },
+        category: {
+          $in: filters.categories,
+        },
       },
     };
     const query = qs.stringify(filterQuery, {
@@ -80,9 +79,9 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
 
   return (
     <FilterWrapper>
-      <FilterItem title="Kategorie" filterInputArr={filter.category} query="categories" onClick={handleFilterClick} value={filters.categories} />
-      <FilterItem title="Úroveň pálivosti" peppers={filter.peppers} query="spiciness" onClick={handleFilterClick} value={filters.spiciness} />
-      <FilterItem title="Původ jídel" filterInputArr={filter.source} query="origin" onClick={handleFilterClick} value={filters.origin} />
+      <FilterItem title="Kategorie" filterInputArr={categories.categories} query="categories" onClick={handleFilterClick} value={filters.categories} />
+      <FilterItem title="Úroveň pálivosti" peppers={[5, 4, 3, 2, 1]} query="spiciness" onClick={handleFilterClick} value={filters.spiciness} />
+      <FilterItem title="Původ jídel" filterInputArr={categories.originOfMeals} query="origin" onClick={handleFilterClick} value={filters.origin} />
       <SliderWrapper>
         <Text fontSize="20px" fontWeight="700" p="0 0 45px 0">
           Doba přípravy

@@ -10,9 +10,11 @@ import Button from "@components/Button";
 import Process from "./components/Process";
 import Comments from "./components/Comments";
 import { RecipeAttributes } from "@shared/recipe";
+import usePageTitle from "@hooks/usePageTitle";
 
 function Recipe({ recipe }: { recipe: RecipeAttributes }) {
   usePageBackground(undefined);
+  usePageTitle(recipe.title);
 
   return (
     <PageContent topP w="100%">

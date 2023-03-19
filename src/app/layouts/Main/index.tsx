@@ -16,7 +16,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   const [active, setActive] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
   const router = useRouter();
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
 
   const handleNavbar = async () => {
     active ? enableScroll() : disableScroll();
@@ -34,10 +34,10 @@ function MainLayout({ children }: { children: React.ReactNode }) {
       router.push("/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading, isAuthenticated, pathIsProtected]);
+  }, [isLoading, isAuthenticated, pathIsProtected, user]);
 
   if ((isLoading || !isAuthenticated) && pathIsProtected) {
-    return <Loading />;
+    return <Loading p="50px" />;
   }
 
   return (
