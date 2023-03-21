@@ -16,7 +16,6 @@ import { createRecipe } from "@api/recipes";
 import { TextArea as TextAreaStyled } from "./components/TextArea/styled";
 import { disableScroll, getToken } from "@app/utils";
 import SentConfirmation from "./components/SentConfirmation";
-import { useRouter } from "next/router";
 import { useAuth } from "@contexts/AuthContext";
 import { useBeforeunload } from "react-beforeunload";
 import isEqual from "lodash/isEqual";
@@ -40,14 +39,13 @@ function Form() {
     author: user?.id,
     description: "",
     ingredients: [{ ingredient: "", amount: "", unit: "" }],
-    category: category[0],
     cookingTime: "",
     process: [""],
     spiciness: "1",
-    recipeOrigin: [],
     publishedAt: null,
     numberOfServings: "",
     categories: [],
+    origins: [],
   };
 
   const [images, setImages] = useState<File[]>([]);
@@ -120,19 +118,21 @@ function Form() {
                 <Text p="0 0 8px 0">Popis</Text>
                 <TextAreaStyled onChange={(e) => handleSetRecipe("description", e.currentTarget.value)} value={recipe.description} required />
               </Column>
-              <Category onClick={(key, index, value) => handleSetRecipeArray(key, index, value)} categories={recipe.categories} />
+              <Category
+                onChange={(arr, key) => setRecipe((prevState) => ({ ...prevState, [key]: arr }))}
+                selectedCategories={recipe.categories.concat(recipe.origins)}
+              />
               <Column w="100%" p="30px 0 0 0">
                 <InputsWrapper p="30px 0 0 0">
-                  <List listItems={category} title="Kategorie" onClick={(e) => handleSetRecipe("category", e)} value={recipe.category} />
                   <List listItems={category} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} pepperList />
-                </InputsWrapper>
-                <InputsWrapper p="20px 0 0 0">
                   <Input
                     title="Délka přípravy (minuty)"
                     required
                     onChange={(e) => handleSetRecipe("cookingTime", e.currentTarget.value)}
                     value={recipe.cookingTime}
                   />
+                </InputsWrapper>
+                <InputsWrapper p="20px 0 0 0">
                   <Input
                     title="Počet porcí"
                     required

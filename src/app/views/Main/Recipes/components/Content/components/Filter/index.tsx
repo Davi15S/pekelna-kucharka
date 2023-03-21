@@ -18,10 +18,10 @@ function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | u
   const [filters, setFilters] = useState<IFilter>({
     categories: [],
     spiciness: [],
-    origin: [],
+    origins: [],
     cookingTime: currentValue,
   });
-  const debounceQuery = useDebounce(query, 1000);
+  const debounceQuery = useDebounce(query);
 
   const handleFilterClick = (key: keyof IFilter, value: string, checked: boolean) => {
     setRecipes(undefined);
@@ -48,8 +48,11 @@ function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | u
         spiciness: {
           $in: filters.spiciness,
         },
-        category: {
-          $in: filters.categories,
+        categories: {
+          $containsi: filters.categories,
+        },
+        origins: {
+          $containsi: filters.origins,
         },
       },
     };
@@ -74,14 +77,19 @@ function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | u
 
   useEffect(() => {
     const query = qs.parse(window.location.search.substring(1)) as unknown as IFilterQuery;
-    setFilters((prevState) => ({ ...prevState, spiciness: query.filters?.spiciness?.$in ?? [] }));
+    setFilters((prevState) => ({
+      ...prevState,
+      spiciness: query.filters?.spiciness?.$in ?? [],
+      origins: query.filters?.origins?.$containsi ?? [],
+      categories: query.filters?.categories?.$containsi ?? [],
+    }));
   }, [router.asPath]);
 
   return (
     <FilterWrapper>
       <FilterItem title="Kategorie" filterInputArr={categories.categories} query="categories" onClick={handleFilterClick} value={filters.categories} />
       <FilterItem title="Úroveň pálivosti" peppers={[5, 4, 3, 2, 1]} query="spiciness" onClick={handleFilterClick} value={filters.spiciness} />
-      <FilterItem title="Původ jídel" filterInputArr={categories.originOfMeals} query="origin" onClick={handleFilterClick} value={filters.origin} />
+      <FilterItem title="Původ jídel" filterInputArr={categories.originOfMeals} query="origins" onClick={handleFilterClick} value={filters.origins} />
       <SliderWrapper>
         <Text fontSize="20px" fontWeight="700" p="0 0 45px 0">
           Doba přípravy

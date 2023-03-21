@@ -1,7 +1,7 @@
 export interface IFilter {
   categories: string[];
   spiciness: string[];
-  origin: string[];
+  origins: string[];
   cookingTime: number | readonly number[];
 }
 
@@ -10,8 +10,11 @@ export interface IFilterQuery {
     spiciness?: {
       $in: string[];
     };
-    category?: {
-      $in: string[];
+    categories?: {
+      $containsi: string[];
+    };
+    origins?: {
+      $containsi: string[];
     };
   };
 }

@@ -13,6 +13,7 @@ export const TrendItemWrapper = styled(Column)<{ offset?: boolean }>`
   position: relative;
   height: max-content;
   justify-self: center;
+  height: 100%;
 
   :hover {
     box-shadow: ${({ theme }) => theme.shadow.hover};

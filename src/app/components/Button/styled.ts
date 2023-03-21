@@ -11,6 +11,7 @@ export const ButtonWrapper = styled.button<{
   theme?: Theme;
   h?: React.CSSProperties["height"];
   borderRadius?: React.CSSProperties["borderRadius"];
+  p?: React.CSSProperties["padding"];
 }>`
   width: 100%;
   display: flex;
@@ -23,7 +24,7 @@ export const ButtonWrapper = styled.button<{
   cursor: pointer;
   transition: all 300ms ease-in-out;
   max-width: ${({ maxW }) => (maxW ? maxW : "")};
-  padding: 5px 15px;
+  padding: ${({ p }) => (p ? p : "5px 15px")};
   margin: ${({ m }) => (m ? m : "20px")};
 
   div {

@@ -9,6 +9,7 @@ export const SubTitle = styled(Text)`
 export const ItemsWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+  grid-auto-rows: 1fr;
   gap: 40px 25px;
   padding-top: 80px;
   width: 100%;

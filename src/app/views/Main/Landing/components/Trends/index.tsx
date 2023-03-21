@@ -27,7 +27,7 @@ function Trends({ recipes }: { recipes: Recipe[] }) {
               subTitle={recipe.attributes.description}
               comments={recipe.attributes.comments?.data.length ?? 0}
               id={recipe.id}
-              spiceness={+recipe.attributes.spiciness}
+              spiciness={+recipe.attributes.spiciness}
             />
           ))}
         </ItemsWrapper>

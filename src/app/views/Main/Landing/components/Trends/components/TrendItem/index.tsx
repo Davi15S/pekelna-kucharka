@@ -5,7 +5,7 @@ import { MdInsertComment } from "react-icons/md";
 import PepperRating from "@components/PepperRating";
 import { useRouter } from "next/router";
 
-function TrendItem(props: { image: string; title: string; subTitle: string; comments: number; id: string; spiceness: number }) {
+function TrendItem(props: { image: string; title: string; subTitle: string; comments: number; id: string; spiciness: number }) {
   const router = useRouter();
 
   return (
@@ -18,7 +18,7 @@ function TrendItem(props: { image: string; title: string; subTitle: string; comm
           {props.title}
         </Text>
         <SubTitle>{props.subTitle}</SubTitle>
-        <Row p="40px 0 0 0" justifyContent="space-between">
+        <Row p="40px 0 0 0" justifyContent="space-between" m="auto 0 0 0">
           <Row alignItems="center">
             <MdInsertComment size={25} color={"#AFAFAF"} style={{ transform: "scaleX(-1)" }} />
             <Text p="0 0 0 5px" fontWeight="600" fontSize="20px" style={{ color: "#AFAFAF" }}>
@@ -26,7 +26,7 @@ function TrendItem(props: { image: string; title: string; subTitle: string; comm
             </Text>
           </Row>
           <Row justifyContent="flex-end">
-            <PepperRating rating={props.spiceness} w="28px" h="28px" />
+            <PepperRating rating={props.spiciness} w="28px" h="28px" />
           </Row>
         </Row>
       </Column>

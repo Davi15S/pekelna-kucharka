@@ -31,7 +31,9 @@ function Recipe({ recipe }: { recipe: RecipeAttributes }) {
             <Description recipe={recipe} />
             <Ingredients recipe={recipe} />
             <Row flexWrap="wrap" justifyContent="space-evenly" p="20px 0">
-              <Button text={recipe.category} color="red" transparent borderRadius="25px" m="5px 1px 5px 1px" maxW="max-content" />
+              {recipe.categories.concat(recipe.origins).map((value, i) => (
+                <Button key={i} text={value} color="red" transparent borderRadius="25px" m="5px 1px 5px 1px" maxW="max-content" />
+              ))}
             </Row>
           </ColumnContent>
           <ColumnContent w="100%">
