@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Theme } from "@styles/theme";
 
 export const FooterWrapper = styled(Column)`
+  position: relative;
   z-index: 10;
 `;
 

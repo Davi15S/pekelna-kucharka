@@ -14,12 +14,13 @@ import { StyledForm, InputsWrapper } from "./styled";
 import { RecipeForm } from "@shared/recipe";
 import { createRecipe } from "@api/recipes";
 import { TextArea as TextAreaStyled } from "./components/TextArea/styled";
-import { disableScroll, enableScroll, getToken } from "@app/utils";
+import { disableScroll, getToken } from "@app/utils";
 import SentConfirmation from "./components/SentConfirmation";
 import { useRouter } from "next/router";
 import { useAuth } from "@contexts/AuthContext";
 import { useBeforeunload } from "react-beforeunload";
 import isEqual from "lodash/isEqual";
+import Category from "./components/Category";
 
 function Form() {
   usePageBackground(undefined);
@@ -27,7 +28,6 @@ function Form() {
   const { user } = useAuth();
   const [category, ,] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
   const [unitList, ,] = useState<string[]>(["g", "kg", "litr", "lžíce", "lžička"]);
-  const router = useRouter();
 
   useBeforeunload((event) => {
     if (!isEqual(recipe, initRecipe) || images.length > 0) {
@@ -46,7 +46,8 @@ function Form() {
     spiciness: "1",
     recipeOrigin: [],
     publishedAt: null,
-    numberOfServings: "0",
+    numberOfServings: "",
+    categories: [],
   };
 
   const [images, setImages] = useState<File[]>([]);
@@ -83,7 +84,6 @@ function Form() {
       disableScroll();
       const res = await createRecipe(form, getToken());
       if (res) {
-        console.log("AHOJ");
         setSent(true);
       }
     }
@@ -120,6 +120,7 @@ function Form() {
                 <Text p="0 0 8px 0">Popis</Text>
                 <TextAreaStyled onChange={(e) => handleSetRecipe("description", e.currentTarget.value)} value={recipe.description} required />
               </Column>
+              <Category onClick={(key, index, value) => handleSetRecipeArray(key, index, value)} categories={recipe.categories} />
               <Column w="100%" p="30px 0 0 0">
                 <InputsWrapper p="30px 0 0 0">
                   <List listItems={category} title="Kategorie" onClick={(e) => handleSetRecipe("category", e)} value={recipe.category} />

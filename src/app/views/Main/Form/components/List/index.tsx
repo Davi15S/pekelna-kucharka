@@ -4,6 +4,7 @@ import { InputWrapper } from "../Input/styled";
 import { IoIosArrowDown } from "react-icons/io";
 import { Arrow, ListItem, ListItems } from "./styled";
 import PepperRating from "@components/PepperRating";
+import useOutsideComponentClick from "@hooks/useOutsideComponentClick";
 
 function List(props: {
   title?: string;
@@ -17,22 +18,7 @@ function List(props: {
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
-  useOutsideAlerter(wrapperRef);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function useOutsideAlerter(ref: React.MutableRefObject<any>) {
-    useEffect(() => {
-      function handleClickOutside(event: Event) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setIsOpen(false);
-        }
-      }
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
-  }
+  useOutsideComponentClick(wrapperRef, () => setIsOpen(false));
 
   return (
     <Column w={props.w ? props.w : "100%"} p={props.p} maxW={props.maxW}>

@@ -8,7 +8,7 @@ export const SentConfirmationWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   width: 100vw;
   height: 100vh;
-  z-index: 10;
+  z-index: 50;
   display: flex;
   justify-content: center;
   align-items: center;

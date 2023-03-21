@@ -21,7 +21,7 @@ function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | u
     origin: [],
     cookingTime: currentValue,
   });
-  const debounceQuery = useDebounce(query);
+  const debounceQuery = useDebounce(query, 1000);
 
   const handleFilterClick = (key: keyof IFilter, value: string, checked: boolean) => {
     setRecipes(undefined);
