@@ -9,12 +9,14 @@ import { getRecipes } from "@api/recipes";
 import { Recipe } from "@shared/recipe";
 import useDebounce from "@hooks/useDebounce";
 import { Categories } from "@shared/categories";
+import { useSearch } from "@views/Main/Recipes/contexts/SearchContext";
 
 function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | undefined) => void; categories: Categories }) {
   const router = useRouter();
   const controller = new AbortController();
   const [query, setQuery] = useState<string | undefined>();
   const [currentValue, setCurrentValue] = useState<number | readonly number[]>([]);
+  const { search, setSearch } = useSearch();
   const [filters, setFilters] = useState<IFilter>({
     categories: [],
     spiciness: [],
@@ -54,6 +56,9 @@ function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | u
         origins: {
           $containsi: filters.origins,
         },
+        title: {
+          $containsi: search,
+        },
       },
     };
     const query = qs.stringify(filterQuery, {
@@ -62,7 +67,7 @@ function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | u
     router.push({ pathname: router.pathname, query: query }, undefined, { scroll: false });
     setQuery(query);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters]);
+  }, [filters, search]);
 
   useEffect(() => {
     (async () => {
@@ -83,6 +88,7 @@ function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | u
       origins: query.filters?.origins?.$containsi ?? [],
       categories: query.filters?.categories?.$containsi ?? [],
     }));
+    setSearch(query.filters?.title?.$containsi);
   }, [router.asPath]);
 
   return (

@@ -10,4 +10,6 @@ export const InputsWrapper = styled.div<{ p?: React.CSSProperties["padding"]; mi
 
 export const StyledForm = styled.form`
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;

@@ -16,5 +16,8 @@ export interface IFilterQuery {
     origins?: {
       $containsi: string[];
     };
+    title?: {
+      $containsi?: string;
+    };
   };
 }
