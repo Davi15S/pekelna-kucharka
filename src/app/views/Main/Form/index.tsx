@@ -5,7 +5,7 @@ import TextArea from "@views/Main/Form/components/TextArea";
 import usePageBackground from "@hooks/usePageBackground";
 import usePageTitle from "@hooks/usePageTitle";
 import { PageContent } from "@layouts/Main/components/Page/styled";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import IngredientItem from "./components/IngredientItem";
 import Input from "./components/Input";
 import List from "./components/List";
@@ -20,13 +20,12 @@ import { useAuth } from "@contexts/AuthContext";
 import { useBeforeunload } from "react-beforeunload";
 import isEqual from "lodash/isEqual";
 import Category from "./components/Category";
+import { IUnits } from "@shared/units";
 
-function Form() {
+function Form({ units }: { units: IUnits }) {
   usePageBackground(undefined);
   usePageTitle("Vytvoření receptu");
   const { user } = useAuth();
-  const [category, ,] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
-  const [unitList, ,] = useState<string[]>(["g", "kg", "litr", "lžíce", "lžička"]);
 
   useBeforeunload((event) => {
     if (!isEqual(recipe, initRecipe) || images.length > 0) {
@@ -124,7 +123,7 @@ function Form() {
               />
               <Column w="100%" p="30px 0 0 0">
                 <InputsWrapper p="30px 0 0 0">
-                  <List listItems={category} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} pepperList />
+                  <List listItems={[]} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} pepperList />
                   <Input
                     title="Délka přípravy (minuty)"
                     required
@@ -153,7 +152,7 @@ function Form() {
                         setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)}
                         index={i}
                         ingredient={ingredient}
-                        unitList={unitList}
+                        unitList={units.units.map((obj) => `${obj.unit}`)}
                       />
                     ))}
                     <Button

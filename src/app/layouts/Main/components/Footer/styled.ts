@@ -4,7 +4,6 @@ import { Theme } from "@styles/theme";
 
 export const FooterWrapper = styled(Column)`
   position: relative;
-  z-index: 10;
 `;
 
 export const FooterText = styled.p<{ theme?: Theme }>`

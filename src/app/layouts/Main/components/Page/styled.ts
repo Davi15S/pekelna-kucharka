@@ -32,9 +32,7 @@ export const PageContent = styled(Column)<{
   padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 80px 0 80px`)};
   align-items: center;
   max-width: 1400px;
-  position: relative;
   width: 100%;
-  z-index: 1;
 
   @media only screen and (max-width: 1024px) {
     padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 20px 0 20px`)};
@@ -43,6 +41,9 @@ export const PageContent = styled(Column)<{
 
 export const PageWrapper = styled.div`
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;

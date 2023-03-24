@@ -41,17 +41,15 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <>
-      <PageBackgroundProvider value={{ bgImage, setBgImage, bgHeight, setBgHeight }}>
-        <PageFixedContextProvider value={{ isFixed, handleIsFixed }}>
-          <Page>
-            <Navbar active={active} handleClick={handleNavbar} />
-            {children}
-          </Page>
+    <PageBackgroundProvider value={{ bgImage, setBgImage, bgHeight, setBgHeight }}>
+      <PageFixedContextProvider value={{ isFixed, handleIsFixed }}>
+        <Page>
+          <Navbar active={active} handleClick={handleNavbar} />
+          {children}
           <Footer />
-        </PageFixedContextProvider>
-      </PageBackgroundProvider>
-    </>
+        </Page>
+      </PageFixedContextProvider>
+    </PageBackgroundProvider>
   );
 }
 
