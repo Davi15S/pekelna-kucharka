@@ -39,7 +39,7 @@ function Form() {
     author: user?.id,
     description: "",
     ingredients: [{ ingredient: "", amount: "", unit: "" }],
-    cookingTime: "",
+    cookingTime: 0,
     process: [""],
     spiciness: "1",
     publishedAt: null,
@@ -53,7 +53,7 @@ function Form() {
   const [isBeingSent, setIsBeingSent] = useState(false);
   const [recipe, setRecipe] = useState<RecipeForm>(initRecipe);
 
-  const handleSetRecipe = (key: keyof RecipeForm, value: string) => {
+  const handleSetRecipe = (key: keyof RecipeForm, value: string | number) => {
     const result = (Object.keys(recipe) as Array<keyof typeof key>).reduce(
       (acc) => ({
         ...acc,
@@ -90,9 +90,9 @@ function Form() {
   return (
     <>
       {isBeingSent && <SentConfirmation sent={sent} />}
-      <BgTitle title="Vytvoření" top="20px" mobileTop="10vh" left="-10vw" />
-      <BgTitle title="Receptu" top="65vh" left="35vw" mobileTop="80vh" mobileLeft="55vw" />
       <PageContent topP>
+        <BgTitle title="Vytvoření" top="20px" mobileTop="10vh" left="-50vw" />
+        <BgTitle title="Receptu" top="65vh" left="-10vw" mobileTop="30vh" mobileLeft="-5vw" />
         <Row p="100px 0" alignItems="center" justifyContent="center" maxW="800px">
           <StyledForm onSubmit={(e) => handleCreateRecipe(e)}>
             <Text fontWeight="700" fontSize="44px" p="0 0 20px 0" textAlign="center">
@@ -128,7 +128,7 @@ function Form() {
                   <Input
                     title="Délka přípravy (minuty)"
                     required
-                    onChange={(e) => handleSetRecipe("cookingTime", e.currentTarget.value)}
+                    onChange={(e) => handleSetRecipe("cookingTime", +e.currentTarget.value)}
                     value={recipe.cookingTime}
                   />
                 </InputsWrapper>

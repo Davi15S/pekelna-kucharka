@@ -32,8 +32,8 @@ export const PageContent = styled(Column)<{
   padding: ${({ p, topP }) => (p ? p : `${topP ? "100px" : "0px"} 80px 0 80px`)};
   align-items: center;
   max-width: 1400px;
-  width: 100%;
   position: relative;
+  width: 100%;
   z-index: 1;
 
   @media only screen and (max-width: 1024px) {
