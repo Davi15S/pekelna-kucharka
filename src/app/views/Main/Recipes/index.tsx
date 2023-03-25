@@ -24,7 +24,7 @@ function Recipes() {
     <SearchProvider>
       <PageContent topP>
         <Hero />
-        <Content categories={categories} />
+        {categories && <Content categories={categories} />}
       </PageContent>
     </SearchProvider>
   );

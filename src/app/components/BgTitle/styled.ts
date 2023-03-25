@@ -2,10 +2,11 @@ import styled from "@emotion/styled";
 import { Theme } from "@styles/theme";
 import React from "react";
 
-export const BgTitleWrapper = styled.div`
+export const BgTitleWrapper = styled.div<{ h?: boolean; m?: boolean }>`
   position: relative;
-  margin-bottom: 30px;
   z-index: -1;
+  margin-bottom: ${({ m }) => (m ? "30px" : "0px")};
+  height: ${({ h }) => (h ? "auto" : "0px")};
 `;
 
 export const Title = styled.p<{

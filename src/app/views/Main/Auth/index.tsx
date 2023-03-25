@@ -24,8 +24,8 @@ function Auth(props: { pathName: string }) {
 
   return (
     <>
-      <BgTitle title="Přihlásit se" top="20px" mobileTop="10vh" left="-10vw" />
-      <BgTitle title="Registrace" top="70vh" left="35vw" mobileTop="80vh" mobileLeft="55vw" />
+      <BgTitle title="Přihlásit se" top="20px" mobileTop="10vh" left="-50vw" />
+      <BgTitle title="Registrace" top="70vh" left="0vw" mobileTop="80vh" mobileLeft="-10vw" />
       <PageContent>
         <LoginWrapper alignItems="center" justifyContent="center" h="100vh">
           <MainTitle fontSize="40px">{isLogin ? "Přihlášení" : "Registrace"}</MainTitle>
