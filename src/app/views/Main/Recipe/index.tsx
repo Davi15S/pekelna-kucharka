@@ -24,7 +24,7 @@ function Recipe({ recipe }: { recipe: RecipeAttributes }) {
             <Text fontWeight="700" fontSize="44px" p="0 0 50px 0">
               {recipe.title}
             </Text>
-            <Gallery />
+            <Gallery images={recipe.images} />
             <Process mobile={false} process={recipe.process} />
           </ColumnContent>
           <ColumnContent w="30%" left>

@@ -1,81 +1,87 @@
-import { ImageWrapper, Row, Text } from "@app/styled";
-import React, { useContext, useState } from "react";
-import recipeImage from "@assets/recipe/recipeImage.jpg";
-import recipeImage1 from "@assets/recipe/recipeImage1.jpg";
-import recipeImage2 from "@assets/recipe/recipeImage2.jpg";
-import recipeImage3 from "@assets/recipe/recipeImage3.jpg";
-import { CarouselButton, CarouselButtonWrapper, CarouselWrapper } from "@views/Main/Landing/components/Novelty/components/Carousel/styled";
+import React, { useState } from "react";
+import { Image as IImage } from "@shared/recipe";
+import { CarouselButton, CarouselButtonWrapper, CarouselWrapper, StyledCarousel } from "@views/Main/Landing/components/Novelty/components/Carousel/styled";
+import { Image, ImageContainer, Row, Text } from "@app/styled";
 import { MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
-import { GalleryMore, LastGalleryImageWrapper } from "./styled";
-import ActivedGallery from "./components/ActivedGallery";
-import { PageFixedContext } from "@contexts/PageFixedContext";
+import { MoreImages } from "./styled";
 
-function Gallery() {
-  const [images, ,] = useState([recipeImage, recipeImage1, recipeImage2, recipeImage3]);
+function Gallery({ images }: { images: { data: IImage[] } }) {
   const [currentImage, setCurrentImage] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-  const { handleIsFixed } = useContext(PageFixedContext);
 
-  const buttonHandle = (left: boolean) => {
-    setCurrentImage(left ? (currentImage == 0 ? images.length - 1 : currentImage - 1) : currentImage == images.length - 1 ? 0 : currentImage + 1);
-  };
-
-  const setActive = (image?: number) => {
-    if (isActive) {
-      document.body.classList.remove("openNavbar");
-    } else {
-      document.body.classList.add("openNavbar");
-    }
-    setIsActive(!isActive);
-    handleIsFixed();
+  const carouselButtonHandle = (left?: boolean) => {
+    setCurrentImage(left ? (currentImage != 0 ? currentImage - 1 : images.data.length - 1) : currentImage >= images.data.length - 1 ? 0 : currentImage + 1);
   };
 
   return (
     <>
-      <ActivedGallery active={isActive} handleClick={setActive} images={images} currentImage={currentImage} />
-      <CarouselWrapper>
-        <CarouselButtonWrapper left justifyContent="center" leftOffset="-50px">
-          <CarouselButton onClick={() => buttonHandle(true)}>
-            <MdOutlineArrowBackIosNew size={20} color={"white"} />
-          </CarouselButton>
-        </CarouselButtonWrapper>
-        <CarouselButtonWrapper justifyContent="center" rightOffset="-50px">
-          <CarouselButton onClick={() => buttonHandle(false)}>
-            <MdOutlineArrowForwardIos size={20} color={"white"} />
-          </CarouselButton>
-        </CarouselButtonWrapper>
-        <ImageWrapper onClick={() => setActive(currentImage)} src={images[currentImage]} alt="" w="100%" maxH="500px" objectFit="cover" borderRadius="20px" />
-      </CarouselWrapper>
-      <Row p="10px 0 0 0" m="0 0 50px 0">
-        <ImageWrapper
-          src={images[currentImage == images.length - 1 ? 0 : currentImage + 1]}
-          alt=""
-          w="100%"
-          maxW="220px"
-          maxH="125px"
-          objectFit="cover"
-          borderRadius="10px"
-          m="0 15px 0 0"
-        />
-        <LastGalleryImageWrapper>
-          <ImageWrapper
-            src={images[currentImage + 2 > images.length - 1 && images.length > 2 ? currentImage + 2 - images.length : currentImage + 2]}
-            alt=""
-            w="100%"
-            maxW="220px"
-            maxH="125px"
-            objectFit="cover"
-            borderRadius="10px"
-            m="0 15px 0 0"
-          />
-          {images.length > 3 && (
-            <GalleryMore>
-              <Text fontSize="24px" fontWeight="semibold">
-                + {images.length - 2} snímky
-              </Text>
-            </GalleryMore>
+      <CarouselWrapper style={{ marginBottom: "40px" }}>
+        <CarouselButtonWrapper left justifyContent="center" leftOffset="-30px" shadow>
+          {currentImage == 0 ? null : (
+            <CarouselButton onClick={() => carouselButtonHandle(true)}>
+              <MdOutlineArrowBackIosNew size={20} color={"white"} />
+            </CarouselButton>
           )}
-        </LastGalleryImageWrapper>
+        </CarouselButtonWrapper>
+        <CarouselButtonWrapper justifyContent="center" rightOffset="-30px" shadow>
+          {currentImage >= images.data.length - 1 ? null : (
+            <CarouselButton onClick={() => carouselButtonHandle(false)}>
+              <MdOutlineArrowForwardIos size={20} color={"white"} />
+            </CarouselButton>
+          )}
+        </CarouselButtonWrapper>
+        <StyledCarousel
+          showStatus={false}
+          showArrows={false}
+          showIndicators={false}
+          showThumbs={false}
+          swipeable={true}
+          emulateTouch
+          selectedItem={currentImage}
+          onChange={(index) => setCurrentImage(index)}
+          transitionTime={200}
+        >
+          {images.data.map((image, i) => (
+            <Row justifyContent="center" key={i}>
+              <ImageContainer w="90%" maxH="550px" borderRadius="20px">
+                <Image src={image.attributes.url} fill objectFit="cover" alt="" />
+              </ImageContainer>
+            </Row>
+          ))}
+        </StyledCarousel>
+      </CarouselWrapper>
+      <Row justifyContent="center">
+        <Row w="90%" p="0 0 20px 0">
+          <ImageContainer maxW="200px" h="120px" borderRadius="10px" m="0 20px 0 0">
+            <Image
+              src={images.data[currentImage + 1 > images.data.length - 1 ? 0 : currentImage + 1].attributes.url}
+              alt=""
+              fill
+              objectFit="cover"
+              loading="lazy"
+            />
+          </ImageContainer>
+          {images.data.length > 2 && (
+            <ImageContainer maxW="200px" h="120px" borderRadius="10px">
+              {images.data.length - 3 > 0 && (
+                <MoreImages>
+                  <Text fontSize="24px" fontWeight="600">
+                    +{images.data.length - 3} snímků
+                  </Text>
+                </MoreImages>
+              )}
+              <Image
+                src={
+                  images.data[currentImage + 2 > images.data.length - 1 && images.data.length > 2 ? currentImage + 2 - images.data.length : currentImage + 2]
+                    .attributes.url
+                }
+                alt=""
+                fill
+                objectFit="cover"
+                loading="lazy"
+              />
+            </ImageContainer>
+          )}
+        </Row>
       </Row>
     </>
   );
