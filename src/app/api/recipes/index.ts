@@ -1,4 +1,5 @@
 import { Recipe } from "@shared/recipe";
+import { User } from "@shared/user";
 import { fetchApi } from "..";
 
 export const getRecipes = (query?: string, signal?: AbortSignal) => {
@@ -11,4 +12,8 @@ export const createRecipe = (data: FormData, token: string) => {
 
 export const getRecipe = (id: string) => {
   return fetchApi<{ data: Recipe }>(`recipes/${id}?populate[0]=images&populate[1]=ingredients&populate[2]=author&populate[3]=comments.author`);
+};
+
+export const getUsersRecipes = (id: number) => {
+  return fetchApi<User>(`users/${id}?populate[0]=recipes&populate[1]=recipes.images`);
 };

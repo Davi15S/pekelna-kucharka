@@ -81,9 +81,6 @@ function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | u
 
   useEffect(() => {
     const query = qs.parse(window.location.search.substring(1)) as unknown as IFilterQuery;
-
-    console.log(query);
-
     setFilters((prevState) => ({
       ...prevState,
       spiciness: query.filters?.spiciness?.$in ?? [],
