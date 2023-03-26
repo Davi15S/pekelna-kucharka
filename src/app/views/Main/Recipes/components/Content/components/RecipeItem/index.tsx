@@ -36,7 +36,9 @@ function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
           <Description color="third">{props.recipe.description}</Description>
         </Row>
         <CategoryWrapper>
-          <Button text={props.recipe.category} color="red" transparent borderRadius="25px" m="0 20px 0 0" maxW="120px" />
+          {props.recipe.categories.concat(props.recipe.origins).map((category, i) => (
+            <Button key={i} text={category} color="red" transparent borderRadius="25px" m="0 20px 0 0" maxW="max-content" />
+          ))}
         </CategoryWrapper>
       </ContentWrapper>
       <ImageContainer w="280px" h="220px" borderRadius="20px" m="20px 30px 20px 30px" mobileHide>

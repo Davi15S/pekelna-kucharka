@@ -6,6 +6,7 @@ import { CarouselButton, CarouselButtonWrapper, CarouselWrapper, Indicator, Indi
 
 function Carousel({ recipes }: { recipes: Recipe[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [recipesCarousel, setRecipesCarousel] = useState(recipes.slice(0, 5));
 
   const carouselButtonHandle = (left?: boolean) => {
     setCurrentSlide(left ? (currentSlide != 0 ? currentSlide - 1 : recipes.length - 1) : currentSlide >= recipes.length - 1 ? 0 : currentSlide + 1);
@@ -21,7 +22,7 @@ function Carousel({ recipes }: { recipes: Recipe[] }) {
         )}
       </CarouselButtonWrapper>
       <CarouselButtonWrapper justifyContent="center" shadow>
-        {currentSlide >= recipes.length - 1 ? null : (
+        {currentSlide >= recipesCarousel.length - 1 ? null : (
           <CarouselButton onClick={() => carouselButtonHandle(false)}>
             <MdOutlineArrowForwardIos size={20} color={"white"} />
           </CarouselButton>
@@ -37,7 +38,7 @@ function Carousel({ recipes }: { recipes: Recipe[] }) {
         swipeable={true}
         emulateTouch={true}
       >
-        {recipes.slice(0, 5).map((recipe, i) => {
+        {recipesCarousel.map((recipe, i) => {
           return (
             <CarouselItem
               key={recipe.id}
@@ -52,7 +53,7 @@ function Carousel({ recipes }: { recipes: Recipe[] }) {
       </StyledCarousel>
       {recipes.length > 1 && (
         <IndicatorsWrapper justifyContent="center">
-          {recipes.map((item, index) => (
+          {recipesCarousel.map((item, index) => (
             <Indicator key={index} active={index == currentSlide ? true : false} onClick={() => setCurrentSlide(index)} />
           ))}
         </IndicatorsWrapper>

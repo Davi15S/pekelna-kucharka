@@ -7,10 +7,11 @@ function Button(props: ButtonProps) {
   return (
     <ButtonWrapper {...props}>
       <ButtonContent>
-        {props.icon}
-        <Text fontSize="16px" fontWeight="500">
+        {!props.iconEnd && props.icon}
+        <Text fontSize="16px" fontWeight="500" wrap="nowrap">
           {props.text}
         </Text>
+        {props.iconEnd && props.icon}
       </ButtonContent>
     </ButtonWrapper>
   );

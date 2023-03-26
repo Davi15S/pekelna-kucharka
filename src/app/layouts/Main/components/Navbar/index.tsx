@@ -8,6 +8,7 @@ import Logo from "@assets/Logo.svg";
 import { ImageWrapper, Row } from "@app/styled";
 import MobileNavbar from "./components/MobileNavbar";
 import { useAuth } from "@contexts/AuthContext";
+import HoverItem from "./components/HoverItem";
 
 function Navbar(props: { active: boolean; handleClick: () => void }) {
   const { user } = useAuth();
@@ -25,7 +26,7 @@ function Navbar(props: { active: boolean; handleClick: () => void }) {
           <LinkComponent text="Magazín" link="/magazine" />
         </Row>
         <Row justifyContent="flex-end" alignItems="center" w="max-content">
-          {user ? <LinkComponent text="Účet" link="" /> : <LinkComponent text="Přihlásit se" link="/login" />}
+          {user ? <LinkComponent text="Profil" link="" hover hoverItem={<HoverItem />} /> : <LinkComponent text="Přihlásit se" link="/login" />}
           {user ? <LinkComponent text="Vytvořit recept" link="/recipes/new" /> : null}
           <Link href="" style={{ margin: "0 15px 0 0" }}>
             <AiOutlineInstagram size={25} color={"white"} />

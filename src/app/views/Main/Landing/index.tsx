@@ -15,15 +15,13 @@ function Landing({ recipes }: { recipes: Recipe[] }) {
   usePageBackground(landingBg, "100vh");
 
   return (
-    <>
-      <PageContent>
-        <Hero />
-        <Stats />
-        <Favourite />
-        <Trends recipes={recipes} />
-        <Novelty recipes={recipes} />
-      </PageContent>
-    </>
+    <PageContent>
+      <Hero />
+      <Stats />
+      <Favourite />
+      <Trends recipes={recipes} />
+      <Novelty recipes={recipes} />
+    </PageContent>
   );
 }
 

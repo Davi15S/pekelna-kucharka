@@ -10,9 +10,11 @@ import Button from "@components/Button";
 import Process from "./components/Process";
 import Comments from "./components/Comments";
 import { RecipeAttributes } from "@shared/recipe";
+import usePageTitle from "@hooks/usePageTitle";
 
 function Recipe({ recipe }: { recipe: RecipeAttributes }) {
   usePageBackground(undefined);
+  usePageTitle(recipe.title);
 
   return (
     <PageContent topP w="100%">
@@ -22,14 +24,16 @@ function Recipe({ recipe }: { recipe: RecipeAttributes }) {
             <Text fontWeight="700" fontSize="44px" p="0 0 50px 0">
               {recipe.title}
             </Text>
-            <Gallery />
+            <Gallery images={recipe.images} />
             <Process mobile={false} process={recipe.process} />
           </ColumnContent>
           <ColumnContent w="30%" left>
             <Description recipe={recipe} />
             <Ingredients recipe={recipe} />
             <Row flexWrap="wrap" justifyContent="space-evenly" p="20px 0">
-              <Button text={recipe.category} color="red" transparent borderRadius="25px" m="5px 1px 5px 1px" maxW="max-content" />
+              {recipe.categories.concat(recipe.origins).map((value, i) => (
+                <Button key={i} text={value} color="red" transparent borderRadius="25px" m="5px 1px 5px 1px" maxW="max-content" />
+              ))}
             </Row>
           </ColumnContent>
           <ColumnContent w="100%">

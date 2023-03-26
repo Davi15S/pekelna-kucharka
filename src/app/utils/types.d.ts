@@ -1,14 +1,25 @@
 export interface IFilter {
   categories: string[];
   spiciness: string[];
-  origin: string[];
-  cookingTime: number | readonly number[];
+  origins: string[];
 }
 
 export interface IFilterQuery {
   filters?: {
     spiciness?: {
       $in: string[];
+    };
+    categories?: {
+      $containsi: string[];
+    };
+    origins?: {
+      $containsi: string[];
+    };
+    title?: {
+      $containsi?: string;
+    };
+    cookingTime?: {
+      $between?: number[] | number;
     };
   };
 }

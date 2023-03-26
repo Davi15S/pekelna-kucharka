@@ -5,7 +5,7 @@ import FilterInput from "./components/FilterInput";
 
 function FilterItem(props: {
   title: string;
-  filterInputArr?: string[];
+  filterInputArr?: { category: string }[];
   peppers?: number[];
   query: keyof IFilter;
   onClick: (key: keyof IFilter, value: string, checked: boolean) => void;
@@ -17,8 +17,14 @@ function FilterItem(props: {
         {props.title}
       </Text>
       {props.filterInputArr
-        ? props.filterInputArr.map((inputValue) => (
-            <FilterInput title={inputValue} key={inputValue} handleClick={props.onClick} query={props.query} checked={props.value.includes(inputValue)} />
+        ? props.filterInputArr.map((inputValue, i) => (
+            <FilterInput
+              title={inputValue.category}
+              key={i}
+              handleClick={props.onClick}
+              query={props.query}
+              checked={props.value.includes(inputValue.category)}
+            />
           ))
         : props.peppers?.map((rating) => (
             <FilterInput

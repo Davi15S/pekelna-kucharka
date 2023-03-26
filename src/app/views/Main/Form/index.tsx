@@ -5,7 +5,7 @@ import TextArea from "@views/Main/Form/components/TextArea";
 import usePageBackground from "@hooks/usePageBackground";
 import usePageTitle from "@hooks/usePageTitle";
 import { PageContent } from "@layouts/Main/components/Page/styled";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import IngredientItem from "./components/IngredientItem";
 import Input from "./components/Input";
 import List from "./components/List";
@@ -14,20 +14,18 @@ import { StyledForm, InputsWrapper } from "./styled";
 import { RecipeForm } from "@shared/recipe";
 import { createRecipe } from "@api/recipes";
 import { TextArea as TextAreaStyled } from "./components/TextArea/styled";
-import { disableScroll, enableScroll, getToken } from "@app/utils";
+import { disableScroll, getToken } from "@app/utils";
 import SentConfirmation from "./components/SentConfirmation";
-import { useRouter } from "next/router";
 import { useAuth } from "@contexts/AuthContext";
 import { useBeforeunload } from "react-beforeunload";
 import isEqual from "lodash/isEqual";
+import Category from "./components/Category";
+import { IUnits } from "@shared/units";
 
-function Form() {
+function Form({ units }: { units: IUnits }) {
   usePageBackground(undefined);
   usePageTitle("Vytvoření receptu");
   const { user } = useAuth();
-  const [category, ,] = useState<string[]>(["Hlavní chod", "Předkrm", "Snídaně", "Dezert"]);
-  const [unitList, ,] = useState<string[]>(["g", "kg", "litr", "lžíce", "lžička"]);
-  const router = useRouter();
 
   useBeforeunload((event) => {
     if (!isEqual(recipe, initRecipe) || images.length > 0) {
@@ -40,20 +38,21 @@ function Form() {
     author: user?.id,
     description: "",
     ingredients: [{ ingredient: "", amount: "", unit: "" }],
-    category: category[0],
-    cookingTime: "",
+    cookingTime: 0,
     process: [""],
     spiciness: "1",
-    recipeOrigin: [],
     publishedAt: null,
-    numberOfServings: "0",
+    numberOfServings: "",
+    categories: [],
+    origins: [],
   };
 
   const [images, setImages] = useState<File[]>([]);
   const [sent, setSent] = useState(false);
+  const [isBeingSent, setIsBeingSent] = useState(false);
   const [recipe, setRecipe] = useState<RecipeForm>(initRecipe);
 
-  const handleSetRecipe = (key: keyof RecipeForm, value: string) => {
+  const handleSetRecipe = (key: keyof RecipeForm, value: string | number) => {
     const result = (Object.keys(recipe) as Array<keyof typeof key>).reduce(
       (acc) => ({
         ...acc,
@@ -74,30 +73,25 @@ function Form() {
   const handleCreateRecipe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const form = new FormData();
-    images.forEach((file) => form.append(`files.images`, file));
-    form.append("data", JSON.stringify(recipe));
-    console.log(recipe);
-    const res = await createRecipe(form, getToken());
-    if (res) {
-      setSent(true);
+    if (!sent) {
+      const form = new FormData();
+      images.forEach((file) => form.append(`files.images`, file));
+      form.append("data", JSON.stringify(recipe));
+      setIsBeingSent(true);
       disableScroll();
+      const res = await createRecipe(form, getToken());
+      if (res) {
+        setSent(true);
+      }
     }
   };
 
   return (
     <>
-      {sent && (
-        <SentConfirmation
-          onClick={() => {
-            enableScroll();
-            router.push("/");
-          }}
-        />
-      )}
-      <BgTitle title="Vytvoření" top="20px" mobileTop="10vh" left="-10vw" />
-      <BgTitle title="Receptu" top="65vh" left="35vw" mobileTop="80vh" mobileLeft="55vw" />
+      {isBeingSent && <SentConfirmation sent={sent} />}
       <PageContent topP>
+        <BgTitle title="Vytvoření" top="20px" mobileTop="10vh" left="-50vw" />
+        <BgTitle title="Receptu" top="65vh" left="-10vw" mobileTop="30vh" mobileLeft="-5vw" />
         <Row p="100px 0" alignItems="center" justifyContent="center" maxW="800px">
           <StyledForm onSubmit={(e) => handleCreateRecipe(e)}>
             <Text fontWeight="700" fontSize="44px" p="0 0 20px 0" textAlign="center">
@@ -123,18 +117,21 @@ function Form() {
                 <Text p="0 0 8px 0">Popis</Text>
                 <TextAreaStyled onChange={(e) => handleSetRecipe("description", e.currentTarget.value)} value={recipe.description} required />
               </Column>
+              <Category
+                onChange={(arr, key) => setRecipe((prevState) => ({ ...prevState, [key]: arr }))}
+                selectedCategories={recipe.categories.concat(recipe.origins)}
+              />
               <Column w="100%" p="30px 0 0 0">
                 <InputsWrapper p="30px 0 0 0">
-                  <List listItems={category} title="Kategorie" onClick={(e) => handleSetRecipe("category", e)} value={recipe.category} />
-                  <List listItems={category} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} pepperList />
-                </InputsWrapper>
-                <InputsWrapper p="20px 0 0 0">
+                  <List listItems={[]} title="Úroveň pálivosti" onClick={(e) => handleSetRecipe("spiciness", e)} value={recipe.spiciness} pepperList />
                   <Input
                     title="Délka přípravy (minuty)"
                     required
-                    onChange={(e) => handleSetRecipe("cookingTime", e.currentTarget.value)}
+                    onChange={(e) => handleSetRecipe("cookingTime", +e.currentTarget.value)}
                     value={recipe.cookingTime}
                   />
+                </InputsWrapper>
+                <InputsWrapper p="20px 0 0 0">
                   <Input
                     title="Počet porcí"
                     required
@@ -144,7 +141,7 @@ function Form() {
                 </InputsWrapper>
                 <Column w="100%" p="40px 0 0 0">
                   <Text fontWeight="500" fontSize="18px">
-                    Suroviny na 1 porci
+                    Seznam surovin
                   </Text>
                   <Column w="100%" p="20px 0 0 0" alignItems="center">
                     {recipe.ingredients.map((ingredient, i) => (
@@ -155,7 +152,7 @@ function Form() {
                         setIngredient={(key, index, value) => handleSetRecipeArray(key, index, value)}
                         index={i}
                         ingredient={ingredient}
-                        unitList={unitList}
+                        unitList={units.units.map((obj) => `${obj.unit}`)}
                       />
                     ))}
                     <Button

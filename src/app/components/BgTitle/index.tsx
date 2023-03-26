@@ -10,7 +10,7 @@ function BgTitle(props: {
   mobileLeft?: React.CSSProperties["left"];
 }) {
   return (
-    <BgTitleWrapper>
+    <BgTitleWrapper h={props.subTitle ? true : false} m={props.subTitle ? true : false}>
       <Title {...props}>{props.title}</Title>
       <Subtitle>{props.subTitle}</Subtitle>
     </BgTitleWrapper>

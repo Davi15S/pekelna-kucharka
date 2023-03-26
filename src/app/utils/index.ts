@@ -35,4 +35,4 @@ export const setToStorage = (value: string | null, key: string) => {
   }
 };
 
-export const protectedRoutes = ["/recipes/new"];
+export const protectedRoutes = ["/recipes/new", "/recipes/my"];

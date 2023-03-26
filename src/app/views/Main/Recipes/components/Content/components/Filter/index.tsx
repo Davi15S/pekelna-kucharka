@@ -8,24 +8,22 @@ import { useRouter } from "next/router";
 import { getRecipes } from "@api/recipes";
 import { Recipe } from "@shared/recipe";
 import useDebounce from "@hooks/useDebounce";
+import { Categories } from "@shared/categories";
+import { useSearch } from "@views/Main/Recipes/contexts/SearchContext";
 
-function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) => void }) {
+function Filter({ setRecipes, categories }: { setRecipes: (recipes: Recipe[] | undefined) => void; categories: Categories }) {
   const router = useRouter();
   const controller = new AbortController();
   const [query, setQuery] = useState<string | undefined>();
-  const [filter, ,] = useState({
-    category: ["Hlavní chod", "Polévka", "Omáčka", "Dezert", "Příloha", "Bezmasé jídlo"],
-    source: ["Mexická", "Vietnamská", "Čínská", "Česká", "Americká", "Indická"],
-    peppers: [5, 4, 3, 2, 1],
-  });
-  const [currentValue, setCurrentValue] = useState<number | readonly number[]>([]);
+  const [startingValues, ,] = useState([15, 120]);
+  const [currentValue, setCurrentValue] = useState<number[]>(startingValues);
+  const { search, setSearch } = useSearch();
   const [filters, setFilters] = useState<IFilter>({
     categories: [],
     spiciness: [],
-    origin: [],
-    cookingTime: currentValue,
+    origins: [],
   });
-  const debounceQuery = useDebounce(query);
+  const debounceQuery = useDebounce(query, 1000);
 
   const handleFilterClick = (key: keyof IFilter, value: string, checked: boolean) => {
     setRecipes(undefined);
@@ -43,14 +41,22 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
   };
 
   useEffect(() => {
-    setFilters((state) => ({ ...state, cookingTime: currentValue }));
-  }, [currentValue]);
-
-  useEffect(() => {
     const filterQuery: IFilterQuery = {
       filters: {
         spiciness: {
           $in: filters.spiciness,
+        },
+        categories: {
+          $containsi: filters.categories,
+        },
+        origins: {
+          $containsi: filters.origins,
+        },
+        title: {
+          $containsi: search,
+        },
+        cookingTime: {
+          $between: JSON.stringify(currentValue) == JSON.stringify(startingValues) ? undefined : currentValue,
         },
       },
     };
@@ -60,7 +66,7 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
     router.push({ pathname: router.pathname, query: query }, undefined, { scroll: false });
     setQuery(query);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters]);
+  }, [filters, search, currentValue]);
 
   useEffect(() => {
     (async () => {
@@ -75,14 +81,23 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
 
   useEffect(() => {
     const query = qs.parse(window.location.search.substring(1)) as unknown as IFilterQuery;
-    setFilters((prevState) => ({ ...prevState, spiciness: query.filters?.spiciness?.$in ?? [] }));
+    setFilters((prevState) => ({
+      ...prevState,
+      spiciness: query.filters?.spiciness?.$in ?? [],
+      origins: query.filters?.origins?.$containsi ?? [],
+      categories: query.filters?.categories?.$containsi ?? [],
+    }));
+    setSearch(query.filters?.title?.$containsi);
+    if (query.filters?.cookingTime?.$between && Array.isArray(query.filters.cookingTime.$between)) {
+      setCurrentValue(query.filters.cookingTime.$between);
+    }
   }, [router.asPath]);
 
   return (
     <FilterWrapper>
-      <FilterItem title="Kategorie" filterInputArr={filter.category} query="categories" onClick={handleFilterClick} value={filters.categories} />
-      <FilterItem title="Úroveň pálivosti" peppers={filter.peppers} query="spiciness" onClick={handleFilterClick} value={filters.spiciness} />
-      <FilterItem title="Původ jídel" filterInputArr={filter.source} query="origin" onClick={handleFilterClick} value={filters.origin} />
+      <FilterItem title="Kategorie" filterInputArr={categories.categories} query="categories" onClick={handleFilterClick} value={filters.categories} />
+      <FilterItem title="Úroveň pálivosti" peppers={[5, 4, 3, 2, 1]} query="spiciness" onClick={handleFilterClick} value={filters.spiciness} />
+      <FilterItem title="Původ jídel" filterInputArr={categories.originOfMeals} query="origins" onClick={handleFilterClick} value={filters.origins} />
       <SliderWrapper>
         <Text fontSize="20px" fontWeight="700" p="0 0 45px 0">
           Doba přípravy
@@ -90,9 +105,9 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
         <Slider
           trackClassName="customSlider-track"
           thumbClassName="customSlider-thumb"
-          min={15}
-          max={120}
-          defaultValue={[15, 120]}
+          min={startingValues[0]}
+          max={startingValues[1]}
+          value={currentValue}
           minDistance={30}
           pearling
           step={15}
@@ -104,7 +119,9 @@ function Filter({ setRecipes }: { setRecipes: (recipes: Recipe[] | undefined) =>
             </div>
           )}
           onChange={(value) => {
-            setCurrentValue(value);
+            if (Array.isArray(value)) {
+              setCurrentValue(value);
+            }
           }}
         />
       </SliderWrapper>

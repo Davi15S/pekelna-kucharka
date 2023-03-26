@@ -3,7 +3,7 @@ import { InputStyled, InputWrapper } from "./styled";
 
 function Input(props: InputProps) {
   return (
-    <InputWrapper {...props}>
+    <InputWrapper maxW={props.maxW} h={props.h}>
       {props.icon}
       <InputStyled {...props} type={props.type ?? "text"} />
     </InputWrapper>
