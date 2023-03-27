@@ -72,7 +72,6 @@ function Form({ units }: { units: IUnits }) {
 
   const handleCreateRecipe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (!sent) {
       const form = new FormData();
       images.forEach((file) => form.append(`files.images`, file));
