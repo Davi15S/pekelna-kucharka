@@ -17,3 +17,7 @@ export const getRecipe = (id: string) => {
 export const getUsersRecipes = (id: number) => {
   return fetchApi<User>(`users/${id}?populate[0]=recipes&populate[1]=recipes.images`);
 };
+
+export const deleteRecipe = (id: number, token: string) => {
+  return fetchApi(`recipes/${id}`, token, "DELETE");
+};

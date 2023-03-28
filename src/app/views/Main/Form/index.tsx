@@ -5,7 +5,7 @@ import TextArea from "@views/Main/Form/components/TextArea";
 import usePageBackground from "@hooks/usePageBackground";
 import usePageTitle from "@hooks/usePageTitle";
 import { PageContent } from "@layouts/Main/components/Page/styled";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import IngredientItem from "./components/IngredientItem";
 import Input from "./components/Input";
 import List from "./components/List";
