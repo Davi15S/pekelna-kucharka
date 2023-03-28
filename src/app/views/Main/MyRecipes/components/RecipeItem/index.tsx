@@ -8,9 +8,11 @@ import { FaTrash } from "react-icons/fa";
 import ConfirmDialog from "../ConfirmDialog";
 import { disableScroll, enableScroll, getToken } from "@app/utils";
 import { deleteRecipe } from "@api/recipes";
+import { useRouter } from "next/router";
 
 function RecipeItem({ recipe }: { recipe: UserRecipes }) {
   const [isActive, setIsActive] = useState(false);
+  const router = useRouter();
 
   const handleDeleteRecipe = async () => {
     await deleteRecipe(recipe.id, getToken()).then(() => window.location.reload());
@@ -40,9 +42,7 @@ function RecipeItem({ recipe }: { recipe: UserRecipes }) {
           <Description>{recipe.description}</Description>
         </Column>
         <Column p="0 0 0 20px">
-          <Row p="0 0 10px 0">
-            <HiPencil size={25} style={{ cursor: "pointer" }} />
-          </Row>
+          <HiPencil size={25} style={{ cursor: "pointer", marginBottom: "10px" }} onClick={() => router.push(`/recipes/edit/${recipe.id}`)} />
           <FaTrash
             size={20}
             color={"#F24E1E"}

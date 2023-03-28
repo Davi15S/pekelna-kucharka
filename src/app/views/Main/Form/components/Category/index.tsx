@@ -15,7 +15,7 @@ function Category({ onChange, selectedCategories }: { onChange: (arr: string[], 
   const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   useOutsideComponentClick(ref, () => setIsActive(false));
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>(selectedCategories);
   const [fetchedCategories, setFetchedCategories] = useState<Categories>();
   const [search, setSearch] = useState<string>();
   const [searchedItems, setSearchedItems] = useState<Categories>();

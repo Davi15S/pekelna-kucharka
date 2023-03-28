@@ -16,9 +16,9 @@ function IngredientItem(props: {
   ingredient: Ingredient;
   unitList: string[];
 }) {
-  const [ingredient, setTitle] = useState<string>("");
-  const [amount, setAmount] = useState("");
-  const [unit, setUnit] = useState(props.unitList[0]);
+  const [ingredient, setTitle] = useState<string>(props.ingredient.ingredient);
+  const [amount, setAmount] = useState(props.ingredient.amount);
+  const [unit, setUnit] = useState(props.ingredient.unit);
 
   useEffect(() => {
     props.setIngredient<Ingredient>("ingredients", props.index, { ingredient, amount, unit });

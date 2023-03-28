@@ -11,7 +11,7 @@ function TextArea(props: {
   onlyone?: boolean;
   value: string;
 }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(props.value);
 
   useEffect(() => {
     props.setIngredient<string>("process", props.index, text);
@@ -21,7 +21,7 @@ function TextArea(props: {
     <Column w="100%" p="15px 0">
       <Text p="0 0 10px 0">Krok {props.index + 1}</Text>
       <TextAreaWrapper>
-        <TextAreaStyled onChange={(e) => setText(e.currentTarget.value)} value={props.value} required />
+        <TextAreaStyled onChange={(e) => setText(e.currentTarget.value)} value={text} required />
         {!props.onlyone && (
           <RemoveButton onClick={props.handleClick}>
             <RxCross2 size={15} />
