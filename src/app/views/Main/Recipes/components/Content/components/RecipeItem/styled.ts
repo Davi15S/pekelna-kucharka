@@ -1,7 +1,9 @@
 import { Column, Row, Text } from "@app/styled";
 import styled from "@emotion/styled";
+import { Theme } from "@styles/theme";
+import Link from "next/link";
 
-export const ItemWrapper = styled(Row)`
+export const ItemWrapper = styled(Link)<{ theme?: Theme }>`
   border-radius: 30px;
   box-shadow: ${({ theme }) => theme.shadow.default};
   background-color: ${({ theme }) => theme.background.primary};
@@ -9,6 +11,10 @@ export const ItemWrapper = styled(Row)`
   cursor: pointer;
   overflow: hidden;
   min-height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
 
   @media only screen and (max-width: 786px) {
     flex-direction: column;

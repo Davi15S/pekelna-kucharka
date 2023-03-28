@@ -1,11 +1,11 @@
 import { getRecipe } from "@api/recipes";
 import { RecipeAttributes } from "@shared/recipe";
+import Recipe from "@views/Main/Recipe";
 import { GetServerSideProps } from "next";
 import React from "react";
 
 function RecipeSite({ recipe }: { recipe: RecipeAttributes }) {
-  console.log(recipe);
-  return <div>Ahoj</div>;
+  return <Recipe recipe={recipe} />;
 }
 
 export default RecipeSite;
