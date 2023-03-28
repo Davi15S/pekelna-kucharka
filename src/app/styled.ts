@@ -52,32 +52,6 @@ export const Column = styled.div<{
   max-width: ${({ maxW }) => (maxW ? maxW : "")};
 `;
 
-export const ImageWrapper = styled(NextImage)<{
-  w?: React.CSSProperties["width"];
-  h?: React.CSSProperties["height"];
-  mobileW?: React.CSSProperties["width"];
-  maxH?: React.CSSProperties["maxHeight"];
-  maxW?: React.CSSProperties["maxWidth"];
-  borderRadius?: React.CSSProperties["borderRadius"];
-  shadow?: boolean;
-  theme?: Theme;
-  objectFit?: React.CSSProperties["objectFit"];
-  m?: React.CSSProperties["margin"];
-}>`
-  width: ${({ w }) => (w ? w : "auto")};
-  height: ${({ h }) => (h ? h : "auto")};
-  max-width: ${({ maxW }) => (maxW ? maxW : "auto")};
-  max-height: ${({ maxH }) => (maxH ? maxH : "auto")};
-  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "")};
-  box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.default : "")};
-  object-fit: ${({ objectFit }) => (objectFit ? objectFit : "")};
-  margin: ${({ m }) => (m ? m : "")};
-
-  @media only screen and (max-width: 1024px) {
-    ${({ mobileW }) => (mobileW ? `width: ${mobileW};` : "")}
-  }
-`;
-
 export const Image = styled(NextImage)<{ objectFit?: React.CSSProperties["objectFit"] }>`
   object-fit: ${({ objectFit }) => (objectFit ? objectFit : "")};
 `;
@@ -92,6 +66,7 @@ export const ImageContainer = styled.div<{
   mobileHide?: boolean;
   shadow?: boolean;
   theme?: Theme;
+  mobileW?: React.CSSProperties["width"];
 }>`
   position: relative;
   width: ${({ w }) => (w ? w : "100%")};
@@ -105,6 +80,10 @@ export const ImageContainer = styled.div<{
 
   @media only screen and (max-width: 786px) {
     ${({ mobileHide }) => (mobileHide ? "display: none;" : "")}
+  }
+
+  @media only screen and (max-width: 1024px) {
+    ${({ mobileW }) => (mobileW ? `width: ${mobileW};` : "")}
   }
 
   :after {

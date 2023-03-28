@@ -19,7 +19,7 @@ function Description(props: { recipe: RecipeAttributes }) {
     <>
       {mounted && (
         <DescriptionWrapper w="100%">
-          <Item title="Pálivost" icon={<PepperRating rating={+props.recipe.spiciness} w="23px" h="23px" />} />
+          <Item title="Pálivost" icon={<PepperRating rating={+props.recipe.spiciness} w={23} h={23} />} />
           <Item title="Doba přípravy" icon={<AiOutlineClockCircle size={20} />} desc={`${props.recipe.cookingTime} min`} />
           <Item title="Hodnocení" icon={<AiOutlineStar size={20} />} desc="4,5 / 5" />
           <Item title="Autor" icon={<FaRegUserCircle size={20} />} desc={props.recipe.author.data.attributes.username} />

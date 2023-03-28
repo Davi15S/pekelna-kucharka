@@ -1,16 +1,15 @@
 import React from "react";
 import { IconWrapper, InputContent } from "./styled";
-import { TbNorthStar } from "react-icons/tb";
+import { FaStarOfLife } from "react-icons/fa";
 
 function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
-    <InputContent {...props}>
-      {/* {props.required && (
-        <IconWrapper>
-          <TbNorthStar size={10} />
-        </IconWrapper>
-      )} */}
-    </InputContent>
+    <div style={{ position: "relative", width: "100%" }}>
+      <InputContent {...props} />
+      <IconWrapper>
+        <FaStarOfLife size={10} />
+      </IconWrapper>
+    </div>
   );
 }
 

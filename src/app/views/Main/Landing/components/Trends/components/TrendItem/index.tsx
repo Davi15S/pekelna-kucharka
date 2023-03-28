@@ -26,7 +26,7 @@ function TrendItem(props: { image: string; title: string; subTitle: string; comm
             </Text>
           </Row>
           <Row justifyContent="flex-end">
-            <PepperRating rating={props.spiciness} w="28px" h="28px" />
+            <PepperRating rating={props.spiciness} />
           </Row>
         </Row>
       </Column>

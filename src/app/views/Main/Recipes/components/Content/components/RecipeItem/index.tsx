@@ -27,7 +27,7 @@ function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
             }`}
           />
           <DescriptionStat icon={<AiOutlineStar size={20} color={"#ED4040"} />} text="4/5" />
-          <PepperRating p="0 20px 10px 0" rating={+props.recipe.spiciness} w="22px" h="22px" />
+          <PepperRating p="0 20px 10px 0" rating={+props.recipe.spiciness} w={22} h={22} />
         </Row>
         <Row p="10px 0 20px 0">
           <Description color="third">{props.recipe.description}</Description>

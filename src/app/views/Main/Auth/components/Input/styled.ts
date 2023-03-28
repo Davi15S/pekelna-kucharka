@@ -18,4 +18,9 @@ export const InputContent = styled.input<{ theme?: Theme }>`
   }
 `;
 
-export const IconWrapper = styled.div``;
+export const IconWrapper = styled.div<{ theme?: Theme }>`
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  color: ${({ theme }) => theme.colors.error};
+`;

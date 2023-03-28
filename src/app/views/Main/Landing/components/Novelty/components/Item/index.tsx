@@ -1,15 +1,15 @@
-import { Column, ImageWrapper, Row, Text } from "@app/styled";
+import { Column, Image, ImageContainer, Text } from "@app/styled";
 import React from "react";
-import { ImageContent, ItemWrapper } from "./styled";
+import { ItemWrapper } from "./styled";
 import trend from "@assets/trends/trend.jpg";
 import { SubTitle } from "../../../Trends/components/TrendItem/styled";
 
 function Item() {
   return (
     <ItemWrapper>
-      <ImageContent>
-        <ImageWrapper src={trend} alt="" maxH="300px" w="100%" objectFit="cover" />
-      </ImageContent>
+      <ImageContainer maxH="300px" borderRadius="20px" w="100%" h="100%">
+        <Image src={trend} alt="" objectFit="cover" fill />
+      </ImageContainer>
       <Column p="20px">
         <Text fontSize="24px" color="error" p="0 0 10px 0" fontWeight="700">
           Ultricies tortor posue vitae, fringill
