@@ -13,4 +13,5 @@ export const ProfileIcon = styled.div<{ theme?: Theme }>`
   position: relative;
   overflow: hidden;
   margin-bottom: 20px;
+  cursor: pointer;
 `;
