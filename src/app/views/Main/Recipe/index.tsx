@@ -12,7 +12,7 @@ import Comments from "./components/Comments";
 import { RecipeAttributes } from "@shared/recipe";
 import usePageTitle from "@hooks/usePageTitle";
 
-function Recipe({ recipe }: { recipe: RecipeAttributes }) {
+function Recipe({ recipe, id }: { recipe: RecipeAttributes; id: string }) {
   usePageBackground(undefined);
   usePageTitle(recipe.title);
 
@@ -38,7 +38,7 @@ function Recipe({ recipe }: { recipe: RecipeAttributes }) {
           </ColumnContent>
           <ColumnContent w="100%">
             <Process mobile={true} process={recipe.process} />
-            <Comments comments={recipe.comments?.data} />
+            <Comments comments={recipe.comments?.data} recipeId={id} />
           </ColumnContent>
         </PageWrapper>
       )}

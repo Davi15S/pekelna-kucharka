@@ -9,6 +9,7 @@ import ConfirmDialog from "../ConfirmDialog";
 import { disableScroll, enableScroll, getToken } from "@app/utils";
 import { deleteRecipe } from "@api/recipes";
 import { useRouter } from "next/router";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 function RecipeItem({ recipe }: { recipe: UserRecipes }) {
   const [isActive, setIsActive] = useState(false);
@@ -41,7 +42,8 @@ function RecipeItem({ recipe }: { recipe: UserRecipes }) {
           </Text>
           <Description>{recipe.description}</Description>
         </Column>
-        <Column p="0 0 0 20px">
+        <Column p="0 0 0 20px" alignItems="center">
+          <AiOutlineInfoCircle size={25} style={{ cursor: "pointer", marginBottom: "5px" }} onClick={() => router.push(`/recipes/${recipe.id}`)} />
           <HiPencil size={25} style={{ cursor: "pointer", marginBottom: "10px" }} onClick={() => router.push(`/recipes/edit/${recipe.id}`)} />
           <FaTrash
             size={20}

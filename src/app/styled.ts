@@ -67,6 +67,7 @@ export const ImageContainer = styled.div<{
   shadow?: boolean;
   theme?: Theme;
   mobileW?: React.CSSProperties["width"];
+  pointer?: boolean;
 }>`
   position: relative;
   width: ${({ w }) => (w ? w : "100%")};
@@ -77,6 +78,7 @@ export const ImageContainer = styled.div<{
   overflow: hidden;
   margin: ${({ m }) => (m ? m : "")};
   box-shadow: ${({ theme, shadow }) => (shadow ? theme.shadow.default : "")};
+  cursor: ${({ pointer }) => (pointer ? "pointer" : "")};
 
   @media only screen and (max-width: 786px) {
     ${({ mobileHide }) => (mobileHide ? "display: none;" : "")}

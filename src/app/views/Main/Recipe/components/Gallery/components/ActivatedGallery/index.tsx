@@ -5,8 +5,8 @@ import { StyledCarousel } from "@views/Main/Landing/components/Novelty/component
 import { Image, ImageContainer, Row } from "@app/styled";
 import { RxCross2 } from "react-icons/rx";
 
-function ActivatedGallery({ onClick, images }: { onClick: () => void; images: IImage[] }) {
-  const [currentImage, setCurrentImage] = useState(0);
+function ActivatedGallery({ onClick, images, clickedImage }: { onClick: () => void; images: IImage[]; clickedImage: number }) {
+  const [currentImage, setCurrentImage] = useState(clickedImage);
 
   const carouselButtonHandle = (left?: boolean) => {
     setCurrentImage(left ? (currentImage != 0 ? currentImage - 1 : images.length - 1) : currentImage >= images.length - 1 ? 0 : currentImage + 1);

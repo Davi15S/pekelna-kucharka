@@ -9,10 +9,17 @@ import { disableScroll, enableScroll } from "@app/utils";
 
 function Gallery({ images }: { images: IImage[] }) {
   const [currentImage, setCurrentImage] = useState(0);
+  const [clickedImage, setClickedImage] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
   const carouselButtonHandle = (left?: boolean) => {
     setCurrentImage(left ? (currentImage != 0 ? currentImage - 1 : images.length - 1) : currentImage >= images.length - 1 ? 0 : currentImage + 1);
+  };
+
+  const handleClick = (id: number) => {
+    setClickedImage(id);
+    setIsActive(true);
+    disableScroll();
   };
 
   return (
@@ -24,6 +31,7 @@ function Gallery({ images }: { images: IImage[] }) {
             setIsActive(false);
           }}
           images={images}
+          clickedImage={clickedImage}
         />
       )}
       <CarouselWrapper style={{ marginBottom: "40px" }}>
@@ -42,10 +50,7 @@ function Gallery({ images }: { images: IImage[] }) {
           )}
         </CarouselButtonWrapper>
         <StyledCarousel
-          onClickItem={() => {
-            setIsActive(true);
-            disableScroll();
-          }}
+          onClickItem={() => handleClick(currentImage)}
           showStatus={false}
           showArrows={false}
           showIndicators={false}
@@ -58,7 +63,7 @@ function Gallery({ images }: { images: IImage[] }) {
         >
           {images.map((image, i) => (
             <Row justifyContent="center" key={i}>
-              <ImageContainer w="90%" maxH="550px" borderRadius="20px">
+              <ImageContainer w="90%" maxH="550px" borderRadius="20px" pointer>
                 <Image src={image.attributes.url} fill objectFit="cover" alt="" />
               </ImageContainer>
             </Row>
@@ -67,11 +72,24 @@ function Gallery({ images }: { images: IImage[] }) {
       </CarouselWrapper>
       <Row justifyContent="center">
         <Row w="90%" p="0 0 20px 0">
-          <ImageContainer maxW="200px" h="120px" borderRadius="10px" m="0 20px 0 0">
+          <ImageContainer
+            pointer
+            maxW="200px"
+            h="120px"
+            borderRadius="10px"
+            m="0 20px 0 0"
+            onClick={() => handleClick(currentImage + 1 > images.length - 1 ? 0 : currentImage + 1)}
+          >
             <Image src={images[currentImage + 1 > images.length - 1 ? 0 : currentImage + 1].attributes.url} alt="" fill objectFit="cover" loading="lazy" />
           </ImageContainer>
           {images.length > 2 && (
-            <ImageContainer maxW="200px" h="120px" borderRadius="10px">
+            <ImageContainer
+              pointer
+              maxW="200px"
+              h="120px"
+              borderRadius="10px"
+              onClick={() => handleClick(currentImage + 2 > images.length - 1 && images.length > 2 ? currentImage + 2 - images.length : currentImage + 2)}
+            >
               {images.length - 3 > 0 && (
                 <MoreImages>
                   <Text fontSize="24px" fontWeight="600">

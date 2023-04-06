@@ -5,6 +5,7 @@ export const CommentsWrapper = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
   width: 100%;
   gap: 20px;
+  padding-top: 20px;
 
   @media screen and (max-width: 1024px) {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
