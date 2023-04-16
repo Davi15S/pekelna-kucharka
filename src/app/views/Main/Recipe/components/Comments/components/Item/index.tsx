@@ -12,7 +12,7 @@ function Item({ comment }: { comment: Comment }) {
           <CommentImage>
             <Image src="https://media.vanityfair.com/photos/631a285245c8cf69f8c2ba82/master/w_2560%2Cc_limit/1203085755" alt="" fill />
           </CommentImage>
-          <Text fontSize="20px" fontWeight="700" p="0 30px" wrap="nowrap">
+          <Text fontSize="20px" fontWeight="600" p="0 15px" wrap="nowrap">
             {comment.attributes.author.data.attributes.username}
           </Text>
         </Row>
@@ -25,9 +25,11 @@ function Item({ comment }: { comment: Comment }) {
       <Text fontWeight="600" color="third" p="20px 0">
         {comment.attributes.content}
       </Text>
-      <Text color="error" fontWeight="700" fontSize="20px" link>
-        Odpovědět
-      </Text>
+      <Row justifyContent="end">
+        <Text color="error" fontWeight="700" link>
+          Odpovědět
+        </Text>
+      </Row>
     </CommentWrapper>
   );
 }

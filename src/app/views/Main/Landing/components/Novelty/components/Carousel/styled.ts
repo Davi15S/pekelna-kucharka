@@ -8,9 +8,9 @@ export const CarouselWrapper = styled.div`
   width: 100%;
 `;
 
-export const StyledCarousel = styled(Carousel)`
+export const StyledCarousel = styled(Carousel)<{ w?: React.CSSProperties["width"] }>`
   margin: 0;
-  width: 100%;
+  width: ${({ w }) => (w ? w : "100%")};
   padding: 0;
 `;
 

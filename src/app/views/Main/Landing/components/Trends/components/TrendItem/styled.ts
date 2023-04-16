@@ -20,12 +20,6 @@ export const TrendItemWrapper = styled(Column)<{ offset?: boolean }>`
   }
 `;
 
-export const ImageContent = styled.div`
-  max-height: 225px;
-  overflow: hidden;
-  border-radius: 20px;
-`;
-
 export const SubTitle = styled(Text)`
   overflow: hidden;
   display: -webkit-box;

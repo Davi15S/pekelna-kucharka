@@ -5,15 +5,12 @@ import { AiOutlineClockCircle, AiOutlineStar } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
 import DescriptionStat from "./components/DescriptionStat";
 import Button from "@components/Button";
-import { useRouter } from "next/router";
 import { RecipeAttributes } from "@shared/recipe";
 import PepperRating from "@components/PepperRating";
 
 function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
-  const navigate = useRouter();
-
   return (
-    <ItemWrapper alignItems="center" justifyContent="space-between" w="100%" m="15px 0" onClick={() => navigate.push(`/recipes/${props.id}`)}>
+    <ItemWrapper href={`/recipes/${props.id}`}>
       <MobilePicture>
         <ImageContainer w="100%" h="250px" borderRadius="20px">
           <Image src={props.recipe.images.data[0].attributes.url} alt="" fill objectFit="cover" />
@@ -30,7 +27,7 @@ function RecipeItem(props: { recipe: RecipeAttributes; id: string }) {
             }`}
           />
           <DescriptionStat icon={<AiOutlineStar size={20} color={"#ED4040"} />} text="4/5" />
-          <PepperRating p="0 20px 10px 0" rating={+props.recipe.spiciness} w="22px" h="22px" />
+          <PepperRating p="0 20px 10px 0" rating={+props.recipe.spiciness} w={22} h={22} />
         </Row>
         <Row p="10px 0 20px 0">
           <Description color="third">{props.recipe.description}</Description>

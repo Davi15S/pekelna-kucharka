@@ -9,13 +9,18 @@ import { RxCrossCircled } from "react-icons/rx";
 import { RecipeForm } from "@shared/recipe";
 import { getCategories } from "@api/categories";
 import { Categories } from "@shared/categories";
+import useDebounce from "@hooks/useDebounce";
 
 function Category({ onChange, selectedCategories }: { onChange: (arr: string[], key: keyof RecipeForm) => void; selectedCategories: string[] }) {
   const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   useOutsideComponentClick(ref, () => setIsActive(false));
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>(selectedCategories);
   const [fetchedCategories, setFetchedCategories] = useState<Categories>();
+  const [search, setSearch] = useState<string>();
+  const [searchedItems, setSearchedItems] = useState<Categories>();
+
+  const debouncedValue = useDebounce(search);
 
   useEffect(() => {
     const categoriesArr: string[] = [];
@@ -34,11 +39,19 @@ function Category({ onChange, selectedCategories }: { onChange: (arr: string[], 
 
   useEffect(() => {
     (async () => {
-      await getCategories().then((data) => {
-        setFetchedCategories(data.data.attributes);
-      });
+      await getCategories().then((data) => setFetchedCategories(data.data.attributes));
     })();
   }, []);
+
+  useEffect(() => {
+    if (search) {
+      const results: Categories = {
+        categories: fetchedCategories?.categories.filter((value) => value.category.toLowerCase().indexOf(search.toLowerCase()) !== -1) ?? [],
+        originOfMeals: fetchedCategories?.originOfMeals.filter((value) => value.category.toLowerCase().indexOf(search.toLowerCase()) !== -1) ?? [],
+      };
+      setSearchedItems(results);
+    }
+  }, [debouncedValue]);
 
   return (
     <Column w="100%" p="50px 0">
@@ -66,12 +79,21 @@ function Category({ onChange, selectedCategories }: { onChange: (arr: string[], 
         ))}
       </Row>
       <InputWrapper w="100%" ref={ref}>
-        <Input placeholder="Napiš, co hledáš..." onFocus={() => setIsActive(!isActive)} />
+        <Input
+          placeholder="Napiš, co hledáš..."
+          onFocus={() => setIsActive(!isActive)}
+          onChange={(e) => {
+            if (e.currentTarget.value == "") {
+              setSearchedItems(undefined);
+            }
+            setSearch(e.currentTarget.value);
+          }}
+        />
         {isActive && (
           <Results
             onClick={(value) => setCategories((prevState) => [...prevState, value])}
             selectedCategories={selectedCategories}
-            categories={fetchedCategories}
+            categories={searchedItems ?? fetchedCategories}
           />
         )}
       </InputWrapper>

@@ -25,7 +25,7 @@ function FilterInput(props: {
       </CheckBox>
       {props.rating ? (
         <Row p="0 0 0 15px">
-          <PepperRating rating={props.rating} w="22px" />
+          <PepperRating rating={props.rating} w={23} />
         </Row>
       ) : (
         <Text color="third" fontSize="16px" p="0 0 0 15px">

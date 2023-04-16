@@ -17,11 +17,3 @@ export const ItemWrapper = styled.div<{ theme?: Theme }>`
     box-shadow: ${({ theme }) => theme.shadow.hover};
   }
 `;
-
-export const ImageContent = styled.div`
-  border-radius: 20px;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  max-height: 300px;
-`;
